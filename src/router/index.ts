@@ -12,6 +12,21 @@ const router = createRouter({
       component: () => import('@/views/LandingView.vue'),
       name: 'LandingView',
     },
+    {
+      path: '/dornbacherstrasse',
+      component: () => import('@/views/DornbacherstrasseView.vue'),
+      name: 'DornbacherstrasseView',
+    },
+    {
+      path: '/mariahilferstrasse',
+      component: () => import('@/views/MariahilferstrasseView.vue'),
+      name: 'MariahilferstrasseView',
+    },
+    {
+      path: '/aboutUs',
+      component: () => import('@/views/AboutUsView.vue'),
+      name: 'AboutUsView',
+    },
   ],
 })
 
