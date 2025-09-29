@@ -2,6 +2,7 @@
   <div>
     <!-- Hier kommt HTML -->
     <h1>Landing View</h1>
+    <p>Test</p>
   </div>
 </template>
 
