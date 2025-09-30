@@ -1,80 +1,17 @@
-.dark {
-  color: #0b132b;
+@font-face {
+  font-family: inter;
+  src: url(./fonts/Inter.ttf);
 }
 
-.bg-dark {
-  background-color: #0b132b;
+@font-face {
+  font-family: roboto;
+  src: url(./fonts/Robot.ttf);
 }
 
-.primary {
-  color: #1e87a7;
+.inter {
+  font-family: 'inter';
 }
 
-.grey {
-  color: #cedce7;
-}
-
-.white {
-  color: #f9f6ee;
-}
-
-.bg-white {
-  background-color: #f9f6ee;
-}
-
-.inter-light {
-  font-family: 'Inter', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.inter-light-italic {
-  font-family: 'Inter', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.inter-regular {
-  font-family: 'Inter', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.inter-regular-italic {
-  font-family: 'Inter', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.inter-medium {
-  font-family: 'Inter', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.inter-semi-bold {
-  font-family: 'Inter', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.inter-bold {
-  font-family: 'Inter', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.roboto-light {
-  font-family: 'Roboto', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-  font-variation-settings: 'wdth' 100;
+.roboto {
+  font-family: 'roboto';
 }
