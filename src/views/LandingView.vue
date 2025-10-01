@@ -1,19 +1,10 @@
 <template>
   <!-- Hier kommt HTML -->
-  <header class="navbar">
-    <div class="navbar-logo">
-      <img src="../../img/Logo_zahnwien.png" alt="Logo" />
-      <li class="button">Home</li>
-    </div>
-    <ul class="navbar-menu">
-      <li class="button">Terminvereinbarung</li>
-      <li class="button">Über uns</li>
-      <li class="button">Jobs</li>
-      <li class="button">Kontakt</li>
-    </ul>
-  </header>
+  <NavBar background="transparent" text="white" :sticky="false" :overlay="true"/>
+
   <div class="splitAnimation">
     <div class="PicLeft" style="background-image: url('../../img/Ordi_1170/VFN_7219.jpg')">
+      <div class="overlay"></div>
       <div class="TextLeft">
         <a href="../views/DornbacherstrasseView.vue">
           <h5 class="text-white">Dornbacher Straße 1 1170, Wien</h5>
@@ -25,6 +16,7 @@
     </div>
 
     <div class="PicRight" style="background-image: url('../../img/Ordi_1070/VFN_7366.jpg')">
+      <div class="overlay"></div>
       <div class="TextRight">
         <a href="../views/MariahilferstrasseView.vue">
           <h5 class="text-white">Mariahilferstraße 112 1070, Wien</h5>
@@ -37,7 +29,16 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts">
+
+import NavBar from '@/components/NavBar.vue';
+
+export default {
+  components: {
+    NavBar
+  }
+};
+</script>
 
 
 <style scoped>
@@ -85,62 +86,17 @@ p {
   padding: 1em 2em;
   border-radius: 50px;
   text-align: center;
+    z-index: 9999;
 }
 
-.navbar {
-  position: fixed;
+.overlay {
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  background: transparent;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 40px;
-  z-index: 9999;
-}
-
-
-.navbar-logo {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-logo img {
-  height: 50px;
-  margin-right: 10px;
-}
-
-.navbar-logo span {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* Menü rechts */
-.navbar-menu {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-
-.button {
-  margin-left: 24px;
-  border: 2px solid black;
-  border-radius: 20px;
-  padding: 10px;
-  backdrop-filter: blur(20px);
-  transition: 300ms;
-  list-style: none;
-}
-
-.button:hover {
-    border-color: #007bff;
-  color: #007bff;
-  background: rgba(0, 123, 255, 0.1);   /* leichter blauer Glas-Effekt */
-  transform: scale(1.05);              /* sanfte Vergrößerung */
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3); /* Glow */
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
 </style>

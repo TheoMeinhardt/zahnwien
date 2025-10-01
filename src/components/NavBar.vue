@@ -1,6 +1,6 @@
 <template>
   <div
-    class="row no-wrap justify-between items-baseline inter text-center text-subtitle1 q-pa-md"
+    class="navbar row no-wrap justify-between items-baseline inter text-center text-subtitle1 q-pa-md"
     :class="[bgClass, stickyClass, overlayClass]"
   >
     <RouterLink to="/" class="col-auto">
@@ -40,5 +40,10 @@ const overlayClass = ref(props.overlay ? 'absolute-top' : 'relative-position')
 <style lang="scss" scoped>
 a {
   color: $white;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 9999;
 }
 </style>
