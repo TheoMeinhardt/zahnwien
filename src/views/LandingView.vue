@@ -7,7 +7,9 @@
       <div class="overlay"></div>
       <div class="TextLeft">
         <a href="../views/DornbacherstrasseView.vue">
-          <h5 class="text-white">Dornbacher Straße 1 1170, Wien</h5>
+          <p class="text-h4 text-weight-bold text-no-wrap text-white">
+            Dornbacher Straße 1 1170, Wien
+          </p>
           <p class="text-white">➜ allg. Zahnmedizin</p>
           <p class="text-white">➜ Implantologie</p>
           <p class="text-white">➜ Ästhetik</p>
@@ -19,7 +21,9 @@
       <div class="overlay"></div>
       <div class="TextRight">
         <a href="../views/MariahilferstrasseView.vue">
-          <h5 class="text-white">Mariahilferstraße 112 1070, Wien</h5>
+          <p class="text-h4 text-weight-bold text-no-wrap text-white">
+            Mariahilferstraße 112 1070, Wien
+          </p>
           <p class="text-white">➜ Kieferorthopädie</p>
           <p class="text-white">➜ Invisalign</p>
           <p class="text-white">➜ Kinderbehandlung</p>
@@ -86,7 +90,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgb($dark, 0.4);
+  background: rgb($dark, 0.5);
   z-index: 1;
 }
 </style>
