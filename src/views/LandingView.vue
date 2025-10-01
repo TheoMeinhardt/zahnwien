@@ -1,6 +1,6 @@
 <template>
   <!-- Hier kommt HTML -->
-  <NavBar background="transparent" text="white" :sticky="false" :overlay="true"/>
+  <NavBar background="transparent" text="white" :sticky="false" :overlay="true" />
 
   <div class="splitAnimation">
     <div class="PicLeft" style="background-image: url('../../img/Ordi_1170/VFN_7219.jpg')">
@@ -29,17 +29,9 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import NavBar from '@/components/NavBar.vue';
-
-export default {
-  components: {
-    NavBar
-  }
-};
+<script setup lang="ts">
+import NavBar from '@/components/NavBar.vue'
 </script>
-
 
 <style scoped>
 a {
@@ -50,7 +42,6 @@ p {
   margin: 0;
   padding-left: 0;
 }
-
 
 .splitAnimation {
   display: flex;
@@ -86,7 +77,7 @@ p {
   padding: 1em 2em;
   border-radius: 50px;
   text-align: center;
-    z-index: 9999;
+  z-index: 9999;
 }
 
 .overlay {
@@ -98,5 +89,4 @@ p {
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
-
 </style>
