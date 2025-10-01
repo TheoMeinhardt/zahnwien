@@ -37,6 +37,11 @@
     text-decoration: none;
   }
 
+  p{
+    margin: 0;
+    padding-left: 0;
+  }
+
 .splitAnimation {
   display: flex;
   width: 100vw;
@@ -69,7 +74,6 @@
   padding: 1em 2em;
   border-radius: 50px;
   text-align: center;
-  color: white;
 }
 
 </style>
