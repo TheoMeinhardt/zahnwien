@@ -33,7 +33,7 @@
 import NavBar from '@/components/NavBar.vue'
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 a {
   text-decoration: none;
 }
@@ -86,7 +86,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb($dark, 0.4);
   z-index: 1;
 }
 </style>
