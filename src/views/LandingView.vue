@@ -6,34 +6,35 @@
     <div class="PicLeft" style="background-image: url('../../img/Ordi_1170/VFN_7219.jpg')">
       <div class="overlay"></div>
       <div class="TextLeft">
-        <a href="../views/DornbacherstrasseView.vue">
+        <RouterLink to="/dornbacherstrasse">
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
             Dornbacher Straße 1 1170, Wien
           </p>
           <p class="text-white q-pt-lg">➜ allg. Zahnmedizin</p>
           <p class="text-white">➜ Implantologie</p>
           <p class="text-white">➜ Ästhetik</p>
-        </a>
+        </RouterLink>
       </div>
     </div>
 
     <div class="PicRight" style="background-image: url('../../img/Ordi_1070/VFN_7366.jpg')">
       <div class="overlay"></div>
       <div class="TextRight">
-        <a href="../views/MariahilferstrasseView.vue">
+        <RouterLink to="/mariahilferstrasse">
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
             Mariahilferstraße 112 1070, Wien
           </p>
           <p class="text-white q-pt-lg">➜ Kieferorthopädie</p>
           <p class="text-white">➜ Invisalign</p>
           <p class="text-white">➜ Kinderbehandlung</p>
-        </a>
+        </RouterLink>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
 import NavBar from '@/components/NavBar.vue'
 </script>
 
