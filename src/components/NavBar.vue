@@ -4,7 +4,7 @@
     :class="[bgClass, stickyClass, overlayClass]"
   >
     <RouterLink to="/" class="col-auto">
-      <q-img src="@/components/icons/Logo.png" width="1.5rem" fit="contain" />
+      <q-img src="@/assets/icons/Logo.png" width="1.5rem" fit="contain" />
     </RouterLink>
 
     <div class="col-6"></div>
