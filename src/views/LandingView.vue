@@ -10,7 +10,7 @@
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
             Dornbacher Straße 1 1170, Wien
           </p>
-          <p class="text-white">➜ allg. Zahnmedizin</p>
+          <p class="text-white q-pt-lg">➜ allg. Zahnmedizin</p>
           <p class="text-white">➜ Implantologie</p>
           <p class="text-white">➜ Ästhetik</p>
         </a>
@@ -24,7 +24,7 @@
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
             Mariahilferstraße 112 1070, Wien
           </p>
-          <p class="text-white">➜ Kieferorthopädie</p>
+          <p class="text-white q-pt-lg">➜ Kieferorthopädie</p>
           <p class="text-white">➜ Invisalign</p>
           <p class="text-white">➜ Kinderbehandlung</p>
         </a>
