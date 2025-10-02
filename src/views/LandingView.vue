@@ -91,7 +91,6 @@ p {
   right: 0;
   bottom: 0;
   background: rgb($dark, 0.5);
-  color: black;
   z-index: 1;
 }
 </style>
