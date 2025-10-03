@@ -49,6 +49,12 @@
             >
           </div>
         </div>
+
+        <!-- Opening Hours -->
+        <div>
+          <!-- Opening Hours heading -->
+          <span class="text-h5 text-bold text-primary q-mt-lg block">Öffnungszeiten:</span>
+        </div>
       </div>
     </div>
   </div>
