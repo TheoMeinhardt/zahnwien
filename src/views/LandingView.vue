@@ -6,28 +6,28 @@
     <div class="PicLeft" style="background-image: url('../../img/Ordi_1170/VFN_7219.jpg')">
       <div class="overlay"></div>
       <div class="TextLeft">
-        <a href="../views/DornbacherstrasseView.vue">
-          <p class="text-h4 text-weight-bold text-no-wrap text-white">
-            Dornbacher Straße 1 1170, Wien
-          </p>
+        <router-link to="/dornbacherstrasse">
+            <p class="text-h4 text-weight-bold text-no-wrap text-white">
+              Dornbacher Straße 1 1170, Wien
+            </p>
           <p class="text-white q-pt-lg">➜ allg. Zahnmedizin</p>
           <p class="text-white">➜ Implantologie</p>
           <p class="text-white">➜ Ästhetik</p>
-        </a>
+        </router-link>
       </div>
     </div>
 
     <div class="PicRight" style="background-image: url('../../img/Ordi_1070/VFN_7366.jpg')">
       <div class="overlay"></div>
       <div class="TextRight">
-        <a href="../views/MariahilferstrasseView.vue">
+        <router-link to="/dornbacherstrasse">
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
             Mariahilferstraße 112 1070, Wien
           </p>
           <p class="text-white q-pt-lg">➜ Kieferorthopädie</p>
           <p class="text-white">➜ Invisalign</p>
           <p class="text-white">➜ Kinderbehandlung</p>
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
@@ -97,8 +97,6 @@ p {
   color: black;
   z-index: 1;
 }
-
-
 
 </style>
 
