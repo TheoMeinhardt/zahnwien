@@ -8,6 +8,7 @@ import { Quasar } from 'quasar'
 import quasarLang from 'quasar/lang/de'
 import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
+import 'leaflet/dist/leaflet.css';
 
 const app = createApp(App)
 

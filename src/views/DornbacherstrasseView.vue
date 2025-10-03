@@ -1,19 +1,38 @@
-<template>
-  <NavBar background="transparent" text="white" :sticky="false" :overlay="true" />
-  <div class="slider" @mousedown="startDrag" @mousemove="onDrag" @mouseup="endDrag" @mouseleave="endDrag"
-    @touchstart="startDrag" @touchmove="onDrag" @touchend="endDrag">
-    <div class="slider-track" :style="trackStyle">
-      <div v-for="(slide, i) in slides" :key="i" class="slide" :style="{ backgroundImage: `url(${slide})` }"></div>
+  <template>
+    <NavBar background="transparent" text="white" :sticky="false" :overlay="true" />
+    <div class="slider" @mousedown="startDrag" @mousemove="onDrag" @mouseup="endDrag" @mouseleave="endDrag"
+      @touchstart="startDrag" @touchmove="onDrag" @touchend="endDrag">
+      <div class="slider-track" :style="trackStyle">
+        <div v-for="(slide, i) in slides" :key="i" class="slide" :style="{ backgroundImage: `url(${slide})` }"></div>
+      </div>
+      <div class="overlay"></div>
+      <button class="nav left" @click="prevSlide">‹</button>
+      <button class="nav right" @click="nextSlide">›</button>
     </div>
-    <div class="overlay"></div>
-    <button class="nav left" @click="prevSlide">‹</button>
-    <button class="nav right" @click="nextSlide">›</button>
-  </div>
-</template>
+    <div class="container">
+      <!-- Linke Spalte -->
+      <div class="textLinks">
+        <h3>Dornbacher Straße 1</h3>
+        <p><strong>Öffnungszeiten:</strong><br>
+          Montag - Freitag: 09:00 - 18:00 Uhr<br>
+          Samstag: 10:00 - 14:00 Uhr<br>
+          Sonntag: Geschlossen
+        </p>
+        <p><strong>Kontakt:</strong><br>
+          Telefon: +43 1 234 5678<br>
+          E-Mail: office@example.at
+        </p>
+      </div>
+
+      <div class="karteRechts" ref="mapContainer"></div>
+    </div>
+  </template>
 
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const slides = ref<string[]>([
   "../../public/img/Ordi_1170/VFN_7243.jpg",
@@ -75,6 +94,26 @@ const trackStyle = computed(() => {
     transition: isDragging ? 'none' : 'transform 0.5s ease',
   };
 });
+
+const mapContainer = ref<HTMLDivElement | null>(null);
+
+onMounted(() => {
+  if (!mapContainer.value) return;
+
+  const lat = 48.2312;
+  const lng = 16.3380;
+
+  const map = L.map(mapContainer.value).setView([lat, lng], 16);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  L.marker([lat, lng]).addTo(map)
+    .bindPopup('Dornbacher Straße 1, 1170 Wien')
+    .openPopup();
+});
+
 </script>
 
 <style scoped>
@@ -82,14 +121,17 @@ const trackStyle = computed(() => {
   position: relative;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow: visible;
   user-select: none;
 }
+
 
 .slider-track {
   display: flex;
   height: 100%;
+  overflow: hidden;
 }
+
 
 .slide {
   flex: 0 0 100%;
@@ -98,6 +140,18 @@ const trackStyle = computed(() => {
   background-position: center;
   filter: brightness(0.5);
 }
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
 
 .nav {
   position: absolute;
@@ -114,7 +168,8 @@ const trackStyle = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10;
 }
 
 .nav:hover {
@@ -129,4 +184,34 @@ const trackStyle = computed(() => {
 .nav.right {
   right: 20px;
 }
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 80vh;
+}
+
+
+.textLinks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+
+.karteRechts {
+  flex: 1;
+  height: 100%;
+  min-height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
 </style>
