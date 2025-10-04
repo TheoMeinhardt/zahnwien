@@ -2,7 +2,7 @@
   <div>
     <NavBar background="dark" text="white" :sticky="true" :overlay="false" />
 
-    <div class="q-mt-xl q-pt-xl q-pl-lg">
+    <div class="q-mt-xl q-pt-xl q-px-lg">
       <!-- Heading -->
       <div class="inter text-primary">
         <span class="text-h2 text-weight-bold block">Dornbacherstraße 1</span>
@@ -56,6 +56,33 @@
           <span class="text-h5 text-bold text-primary q-mt-lg block">Öffnungszeiten:</span>
         </div>
       </div>
+
+      <div class="q-mt-xl">
+        <span class="inter text-primary text-h3 text-weight-bold block">Leistungen</span>
+
+        <div class="row wrap justify-between">
+          <ServiceBox
+            class="col-5 q-mt-xl"
+            header="Prophylaxe & Bleaching"
+            subtext="Sanfte Reinigung für gesunde Zähne. Aufhellung für ein frisches Lächeln."
+            image="https://placehold.co/600x400"
+          />
+
+          <ServiceBox
+            class="col-5 q-mt-xl"
+            header="Kronen, Brücken, Veneers"
+            subtext="Schöne Zähne durch Keramik."
+            image="https://placehold.co/600x400"
+          />
+
+          <ServiceBox
+            class="col-5 q-mt-xl"
+            header="Kronen, Brücken, Veneers"
+            subtext="Schöne Zähne durch Keramik."
+            image="https://placehold.co/600x400"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -63,6 +90,7 @@
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
 import Chip from '@/components/ChipComponent.vue'
+import ServiceBox from '@/components/ServiceBox.vue'
 </script>
 
 <style scoped></style>
