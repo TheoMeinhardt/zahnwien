@@ -8,6 +8,7 @@
       <q-btn
         flat
         no-caps
+        dense
         color="primary"
         icon-right="keyboard_arrow_right"
         label="mehr erfahren"
@@ -30,8 +31,19 @@ const props = defineProps<{
 
 <style lang="scss" scoped>
 .box {
+  min-width: 45vw;
+
   border: $primary 2px solid;
   border-radius: 30px;
+
+  transition:
+    transform 0.15s ease-out,
+    box-shadow 0.25s ease-out;
+}
+
+.box:hover {
+  transform: scale(1.025);
+  box-shadow: 0px 0px 10px $primary;
 }
 
 .q-img {
