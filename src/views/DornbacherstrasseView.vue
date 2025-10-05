@@ -62,21 +62,21 @@
 
         <div class="row wrap justify-between">
           <ServiceBox
-            class="col-5 q-mt-xl"
+            class="col-12 col-md-5 q-mt-xl"
             header="Prophylaxe & Bleaching"
             subtext="Sanfte Reinigung für gesunde Zähne. Aufhellung für ein frisches Lächeln."
             image="https://placehold.co/600x400"
           />
 
           <ServiceBox
-            class="col-5 q-mt-xl"
+            class="col-12 col-md-5 q-mt-xl"
             header="Kronen, Brücken, Veneers"
             subtext="Schöne Zähne durch Keramik."
             image="https://placehold.co/600x400"
           />
 
           <ServiceBox
-            class="col-5 q-mt-xl"
+            class="col-12 col-md-5 q-mt-xl"
             header="Kronen, Brücken, Veneers"
             subtext="Schöne Zähne durch Keramik."
             image="https://placehold.co/600x400"
