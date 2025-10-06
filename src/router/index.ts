@@ -1,5 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import LandingView from '@/views/LandingView.vue'
+import DornbacherstrasseView from '@/views/DornbacherstrasseView.vue'
+import MariahilferstrasseView from '@/views/MariahilferstrasseView.vue'
+import AboutUsView from '@/views/AboutUsView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -9,22 +14,22 @@ const router = createRouter({
     },
     {
       path: '/home',
-      component: () => import('@/views/LandingView.vue'),
+      component: LandingView,
       name: 'LandingView',
     },
     {
       path: '/dornbacherstrasse',
-      component: () => import('@/views/DornbacherstrasseView.vue'),
+      component: DornbacherstrasseView,
       name: 'DornbacherstrasseView',
     },
     {
       path: '/mariahilferstrasse',
-      component: () => import('@/views/MariahilferstrasseView.vue'),
+      component: MariahilferstrasseView,
       name: 'MariahilferstrasseView',
     },
     {
       path: '/aboutUs',
-      component: () => import('@/views/AboutUsView.vue'),
+      component: AboutUsView,
       name: 'AboutUsView',
     },
   ],
