@@ -1,5 +1,7 @@
 <template>
   <div class="box row">
+    <div class="box-back"></div>
+
     <div class="col q-mt-xl q-mb-md q-mx-lg">
       <span class="inter text-primary text-h5 block">{{ props.header }}</span>
       <span class="roboto text-dark text-subtitle2 text-weight-regular block q-mt-sm">
@@ -32,6 +34,7 @@ const props = defineProps<{
 <style lang="scss" scoped>
 .box {
   min-width: 45vw;
+  overflow: hidden;
 
   border: $primary 2px solid;
   border-radius: 30px;
@@ -48,5 +51,12 @@ const props = defineProps<{
 
 .q-img {
   border-radius: 0px 30px 30px 0px;
+}
+
+.box-back {
+  width: 100%;
+  height: 100%;
+
+  background-color: red;
 }
 </style>
