@@ -56,14 +56,14 @@
             <l-map
               class="l-map"
               :zoom="17"
-              :center="[48.2297, 16.3265]"
+              :center="[48.2296, 16.3349]"
               :use-global-leaflet="false"
             >
               <l-tile-layer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
               />
-              <l-marker :lat-lng="[48.2297, 16.3265]">
+              <l-marker :lat-lng="[48.2296, 16.3349]">
                 <l-popup>Dornbacherstraße 1, 1170 Wien</l-popup>
               </l-marker>
             </l-map>
@@ -79,37 +79,37 @@
             class="col-12 col-md-5 q-mt-xl"
             header="Prophylaxe & Bleaching"
             subtext="Sanfte Reinigung für gesunde Zähne. Aufhellung für ein frisches Lächeln."
-            image="https://placehold.co/600x400"
+            image="/img/Details/VFN_7349.jpg"
           />
           <ServiceBox
             class="col-12 col-md-5 q-mt-xl"
             header="Kronen, Brücken, Veneers"
             subtext="Schöne Zähne durch Keramik."
-            image="https://placehold.co/600x400"
+            image="/img/Details/VFN_7401.jpg"
           />
           <ServiceBox
             class="col-12 col-md-5 q-mt-xl"
-            header="Kronen, Brücken, Veneers"
-            subtext="Schöne Zähne durch Keramik."
-            image="https://placehold.co/600x400"
+            header="Implantologie"
+            subtext="Fester Halt durch moderne Implantate."
+            image="/img/Details/VFN_7336.jpg"
           />
           <ServiceBox
             class="col-12 col-md-5 q-mt-xl"
-            header="Prophylaxe & Bleaching"
-            subtext="Sanfte Reinigung für gesunde Zähne. Aufhellung für ein frisches Lächeln."
-            image="https://placehold.co/600x400"
+            header="Wurzelbehandlung"
+            subtext="Zahnerhalt durch präzise Endodontie."
+            image="/img/Details/VFN_7402.jpg"
           />
           <ServiceBox
             class="col-12 col-md-5 q-mt-xl"
-            header="Prophylaxe & Bleaching"
-            subtext="Sanfte Reinigung für gesunde Zähne. Aufhellung für ein frisches Lächeln."
-            image="https://placehold.co/600x400"
+            header="Zahnersatz"
+            subtext="Funktionell und ästhetisch perfekt."
+            image="/img/Details/VFN_7345.jpg"
           />
           <ServiceBox
             class="col-12 col-md-5 q-mt-xl"
-            header="Prophylaxe & Bleaching"
-            subtext="Sanfte Reinigung für gesunde Zähne. Aufhellung für ein frisches Lächeln."
-            image="https://placehold.co/600x400"
+            header="3D-Diagnostik"
+            subtext="Präzise Planung mit modernster Technik."
+            image="/img/Details/VFN_7311.jpg"
           />
         </div>
       </div>
@@ -128,7 +128,7 @@ import "leaflet/dist/leaflet.css"
 <style scoped>
 .map-wrapper {
   width: 100%;
-  max-width: 800px;
+  max-width: 500px;
   height: 400px;
   border-radius: 1rem;
   overflow: hidden;
