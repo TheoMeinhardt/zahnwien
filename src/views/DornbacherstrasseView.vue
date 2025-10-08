@@ -44,7 +44,7 @@
                 >3D-Scan</Chip
               >
             </div>
-          </div>e
+          </div>
 
           <div>
             <span class="text-h5 text-bold text-primary q-mt-lg block">Öffnungszeiten:</span>
@@ -56,14 +56,14 @@
             <l-map
               class="l-map"
               :zoom="17"
-              :center="[48.2228, 16.2949]"
+              :center="[48.2297, 16.3265]"
               :use-global-leaflet="false"
             >
               <l-tile-layer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
               />
-              <l-marker :lat-lng="[48.2228, 16.2949]">
+              <l-marker :lat-lng="[48.2297, 16.3265]">
                 <l-popup>Dornbacherstraße 1, 1170 Wien</l-popup>
               </l-marker>
             </l-map>
@@ -122,13 +122,13 @@ import NavBar from '@/components/NavBar.vue'
 import Chip from '@/components/ChipComponent.vue'
 import ServiceBox from '@/components/ServiceBox.vue'
 import { LMap, LTileLayer, LMarker, LPopup } from "@vue-leaflet/vue-leaflet"
-
+import "leaflet/dist/leaflet.css"
 </script>
 
 <style scoped>
 .map-wrapper {
   width: 100%;
-  max-width: 500px;
+  max-width: 800px;
   height: 400px;
   border-radius: 1rem;
   overflow: hidden;
