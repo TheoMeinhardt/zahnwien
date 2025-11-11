@@ -63,23 +63,12 @@
         <div class="row wrap justify-between">
           <ServiceBox
             class="col-12 col-md-5 q-mt-xl"
-            header="Prophylaxe & Bleaching"
-            subtext="Sanfte Reinigung für gesunde Zähne. Aufhellung für ein frisches Lächeln."
-            image="https://placehold.co/600x400"
-          />
-
-          <ServiceBox
-            class="col-12 col-md-5 q-mt-xl"
-            header="Kronen, Brücken, Veneers"
-            subtext="Schöne Zähne durch Keramik."
-            image="https://placehold.co/600x400"
-          />
-
-          <ServiceBox
-            class="col-12 col-md-5 q-mt-xl"
-            header="Kronen, Brücken, Veneers"
-            subtext="Schöne Zähne durch Keramik."
-            image="https://placehold.co/600x400"
+            v-for="(item, key) in data"
+            :header="item.header"
+            :subtext="item.subtext"
+            :detailtext="item.detailText"
+            :image="item.image"
+            :key="key"
           />
         </div>
       </div>
@@ -91,6 +80,11 @@
 import NavBar from '@/components/NavBar.vue'
 import Chip from '@/components/ChipComponent.vue'
 import ServiceBox from '@/components/ServiceBox.vue'
+
+import type { locationData } from '@/types'
+import rawData from '@/assets/data/1190/text.json'
+
+const data: locationData[] = rawData
 </script>
 
 <style scoped></style>
