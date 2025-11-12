@@ -9,8 +9,8 @@
         <span class="text-h6 text-italic text-weight-regular">1170 Wien</span>
       </div>
 
-      <div class="row">
-        <div class="col">
+      <div class="row wrap">
+        <div class="col-12 col-md-6">
           <!-- Focus chips -->
           <div>
             <!-- Focus heading -->
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Map -->
-        <div id="map" class="col"></div>
+        <div id="map" class="col-12 col-md-6"></div>
       </div>
 
       <div class="q-mt-xl">
@@ -111,5 +111,6 @@ onMounted(() => {
 <style scoped>
 #map {
   height: 20rem;
+  min-width: 20rem;
 }
 </style>
