@@ -3,7 +3,7 @@
   <NavBar background="transparent" text="white" :sticky="false" :overlay="true" />
 
   <div class="splitAnimation">
-    <div class="PicLeft" style="background-image: url('/img/Ordi_1170/VFN_7219.jpg')">
+    <div class="PicLeft" :style="'background-image: url(' + leftImage + ')'">
       <div class="overlay"></div>
       <div class="TextLeft">
         <RouterLink to="/dornbacherstrasse">
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="PicRight" style="background-image: url('/img/Ordi_1070/VFN_7366.jpg')">
+    <div class="PicRight" :style="'background-image: url(' + rightImage + ')'">
       <div class="overlay"></div>
       <div class="TextRight">
         <RouterLink to="/mariahilferstrasse">
@@ -36,6 +36,9 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import NavBar from '@/components/NavBar.vue'
+
+const leftImage = import.meta.env.BASE_URL + 'img/Ordi_1170/VFN_7219.jpg'
+const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7366.jpg'
 </script>
 
 <style lang="scss" scoped>
