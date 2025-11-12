@@ -99,12 +99,14 @@ const map: Ref<L.Map | undefined> = ref(undefined)
 const mapMarker: Ref<L.Marker | undefined> = ref(undefined)
 
 onMounted(() => {
-  map.value = L.map('map').setView([48.22625, 16.3075], 16)
+  map.value = L.map('map').setView([48.22625, 16.3075], 15)
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 25,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map.value)
+
   mapMarker.value = L.marker([48.226278, 16.307361], {}).addTo(map.value)
+  mapMarker.value.bindPopup('<b>Dornbacherstraße 1</b><br>1170 Wien')
 })
 </script>
 
