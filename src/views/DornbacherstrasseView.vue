@@ -5,11 +5,12 @@
     <div class="q-mt-xl q-pt-xl q-px-lg">
       <!-- Heading -->
       <div class="inter text-primary">
-        <span class="text-h2 text-weight-bold block">Dornbacherstraße 1</span>
+        <span class="gt-sm text-h2 text-weight-bold block">Dornbacherstraße 1</span>
+        <span class="lt-md text-h4 text-weight-bold block">Dornbacherstraße 1</span>
         <span class="text-h6 text-italic text-weight-regular">1170 Wien</span>
       </div>
 
-      <div class="row wrap">
+      <div class="row wrap items-stretch">
         <div class="col-12 col-md-6">
           <!-- Focus chips -->
           <div>
@@ -57,11 +58,57 @@
           <div>
             <!-- Opening Hours heading -->
             <span class="text-h5 text-bold text-primary q-mt-lg block">Öffnungszeiten:</span>
+            <div>
+              <span class="block text-body roboto text-weight-regular"
+                >Montag:
+                <span :class="formatClosedOrOpen(openingHours.monday)">{{
+                  formatDay(openingHours.monday)
+                }}</span></span
+              >
+              <span class="block text-body roboto text-weight-regular"
+                >Dienstag:
+                <span :class="formatClosedOrOpen(openingHours.tuesday)">{{
+                  formatDay(openingHours.tuesday)
+                }}</span></span
+              >
+              <span class="block text-body roboto text-weight-regular"
+                >Mittwoch:
+                <span :class="formatClosedOrOpen(openingHours.wednesday)">{{
+                  formatDay(openingHours.wednesday)
+                }}</span></span
+              >
+              <span class="block text-body roboto text-weight-regular"
+                >Donnerstag:
+                <span :class="formatClosedOrOpen(openingHours.thursday)">{{
+                  formatDay(openingHours.thursday)
+                }}</span></span
+              >
+              <span class="block text-body roboto text-weight-regular"
+                >Freitag:
+                <span :class="formatClosedOrOpen(openingHours.friday)">{{
+                  formatDay(openingHours.friday)
+                }}</span></span
+              >
+              <span class="block text-body roboto text-weight-regular"
+                >Samstag:
+                <span :class="formatClosedOrOpen(openingHours.saturday)">{{
+                  formatDay(openingHours.saturday)
+                }}</span></span
+              >
+              <span class="block text-body roboto text-weight-regular"
+                >Sonntag:
+                <span :class="formatClosedOrOpen(openingHours.sunday)">{{
+                  formatDay(openingHours.sunday)
+                }}</span></span
+              >
+            </div>
           </div>
         </div>
 
         <!-- Map -->
-        <div id="map" class="col-12 col-md-6"></div>
+        <div class="col-12 col-md-6">
+          <div id="map"></div>
+        </div>
       </div>
 
       <div class="q-mt-xl">
@@ -91,11 +138,12 @@ import ServiceBox from '@/components/ServiceBox.vue'
 import L from 'leaflet'
 import { onMounted, ref, type Ref } from 'vue'
 
-import type { locationData } from '@/types'
+import type { locationData, openingHours } from '@/types'
 import { parseOpeningHours } from '@/helpers'
 import rawData from '@/assets/data/1170/text.json'
 
 const data: Ref<locationData[]> = ref(rawData)
+const openingHours: Ref<openingHours> = ref(parseOpeningHours())
 const map: Ref<L.Map | undefined> = ref(undefined)
 const mapMarker: Ref<L.Marker | undefined> = ref(undefined)
 
@@ -109,11 +157,33 @@ onMounted(() => {
   mapMarker.value = L.marker([48.226278, 16.307361], {}).addTo(map.value)
   mapMarker.value.bindPopup('<b>Dornbacraße 1</b><br>1170 Wien')
 })
+
+function formatDay(day: { from: Date; to: Date } | undefined): string {
+  if (!day) return 'geschlossen'
+  else {
+    return (
+      day.from.toLocaleTimeString('de-AT', {
+        hour: '2-digit',
+        minute: '2-digit',
+      }) +
+      ' - ' +
+      day.to.toLocaleTimeString('de-AT', {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    )
+  }
+}
+
+function formatClosedOrOpen(day: { from: Date; to: Date } | undefined): string {
+  return day ? 'text-primary text-weight-bold' : 'text-grey text-italic'
+}
 </script>
 
 <style scoped>
 #map {
-  height: 20rem;
+  height: 100%;
+  min-height: 20rem;
   min-width: 20rem;
 }
 </style>
