@@ -92,7 +92,8 @@ import L from 'leaflet'
 import { onMounted, ref, type Ref } from 'vue'
 
 import type { locationData } from '@/types'
-import rawData from '@/assets/data/1190/text.json'
+import { parseOpeningHours } from '@/helpers'
+import rawData from '@/assets/data/1170/text.json'
 
 const data: Ref<locationData[]> = ref(rawData)
 const map: Ref<L.Map | undefined> = ref(undefined)
@@ -106,7 +107,7 @@ onMounted(() => {
   }).addTo(map.value)
 
   mapMarker.value = L.marker([48.226278, 16.307361], {}).addTo(map.value)
-  mapMarker.value.bindPopup('<b>Dornbacherstraße 1</b><br>1170 Wien')
+  mapMarker.value.bindPopup('<b>Dornbacraße 1</b><br>1170 Wien')
 })
 </script>
 
