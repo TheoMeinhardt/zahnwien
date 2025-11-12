@@ -18,17 +18,13 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Fokus:</span>
 
             <div class="inter row text-italic text-weight-light q-mt-sm">
-              <Chip color="white" text-color="primary" img="src/assets/icons/teeth_medicin.png"
+              <Chip color="white" text-color="primary" :img="teethMedicin"
                 >Allgemeine Zahnmedizin</Chip
               >
 
-              <Chip color="white" text-color="primary" img="src/assets/icons/teeth_implants.png"
-                >Implantologie</Chip
-              >
+              <Chip color="white" text-color="primary" :img="teethImplants">Implantologie</Chip>
 
-              <Chip color="white" text-color="primary" img="src/assets/icons/teeth_aesthetic.png"
-                >Ästhetik</Chip
-              >
+              <Chip color="white" text-color="primary" :img="teethAesthetic">Ästhetik</Chip>
             </div>
           </div>
 
@@ -38,19 +34,15 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Ausstattung:</span>
 
             <div class="inter row text-italic text-weight-light q-mt-sm">
-              <Chip color="white" text-color="primary" img="src/assets/icons/x-ray.png"
-                >Röntgen</Chip
-              >
+              <Chip color="white" text-color="primary" :img="xray">Röntgen</Chip>
 
               <Chip color="white" text-color="primary" img="">DVT</Chip>
 
-              <Chip color="white" text-color="primary" img="src/assets/icons/digital_workflow.png"
+              <Chip color="white" text-color="primary" :img="digitalWorkflow"
                 >digitale Workflows</Chip
               >
 
-              <Chip color="white" text-color="primary" img="src/assets/icons/3d-scan.png"
-                >3D-Scan</Chip
-              >
+              <Chip color="white" text-color="primary" :img="scan3d">3D-Scan</Chip>
             </div>
           </div>
 
@@ -134,6 +126,13 @@
 import NavBar from '@/components/NavBar.vue'
 import Chip from '@/components/ChipComponent.vue'
 import ServiceBox from '@/components/ServiceBox.vue'
+
+import teethMedicin from '@/assets/icons/teeth_medicin.png'
+import teethImplants from '@/assets/icons/teeth_implants.png'
+import teethAesthetic from '@/assets/icons/teeth_aesthetic.png'
+import digitalWorkflow from '@/assets/icons/digital_workflow.png'
+import scan3d from '@/assets/icons/3d-scan.png'
+import xray from '@/assets/icons/x-ray.png'
 
 import L from 'leaflet'
 import { onMounted, ref, type Ref } from 'vue'

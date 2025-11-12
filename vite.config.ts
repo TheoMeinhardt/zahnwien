@@ -7,9 +7,6 @@ import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  // Load env vars, allowing VITE_BASE to control the built `base`.
-  // Create `.env.production` with `VITE_BASE=/zahnwien/` for the GitHub Pages build
-  // (or set VITE_BASE via CI). Fallback to '/' when not provided.
   const env = loadEnv(mode, process.cwd(), '')
   const base = env.VITE_BASE || '/'
 
