@@ -38,19 +38,19 @@ import NavBar from '@/components/NavBar.vue'
 
 const team = [
   {
-    name: 'Dr. Olivia',
+    name: 'Dr. Isabele Olivia',
     role: 'Zahnärztin & Praxisleitung',
     image: '',
     text: 'Ich liebe es, Menschen zu einem natürlichen Lächeln zu verhelfen – mit Feingefühl und moderner Zahnmedizin.',
   },
   {
-    name: 'Dr. Muster',
+    name: 'Dr. Muster Eber',
     role: 'Spezialist für Implantologie',
     image: '',
     text: 'Technische Präzision trifft auf Ästhetik – mein Ziel ist dauerhafter Komfort und Funktion.',
   },
   {
-    name: 'Mag. Luster',
+    name: 'Dr Eva Olivia',
     role: 'Dentalhygienikerin',
     image: '',
     text: 'Prophylaxe ist die Basis jedes gesunden Lächelns – ich helfe, dieses zu bewahren.',
