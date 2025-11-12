@@ -4,7 +4,7 @@
     :class="[bgClass, stickyClass, overlayClass]"
   >
     <RouterLink to="/" class="col-auto">
-      <q-img src="@/assets/icons/Logo.png" width="1.5rem" fit="contain" />
+      <q-img src="@/assets/icons/logo.png" width="1.5rem" fit="contain" />
     </RouterLink>
 
     <div class="col-6"></div>
@@ -12,7 +12,9 @@
     <RouterLink to="/" class="col-2 text-weight-bolder" :class="textClass"
       >Terminvereinbarung</RouterLink
     >
-    <RouterLink to="/aboutUs" class="col-auto q-gutter-x-lg" :class="textClass">Über uns</RouterLink>
+    <RouterLink to="/aboutUs" class="col-auto q-gutter-x-lg" :class="textClass"
+      >Über uns</RouterLink
+    >
     <RouterLink to="/" class="col-auto" :class="textClass">Standorte</RouterLink>
     <RouterLink to="/" class="col-auto" :class="textClass">Leistungen</RouterLink>
     <RouterLink to="/" class="col-auto" :class="textClass">Jobs</RouterLink>
