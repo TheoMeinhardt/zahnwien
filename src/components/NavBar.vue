@@ -92,6 +92,6 @@ a {
 }
 
 .mobile-navbar.shown {
-  max-height: 500px;
+  max-height: 100vh;
 }
 </style>
