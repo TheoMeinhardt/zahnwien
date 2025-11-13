@@ -68,7 +68,7 @@ const stickyClass = ref(props.sticky ? 'fixed-top' : '')
 const overlayClass = ref(props.overlay ? 'absolute-top' : 'relative-position')
 
 const navbarExpanded = ref(false)
-const animationClass = computed(() => (navbarExpanded.value ? 'shown' : 'collapsed'))
+const animationClass = computed(() => (navbarExpanded.value ? 'shown' : ''))
 </script>
 
 <style lang="scss" scoped>
