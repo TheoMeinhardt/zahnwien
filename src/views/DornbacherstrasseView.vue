@@ -161,7 +161,7 @@ onMounted(() => {
   }).addTo(map.value)
 
   mapMarker.value = L.marker([48.226278, 16.307361], {}).addTo(map.value)
-  mapMarker.value.bindPopup('<b>Dornbacraße 1</b><br>1170 Wien')
+  mapMarker.value.bindPopup('<b>Dornbacherstraße 1</b><br>1170 Wien')
 })
 
 data.value.forEach((locationDataItem) => {
