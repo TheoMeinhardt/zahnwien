@@ -99,22 +99,22 @@
             >Dornbacherstraße 1, 1170 Wien</q-chip
           >
           <q-chip
-            @click="redirectTo('tel:06641234567')"
+            @click="redirectTo('tel:01/4864627')"
             size="md"
             clickable
             color="primary"
             dark
             icon="phone"
-            >+43 123 45678</q-chip
+            >01/486 46 27</q-chip
           >
           <q-chip
-            @click="redirectTo('mailto:mail@mail.at')"
+            @click="redirectTo('mailto:ordination@zahnwien.at?subject=Anfrage an Ordination 1170')"
             clickable
             size="md"
             color="primary"
             dark
             icon="mail"
-            >mail@mail.at</q-chip
+            >ordination@zahnwien.at</q-chip
           >
 
           <OpeningHours :opening-hours-data="openingHours" />
