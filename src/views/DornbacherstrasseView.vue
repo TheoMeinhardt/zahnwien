@@ -97,10 +97,8 @@
           </div>
         </div>
 
-        <!-- Map -->
-        <div class="col-12 col-md-6">
-          <div id="map"></div>
-        </div>
+        <!-- Container for images maybe? -->
+        <div class="col-12 col-md-6"></div>
       </div>
 
       <div class="q-mt-xl">
@@ -116,6 +114,16 @@
             :image="item.image"
             :key="key"
           />
+        </div>
+      </div>
+
+      <!-- Kontakt und Karte -->
+      <span class="inter text-primary text-h3 text-weight-bold block q-mt-xl">Kontakt</span>
+      <div class="row">
+        <div class="col-12 col-md-6"></div>
+
+        <div class="col-12 col-md-6">
+          <div id="map"></div>
         </div>
       </div>
     </div>
