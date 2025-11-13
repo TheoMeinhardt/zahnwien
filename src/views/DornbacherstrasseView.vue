@@ -10,7 +10,7 @@
         <span class="text-h6 text-italic text-weight-regular">1170 Wien</span>
       </div>
 
-      <div class="row wrap items-stretch">
+      <div class="row wrap items-center">
         <div class="col-12 col-md-6">
           <!-- Focus chips -->
           <div>
@@ -52,8 +52,16 @@
           </div>
         </div>
 
-        <!-- Container for images maybe? -->
-        <div class="col-12 col-md-6"></div>
+        <!-- Einführungstext -->
+        <div class="col-12 col-md-6">
+          <span class="block q-my-lg roboto text-body1"
+            >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
+            in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
+            und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
+            deutsch, englisch, französisch oder polnisch an.</span
+          >
+          <q-parallax src="https://placehold.co/1280x720" :height="300"></q-parallax>
+        </div>
       </div>
 
       <div class="q-mt-xl">
