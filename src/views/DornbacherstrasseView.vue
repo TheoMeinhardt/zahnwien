@@ -157,6 +157,10 @@ onMounted(() => {
   mapMarker.value.bindPopup('<b>Dornbacraße 1</b><br>1170 Wien')
 })
 
+data.value.forEach((locationDataItem) => {
+  locationDataItem.image = import.meta.env.BASE_URL + 'img/Details/' + locationDataItem.image
+})
+
 function formatDay(day: { from: Date; to: Date } | undefined): string {
   if (!day) return 'geschlossen'
   else {

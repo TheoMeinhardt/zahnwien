@@ -27,9 +27,10 @@
       />
     </div>
     <q-img
-      class="col full-width contain front-image"
+      class="col full-width front-image"
       :src="props.image"
       :class="{ 'front-hidden': !showFront }"
+      contain
     ></q-img>
   </div>
 </template>
