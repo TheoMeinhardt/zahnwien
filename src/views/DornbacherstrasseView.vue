@@ -48,52 +48,7 @@
 
           <!-- Opening Hours -->
           <div>
-            <!-- Opening Hours heading -->
-            <span class="text-h5 text-bold text-primary q-mt-lg block">Öffnungszeiten:</span>
-            <div>
-              <span class="block text-body roboto text-weight-regular"
-                >Montag:
-                <span :class="formatClosedOrOpen(openingHours.monday)">{{
-                  formatDay(openingHours.monday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Dienstag:
-                <span :class="formatClosedOrOpen(openingHours.tuesday)">{{
-                  formatDay(openingHours.tuesday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Mittwoch:
-                <span :class="formatClosedOrOpen(openingHours.wednesday)">{{
-                  formatDay(openingHours.wednesday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Donnerstag:
-                <span :class="formatClosedOrOpen(openingHours.thursday)">{{
-                  formatDay(openingHours.thursday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Freitag:
-                <span :class="formatClosedOrOpen(openingHours.friday)">{{
-                  formatDay(openingHours.friday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Samstag:
-                <span :class="formatClosedOrOpen(openingHours.saturday)">{{
-                  formatDay(openingHours.saturday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Sonntag:
-                <span :class="formatClosedOrOpen(openingHours.sunday)">{{
-                  formatDay(openingHours.sunday)
-                }}</span></span
-              >
-            </div>
+            <OpeningHours :opening-hours-data="openingHours" />
           </div>
         </div>
 
@@ -134,6 +89,7 @@
 import NavBar from '@/components/NavBar.vue'
 import Chip from '@/components/ChipComponent.vue'
 import ServiceBox from '@/components/ServiceBox.vue'
+import OpeningHours from '@/components/OpeningHours.vue'
 
 import teethMedicin from '@/assets/icons/teeth_medicin.png'
 import teethImplants from '@/assets/icons/teeth_implants.png'
@@ -168,27 +124,6 @@ onMounted(() => {
 data.value.forEach((locationDataItem) => {
   locationDataItem.image = import.meta.env.BASE_URL + 'img/Details/' + locationDataItem.image
 })
-
-function formatDay(day: { from: Date; to: Date } | undefined): string {
-  if (!day) return 'geschlossen'
-  else {
-    return (
-      day.from.toLocaleTimeString('de-AT', {
-        hour: '2-digit',
-        minute: '2-digit',
-      }) +
-      ' - ' +
-      day.to.toLocaleTimeString('de-AT', {
-        hour: '2-digit',
-        minute: '2-digit',
-      })
-    )
-  }
-}
-
-function formatClosedOrOpen(day: { from: Date; to: Date } | undefined): string {
-  return day ? 'text-primary text-weight-bold' : 'text-grey text-italic'
-}
 </script>
 
 <style scoped>
