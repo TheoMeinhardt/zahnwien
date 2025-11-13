@@ -34,20 +34,25 @@
         round
         dense
         dark
-        icon="menu"
+        :icon="navbarExpanded ? 'close' : 'menu'"
         class="col-auto"
         aria-label="Toggle navigation menu"
+        :aria-expanded="navbarExpanded"
       />
 
       <!-- RouterLinks -->
-      <div class="col-12 column text-h6 text-center q-py-md test">
+      <nav
+        class="col-12 column text-h6 text-center q-py-md test"
+        v-show="navbarExpanded"
+        :aria-hidden="!navbarExpanded"
+      >
         <RouterLink to="/" class="text-weight-bolder">Terminvereinbarung</RouterLink>
         <RouterLink to="/aboutUs">Über uns</RouterLink>
         <RouterLink to="/">Standorte</RouterLink>
         <RouterLink to="/">Leistungen</RouterLink>
         <RouterLink to="/">Jobs</RouterLink>
         <RouterLink to="/">Kontakt</RouterLink>
-      </div>
+      </nav>
     </div>
   </div>
 </template>
