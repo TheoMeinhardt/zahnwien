@@ -36,6 +36,7 @@
         dark
         icon="menu"
         class="col-auto"
+        aria-label="Toggle navigation menu"
       />
 
       <!-- RouterLinks -->
