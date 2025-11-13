@@ -53,7 +53,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import type { openingHours } from '@/types'
 
 defineProps<{
