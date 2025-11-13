@@ -28,7 +28,15 @@
         <q-img src="@/assets/icons/logo.png" width="1.5rem" fit="contain" />
       </RouterLink>
       <q-space />
-      <q-btn @click="toggleNavbar" flat round dense dark icon="menu" class="col-auto" />
+      <q-btn
+        @click="navbarExpanded = !navbarExpanded"
+        flat
+        round
+        dense
+        dark
+        icon="menu"
+        class="col-auto"
+      />
 
       <!-- RouterLinks -->
       <div class="col-12 column text-h6 text-center q-py-md test">
@@ -44,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
 const props = defineProps<{
@@ -60,12 +68,7 @@ const stickyClass = ref(props.sticky ? 'fixed-top' : '')
 const overlayClass = ref(props.overlay ? 'absolute-top' : 'relative-position')
 
 const navbarExpanded = ref(false)
-const animationClass = ref('collapsed')
-
-function toggleNavbar(): void {
-  navbarExpanded.value = !navbarExpanded.value
-  animationClass.value = navbarExpanded.value ? 'shown' : 'collapsed'
-}
+const animationClass = computed(() => (navbarExpanded.value ? 'shown' : 'collapsed'))
 </script>
 
 <style lang="scss" scoped>
