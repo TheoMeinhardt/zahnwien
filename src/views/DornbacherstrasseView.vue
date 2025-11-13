@@ -5,12 +5,12 @@
     <div class="q-mt-xl q-pt-xl q-px-lg">
       <!-- Heading -->
       <div class="inter text-primary">
-        <span class="gt-sm text-h2 text-weight-bold block">Dornbacherstraße 1</span>
-        <span class="lt-md text-h4 text-weight-bold block">Dornbacherstraße 1</span>
+        <span class="gt-sm text-h4 text-weight-bold block">Dornbacherstraße 1</span>
+        <span class="lt-md text-h6 text-weight-bold block">Dornbacherstraße 1</span>
         <span class="text-h6 text-italic text-weight-regular">1170 Wien</span>
       </div>
 
-      <div class="row wrap items-stretch">
+      <div class="row wrap items-center">
         <div class="col-12 col-md-6">
           <!-- Focus chips -->
           <div>
@@ -48,58 +48,19 @@
 
           <!-- Opening Hours -->
           <div>
-            <!-- Opening Hours heading -->
-            <span class="text-h5 text-bold text-primary q-mt-lg block">Öffnungszeiten:</span>
-            <div>
-              <span class="block text-body roboto text-weight-regular"
-                >Montag:
-                <span :class="formatClosedOrOpen(openingHours.monday)">{{
-                  formatDay(openingHours.monday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Dienstag:
-                <span :class="formatClosedOrOpen(openingHours.tuesday)">{{
-                  formatDay(openingHours.tuesday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Mittwoch:
-                <span :class="formatClosedOrOpen(openingHours.wednesday)">{{
-                  formatDay(openingHours.wednesday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Donnerstag:
-                <span :class="formatClosedOrOpen(openingHours.thursday)">{{
-                  formatDay(openingHours.thursday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Freitag:
-                <span :class="formatClosedOrOpen(openingHours.friday)">{{
-                  formatDay(openingHours.friday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Samstag:
-                <span :class="formatClosedOrOpen(openingHours.saturday)">{{
-                  formatDay(openingHours.saturday)
-                }}</span></span
-              >
-              <span class="block text-body roboto text-weight-regular"
-                >Sonntag:
-                <span :class="formatClosedOrOpen(openingHours.sunday)">{{
-                  formatDay(openingHours.sunday)
-                }}</span></span
-              >
-            </div>
+            <OpeningHours :opening-hours-data="openingHours" />
           </div>
         </div>
 
-        <!-- Map -->
+        <!-- Einführungstext -->
         <div class="col-12 col-md-6">
-          <div id="map"></div>
+          <span class="block q-my-lg roboto text-body1"
+            >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
+            in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
+            und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
+            deutsch, englisch, französisch oder polnisch an.</span
+          >
+          <q-parallax src="https://placehold.co/1280x720" :height="300"></q-parallax>
         </div>
       </div>
 
@@ -118,6 +79,51 @@
           />
         </div>
       </div>
+
+      <!-- Kontakt und Karte -->
+      <span class="inter text-primary text-h3 text-weight-bold block q-mt-xl">Kontakt</span>
+      <div class="row q-mb-xl">
+        <div class="col-12 col-md-6 q-pt-md">
+          <span class="roboto text-body1 block q-mb-sm q-ml-sm"
+            >Bei Fragen oder wenn Sie weitere Informationen benötigen, senden Sie uns bitte eine
+            E‑Mail oder rufen Sie uns an.
+            <span class="text-primary text-weight-bold">Wir helfen Ihnen gerne weiter!</span></span
+          >
+          <q-chip
+            @click="redirectTo('https://maps.app.goo.gl/ELQbS8hAhRYHtrQ16')"
+            clickable
+            size="md"
+            color="primary"
+            dark
+            icon="map"
+            >Dornbacherstraße 1, 1170 Wien</q-chip
+          >
+          <q-chip
+            @click="redirectTo('tel:06641234567')"
+            size="md"
+            clickable
+            color="primary"
+            dark
+            icon="phone"
+            >+43 123 45678</q-chip
+          >
+          <q-chip
+            @click="redirectTo('mailto:mail@mail.at')"
+            clickable
+            size="md"
+            color="primary"
+            dark
+            icon="mail"
+            >mail@mail.at</q-chip
+          >
+
+          <OpeningHours :opening-hours-data="openingHours" />
+        </div>
+
+        <div class="col-12 col-md-6 q-pa-lg">
+          <div id="map"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -126,6 +132,7 @@
 import NavBar from '@/components/NavBar.vue'
 import Chip from '@/components/ChipComponent.vue'
 import ServiceBox from '@/components/ServiceBox.vue'
+import OpeningHours from '@/components/OpeningHours.vue'
 
 import teethMedicin from '@/assets/icons/teeth_medicin.png'
 import teethImplants from '@/assets/icons/teeth_implants.png'
@@ -154,28 +161,15 @@ onMounted(() => {
   }).addTo(map.value)
 
   mapMarker.value = L.marker([48.226278, 16.307361], {}).addTo(map.value)
-  mapMarker.value.bindPopup('<b>Dornbacraße 1</b><br>1170 Wien')
+  mapMarker.value.bindPopup('<b>Dornbacherstraße 1</b><br>1170 Wien')
 })
 
-function formatDay(day: { from: Date; to: Date } | undefined): string {
-  if (!day) return 'geschlossen'
-  else {
-    return (
-      day.from.toLocaleTimeString('de-AT', {
-        hour: '2-digit',
-        minute: '2-digit',
-      }) +
-      ' - ' +
-      day.to.toLocaleTimeString('de-AT', {
-        hour: '2-digit',
-        minute: '2-digit',
-      })
-    )
-  }
-}
+data.value.forEach((locationDataItem) => {
+  locationDataItem.image = import.meta.env.BASE_URL + 'img/Details/' + locationDataItem.image
+})
 
-function formatClosedOrOpen(day: { from: Date; to: Date } | undefined): string {
-  return day ? 'text-primary text-weight-bold' : 'text-grey text-italic'
+function redirectTo(url: string): void {
+  window.open(url)
 }
 </script>
 
