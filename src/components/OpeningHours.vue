@@ -1,48 +1,53 @@
 <template>
   <!-- Opening Hours heading -->
   <span class="text-h5 text-bold text-primary q-mt-lg block">Öffnungszeiten:</span>
-  <div>
-    <span class="block text-body roboto text-weight-regular"
+  <div class="text-body roboto text-weight-regular">
+    <span class="block"
       >Montag:
       <span :class="formatClosedOrOpen(openingHoursData.monday)">{{
         formatDay(openingHoursData.monday)
       }}</span></span
     >
-    <span class="block text-body roboto text-weight-regular"
+    <span class="block"
       >Dienstag:
       <span :class="formatClosedOrOpen(openingHoursData.tuesday)">{{
         formatDay(openingHoursData.tuesday)
       }}</span></span
     >
-    <span class="block text-body roboto text-weight-regular"
+    <span class="block"
       >Mittwoch:
       <span :class="formatClosedOrOpen(openingHoursData.wednesday)">{{
         formatDay(openingHoursData.wednesday)
       }}</span></span
     >
-    <span class="block text-body roboto text-weight-regular"
+    <span class="block"
       >Donnerstag:
       <span :class="formatClosedOrOpen(openingHoursData.thursday)">{{
         formatDay(openingHoursData.thursday)
       }}</span></span
     >
-    <span class="block text-body roboto text-weight-regular"
+    <span class="block"
       >Freitag:
       <span :class="formatClosedOrOpen(openingHoursData.friday)">{{
         formatDay(openingHoursData.friday)
       }}</span></span
     >
-    <span class="block text-body roboto text-weight-regular"
+    <span class="block"
       >Samstag:
       <span :class="formatClosedOrOpen(openingHoursData.saturday)">{{
         formatDay(openingHoursData.saturday)
       }}</span></span
     >
-    <span class="block text-body roboto text-weight-regular"
+    <span class="block"
       >Sonntag:
       <span :class="formatClosedOrOpen(openingHoursData.sunday)">{{
         formatDay(openingHoursData.sunday)
       }}</span></span
+    >
+
+    <span class="block q-mt-sm text-grey text-italic"
+      >Auf Anfrage sind
+      <span class="text-primary text-weight-bold">erweiterte Öffnungszeiten</span> möglich</span
     >
   </div>
 </template>

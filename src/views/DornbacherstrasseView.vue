@@ -5,8 +5,8 @@
     <div class="q-mt-xl q-pt-xl q-px-lg">
       <!-- Heading -->
       <div class="inter text-primary">
-        <span class="gt-sm text-h2 text-weight-bold block">Dornbacherstraße 1</span>
-        <span class="lt-md text-h4 text-weight-bold block">Dornbacherstraße 1</span>
+        <span class="gt-sm text-h4 text-weight-bold block">Dornbacherstraße 1</span>
+        <span class="lt-md text-h6 text-weight-bold block">Dornbacherstraße 1</span>
         <span class="text-h6 text-italic text-weight-regular">1170 Wien</span>
       </div>
 
@@ -74,10 +74,45 @@
 
       <!-- Kontakt und Karte -->
       <span class="inter text-primary text-h3 text-weight-bold block q-mt-xl">Kontakt</span>
-      <div class="row">
-        <div class="col-12 col-md-6"></div>
+      <div class="row q-mb-xl">
+        <div class="col-12 col-md-6 q-pt-md">
+          <span class="roboto text-body1 block q-mb-sm q-ml-sm"
+            >Bei Fragen oder wenn Sie weitere Informationen benötigen, senden Sie uns bitte eine
+            E‑Mail oder rufen Sie uns an.
+            <span class="text-primary text-weight-bold">Wir helfen Ihnen gerne weiter!</span></span
+          >
+          <q-chip
+            @click="redirectTo('https://maps.app.goo.gl/ELQbS8hAhRYHtrQ16')"
+            clickable
+            size="md"
+            color="primary"
+            dark
+            icon="map"
+            >Dornbacherstraße 1, 1170 Wien</q-chip
+          >
+          <q-chip
+            @click="redirectTo('tel:06641234567')"
+            size="md"
+            clickable
+            color="primary"
+            dark
+            icon="phone"
+            >+43 123 45678</q-chip
+          >
+          <q-chip
+            @click="redirectTo('mailto:mail@mail.at')"
+            clickable
+            size="md"
+            color="primary"
+            dark
+            icon="mail"
+            >mail@mail.at</q-chip
+          >
 
-        <div class="col-12 col-md-6">
+          <OpeningHours :opening-hours-data="openingHours" />
+        </div>
+
+        <div class="col-12 col-md-6 q-pa-lg">
           <div id="map"></div>
         </div>
       </div>
@@ -124,6 +159,10 @@ onMounted(() => {
 data.value.forEach((locationDataItem) => {
   locationDataItem.image = import.meta.env.BASE_URL + 'img/Details/' + locationDataItem.image
 })
+
+function redirectTo(url: string): void {
+  window.open(url)
+}
 </script>
 
 <style scoped>
