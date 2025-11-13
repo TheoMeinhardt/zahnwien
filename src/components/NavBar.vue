@@ -19,7 +19,7 @@
       <RouterLink to="/" class="col-auto">Kontakt</RouterLink>
     </div>
 
-    <!-- collapesd NavBar for small screens -->
+    <!-- collapsed NavBar for small screens -->
     <div
       class="mobile-navbar row full-width lt-md q-pa-md"
       :class="[bgClass, textClass, stickyClass, overlayClass, animationClass]"
