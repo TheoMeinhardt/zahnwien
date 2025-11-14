@@ -1,6 +1,5 @@
 <template>
   <!-- Hier kommt HTML -->
-  <NavBar background="transparent" text="white" :sticky="false" :overlay="true" />
 
   <div class="splitAnimation">
     <div class="PicLeft" :style="'background-image: url(' + leftImage + ')'">
@@ -8,11 +7,12 @@
       <div class="TextLeft">
         <RouterLink to="/dornbacherstrasse">
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
-            Dornbacher Straße 1 1170, Wien
+            Dornbacher Straße 1<br>1170 Wien
           </p>
-          <p class="text-white q-pt-lg">➜ allg. Zahnmedizin</p>
-          <p class="text-white">➜ Implantologie</p>
-          <p class="text-white">➜ Ästhetik</p>
+          <p class="text-white q-pt-lg">Kassenordination</p>
+          <p class="text-white">mit Schwerpunkt</p>
+          <p class="text-white">allgemeine Zahnmedizin</p>
+          <p class="text-white">und Ästhetik</p>
         </RouterLink>
       </div>
     </div>
@@ -22,11 +22,12 @@
       <div class="TextRight">
         <RouterLink to="/mariahilferstrasse">
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
-            Mariahilferstraße 112 1070, Wien
+            Mariahilferstraße 112<br> 1070 Wien
           </p>
-          <p class="text-white q-pt-lg">➜ Kieferorthopädie</p>
-          <p class="text-white">➜ Invisalign</p>
-          <p class="text-white">➜ Kinderbehandlung</p>
+          <p class="text-white q-pt-lg">Wahlarztordination</p>
+          <p class="text-white">mit Schwerpunkt</p>
+          <p class="text-white">Kieferorthopädie</p>
+          <p class="text-white">und Kinderbehandlung</p>
         </RouterLink>
       </div>
     </div>
@@ -35,10 +36,10 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import NavBar from '@/components/NavBar.vue'
 
-const leftImage = import.meta.env.BASE_URL + 'img/Ordi_1170/VFN_7219.jpg'
-const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7366.jpg'
+const leftImage = import.meta.env.BASE_URL + 'img/Ordi_1170/VFN_7216.jpg'
+const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7376.jpg'
+const logoImage = import.meta.env.BASE_URL + 'public/Logo_zahnwien.png'
 </script>
 
 <style lang="scss" scoped>
@@ -96,5 +97,43 @@ p {
   bottom: 0;
   background: rgb($dark, 0.5);
   z-index: 1;
+}
+
+
+@keyframes float {
+  0% { transform: translate(-50%, -50%) translateY(0); }
+  100% { transform: translate(-50%, -50%) translateY(-15px); }
+}
+
+@media (max-width: 1200px) {
+  .splitAnimation {
+    flex-direction: column;
+  }
+  .PicLeft, .PicRight {
+    flex: none;
+    width: 100%;
+    height: 50vh;
+  }
+  .splitAnimation:hover .PicLeft:hover,
+  .splitAnimation:hover .PicRight:hover {
+    flex: none;
+  }
+  .TextLeft, .TextRight {
+    transform: translate(-50%, -50%) scale(0.9);
+    padding: 0.5em 1em;
+  }
+  .LogoCenter img {
+    width: 35vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .TextLeft, .TextRight {
+    font-size: 0.8rem;
+    padding: 0.5em 0.8em;
+  }
+  .LogoCenter img {
+    display: none;
+  }
 }
 </style>
