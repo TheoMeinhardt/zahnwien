@@ -4,8 +4,8 @@ type RevealElement = Element & { __revealObserver?: IntersectionObserver }
 
 export const revealDirective: ObjectDirective = {
   mounted(el, binding) {
-    const opts = binding.value?.options || { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
-    const once = binding.value?.once ?? true
+    const opts = binding.value || { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
+    const once = binding.value ?? true
 
     // ensure a base class with transition rules stays on the element
     el.classList.add('reveal')
