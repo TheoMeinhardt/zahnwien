@@ -154,7 +154,7 @@
           <OpeningHours :opening-hours-data="openingHours" />
         </div>
 
-        <div class="col-12 col-md-6 q-pa-lg">
+        <div class="col-12 col-md-6 q-mt-md">
           <div id="map" v-reveal="{ once: true }"></div>
         </div>
       </div>
