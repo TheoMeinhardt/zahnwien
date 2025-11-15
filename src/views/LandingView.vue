@@ -41,8 +41,13 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 
+<<<<<<< HEAD
 const leftImage = import.meta.env.BASE_URL + 'img/Start1_7216_b.jpg'
 const rightImage = import.meta.env.BASE_URL + 'img/Start1_7379_b.jpg'
+=======
+const leftImage = import.meta.env.BASE_URL + 'img/Ordi_1170/VFN_7219.jpg'
+const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7366.jpg'
+>>>>>>> bed26abf15333521cf5463514a35eded647d8acb
 </script>
 
 <style lang="scss" scoped>
@@ -101,6 +106,7 @@ p {
   z-index: 9999;
 }
 
+<<<<<<< HEAD
 @keyframes float {
   0% { transform: translate(-50%, -50%) translateY(0); }
   100% { transform: translate(-50%, -50%) translateY(-15px); }
@@ -150,4 +156,15 @@ p {
 }
 
 
+=======
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb($dark, 0.5);
+  z-index: 1;
+}
+>>>>>>> bed26abf15333521cf5463514a35eded647d8acb
 </style>
