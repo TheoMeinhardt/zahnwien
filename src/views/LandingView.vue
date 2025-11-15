@@ -17,6 +17,10 @@
       </div>
     </div>
 
+
+      <img class="Logo" src="Logo_zahnwien.png">
+
+
     <div class="PicRight" :style="'background-image: url(' + rightImage + ')'">
       <div class="overlay"></div>
       <div class="TextRight">
@@ -39,10 +43,21 @@ import { RouterLink } from 'vue-router'
 
 const leftImage = import.meta.env.BASE_URL + 'img/Ordi_1170/VFN_7216.jpg'
 const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7376.jpg'
-const logoImage = import.meta.env.BASE_URL + 'public/Logo_zahnwien.png'
 </script>
 
 <style lang="scss" scoped>
+
+.Logo{
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  height: 450px;
+  z-index: 1000;
+}
 a {
   text-decoration: none;
 }
@@ -122,9 +137,17 @@ p {
     transform: translate(-50%, -50%) scale(0.9);
     padding: 0.5em 1em;
   }
-  .LogoCenter img {
-    width: 35vw;
-  }
+  .Logo{
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  height: 100px;
+  z-index: 1000;
+}
 }
 
 @media (max-width: 768px) {
@@ -132,8 +155,19 @@ p {
     font-size: 0.8rem;
     padding: 0.5em 0.8em;
   }
-  .LogoCenter img {
-    display: none;
-  }
+
+.Logo{
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  height: 100px;
+  z-index: 1000;
 }
+}
+
+
 </style>
