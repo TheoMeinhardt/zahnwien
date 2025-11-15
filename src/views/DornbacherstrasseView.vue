@@ -4,27 +4,39 @@
 
     <div class="q-mt-xl q-pt-xl q-px-lg">
       <!-- Heading -->
-      <div class="inter text-primary">
+      <div class="inter text-primary" v-reveal="{ once: true }">
         <span class="gt-sm text-h4 text-weight-bold block">Dornbacherstraße 1</span>
         <span class="lt-md text-h6 text-weight-bold block">Dornbacherstraße 1</span>
         <span class="text-h6 text-italic text-weight-regular">1170 Wien</span>
       </div>
 
       <div class="row wrap items-center">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6" v-reveal="{ once: true }">
           <!-- Focus chips -->
           <div>
             <!-- Focus heading -->
             <span class="text-h5 text-bold text-primary q-mt-lg block">Fokus:</span>
 
             <div class="inter row text-italic text-weight-light q-mt-sm">
-              <Chip color="white" text-color="primary" :img="teethMedicin"
+              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="teethMedicin"
                 >Allgemeine Zahnmedizin</Chip
               >
 
-              <Chip color="white" text-color="primary" :img="teethImplants">Implantologie</Chip>
+              <Chip
+                v-reveal="{ once: true }"
+                color="white"
+                text-color="primary"
+                :img="teethImplants"
+                >Implantologie</Chip
+              >
 
-              <Chip color="white" text-color="primary" :img="teethAesthetic">Ästhetik</Chip>
+              <Chip
+                v-reveal="{ once: true }"
+                color="white"
+                text-color="primary"
+                :img="teethAesthetic"
+                >Ästhetik</Chip
+              >
             </div>
           </div>
 
@@ -34,26 +46,34 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Ausstattung:</span>
 
             <div class="inter row text-italic text-weight-light q-mt-sm">
-              <Chip color="white" text-color="primary" :img="xray">Röntgen</Chip>
+              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="xray"
+                >Röntgen</Chip
+              >
 
-              <Chip color="white" text-color="primary" img="">DVT</Chip>
+              <Chip v-reveal="{ once: true }" color="white" text-color="primary" img="">DVT</Chip>
 
-              <Chip color="white" text-color="primary" :img="digitalWorkflow"
+              <Chip
+                v-reveal="{ once: true }"
+                color="white"
+                text-color="primary"
+                :img="digitalWorkflow"
                 >digitale Workflows</Chip
               >
 
-              <Chip color="white" text-color="primary" :img="scan3d">3D-Scan</Chip>
+              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="scan3d"
+                >3D-Scan</Chip
+              >
             </div>
           </div>
 
           <!-- Opening Hours -->
-          <div>
+          <div v-reveal="{ once: true }">
             <OpeningHours :opening-hours-data="openingHours" />
           </div>
         </div>
 
         <!-- Einführungstext -->
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6" v-reveal="{ once: true }">
           <span class="block q-my-lg roboto text-body1"
             >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
             in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
@@ -65,12 +85,15 @@
       </div>
 
       <div class="q-mt-xl">
-        <span class="inter text-primary text-h3 text-weight-bold block">Leistungen</span>
+        <span class="inter text-primary text-h3 text-weight-bold block" v-reveal="{ once: true }"
+          >Leistungen</span
+        >
 
         <div class="row wrap justify-between">
           <ServiceBox
             class="col-12 col-md-5 q-mt-xl"
             v-for="(item, key) in data"
+            v-reveal="{ once: true }"
             :header="item.header"
             :subtext="item.subtext"
             :detailtext="item.detailText"
@@ -81,15 +104,20 @@
       </div>
 
       <!-- Kontakt und Karte -->
-      <span class="inter text-primary text-h3 text-weight-bold block q-mt-xl">Kontakt</span>
+      <span
+        class="inter text-primary text-h3 text-weight-bold block q-mt-xl"
+        v-reveal="{ once: true }"
+        >Kontakt</span
+      >
       <div class="row q-mb-xl">
         <div class="col-12 col-md-6 q-pt-md">
-          <span class="roboto text-body1 block q-mb-sm q-ml-sm"
+          <span v-reveal="{ once: true }" class="roboto text-body1 block q-mb-sm q-ml-sm"
             >Bei Fragen oder wenn Sie weitere Informationen benötigen, senden Sie uns bitte eine
             E‑Mail oder rufen Sie uns an.
             <span class="text-primary text-weight-bold">Wir helfen Ihnen gerne weiter!</span></span
           >
           <q-chip
+            v-reveal="{ once: true }"
             @click="redirectTo('https://maps.app.goo.gl/ELQbS8hAhRYHtrQ16')"
             clickable
             size="md"
@@ -99,6 +127,7 @@
             >Dornbacherstraße 1, 1170 Wien</q-chip
           >
           <q-chip
+            v-reveal="{ once: true }"
             @click="redirectTo('tel:01/4864627')"
             size="md"
             clickable
@@ -108,6 +137,7 @@
             >01/486 46 27</q-chip
           >
           <q-chip
+            v-reveal="{ once: true }"
             @click="redirectTo('mailto:ordination@zahnwien.at?subject=Anfrage an Ordination 1170')"
             clickable
             size="md"
@@ -120,8 +150,8 @@
           <OpeningHours :opening-hours-data="openingHours" />
         </div>
 
-        <div class="col-12 col-md-6 q-pa-lg">
-          <div id="map"></div>
+        <div class="col-12 col-md-6 q-mt-md">
+          <div id="map" v-reveal="{ once: true }"></div>
         </div>
       </div>
     </div>
