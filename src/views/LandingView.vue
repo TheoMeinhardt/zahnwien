@@ -17,6 +17,10 @@
       </div>
     </div>
 
+
+      <img class="Logo" src="Logo_zahnwien.png">
+
+
     <div class="PicRight" :style="'background-image: url(' + rightImage + ')'">
       <div class="overlay"></div>
       <div class="TextRight">
@@ -37,12 +41,23 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 
-const leftImage = import.meta.env.BASE_URL + 'img/Ordi_1170/VFN_7216.jpg'
-const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7376.jpg'
-const logoImage = import.meta.env.BASE_URL + 'public/Logo_zahnwien.png'
+const leftImage = import.meta.env.BASE_URL + 'img/Ordi_1170/VFN_7219.jpg'
+const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7366.jpg'
 </script>
 
 <style lang="scss" scoped>
+
+.Logo{
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  height: 450px;
+  z-index: 1000;
+}
 a {
   text-decoration: none;
 }
@@ -97,43 +112,5 @@ p {
   bottom: 0;
   background: rgb($dark, 0.5);
   z-index: 1;
-}
-
-
-@keyframes float {
-  0% { transform: translate(-50%, -50%) translateY(0); }
-  100% { transform: translate(-50%, -50%) translateY(-15px); }
-}
-
-@media (max-width: 1200px) {
-  .splitAnimation {
-    flex-direction: column;
-  }
-  .PicLeft, .PicRight {
-    flex: none;
-    width: 100%;
-    height: 50vh;
-  }
-  .splitAnimation:hover .PicLeft:hover,
-  .splitAnimation:hover .PicRight:hover {
-    flex: none;
-  }
-  .TextLeft, .TextRight {
-    transform: translate(-50%, -50%) scale(0.9);
-    padding: 0.5em 1em;
-  }
-  .LogoCenter img {
-    width: 35vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .TextLeft, .TextRight {
-    font-size: 0.8rem;
-    padding: 0.5em 0.8em;
-  }
-  .LogoCenter img {
-    display: none;
-  }
 }
 </style>
