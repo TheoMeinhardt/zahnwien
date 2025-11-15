@@ -18,7 +18,7 @@
     </div>
 
 
-      <img class="Logo" src="Logo_zahnwien.png">
+      <img class="Logo" src="/public/Logo_zahnwien.png">
 
 
     <div class="PicRight" :style="'background-image: url(' + rightImage + ')'">
@@ -41,8 +41,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 
-const leftImage = import.meta.env.BASE_URL + 'img/Ordi_1170/VFN_7216.jpg'
-const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7376.jpg'
+const leftImage = import.meta.env.BASE_URL + 'img/Start1_7216_b.jpg'
+const rightImage = import.meta.env.BASE_URL + 'img/Start1_7379_b.jpg'
 </script>
 
 <style lang="scss" scoped>
@@ -51,9 +51,6 @@ const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7376.jpg'
   position: fixed;
   inset: 0;
   margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
   height: 450px;
   z-index: 1000;
@@ -104,17 +101,6 @@ p {
   z-index: 9999;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgb($dark, 0.5);
-  z-index: 1;
-}
-
-
 @keyframes float {
   0% { transform: translate(-50%, -50%) translateY(0); }
   100% { transform: translate(-50%, -50%) translateY(-15px); }
@@ -141,9 +127,6 @@ p {
   position: fixed;
   inset: 0;
   margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
   height: 100px;
   z-index: 1000;
@@ -160,9 +143,6 @@ p {
   position: fixed;
   inset: 0;
   margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
   height: 100px;
   z-index: 1000;
