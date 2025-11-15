@@ -41,13 +41,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 
-<<<<<<< HEAD
 const leftImage = import.meta.env.BASE_URL + 'img/Start1_7216_b.jpg'
 const rightImage = import.meta.env.BASE_URL + 'img/Start1_7379_b.jpg'
-=======
-const leftImage = import.meta.env.BASE_URL + 'img/Ordi_1170/VFN_7219.jpg'
-const rightImage = import.meta.env.BASE_URL + 'img/Ordi_1070/VFN_7366.jpg'
->>>>>>> bed26abf15333521cf5463514a35eded647d8acb
 </script>
 
 <style lang="scss" scoped>
