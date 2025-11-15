@@ -2,6 +2,19 @@ import type { ObjectDirective } from 'vue'
 
 type RevealElement = Element & { __revealObserver?: IntersectionObserver }
 
+/**
+ * Vue directive for scroll-based reveal animations using IntersectionObserver.
+ *
+ * @example
+ * ```vue
+ * <div v-reveal="{ once: true }">Content</div>
+ * <div v-reveal="{ once: false, options: { threshold: 0.5 } }">Content</div>
+ * ```
+ *
+ * @param binding.value.once - If true, animation triggers only once. Defaults to true.
+ * @param binding.value.options - IntersectionObserver options (threshold, rootMargin, etc.)
+ */
+
 export const revealDirective: ObjectDirective = {
   mounted(el, binding) {
     const opts = binding.value || { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
