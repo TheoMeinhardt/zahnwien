@@ -74,17 +74,13 @@
 
         <!-- Einführungstext -->
         <div class="col-12 col-md-6" v-reveal="{ once: true }">
-          <span v-reveal="{ once: true }" class="block q-my-lg roboto text-body1"
+          <span class="block q-my-lg roboto text-body1"
             >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
             in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
             und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
             deutsch, englisch, französisch oder polnisch an.</span
           >
-          <q-parallax
-            v-reveal="{ once: true }"
-            src="https://placehold.co/1280x720"
-            :height="300"
-          ></q-parallax>
+          <q-parallax src="https://placehold.co/1280x720" :height="300"></q-parallax>
         </div>
       </div>
 
