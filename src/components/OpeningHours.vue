@@ -11,9 +11,9 @@
       >
       <span class="block"
         >Dienstag:
-        <span class="float-right" :class="formatClosedOrOpen(openingHoursData.tuesday)">{{
-          formatDay(openingHoursData.tuesday)
-        }}</span></span
+        <span class="float-right" :class="formatClosedOrOpen(openingHoursData.tuesday)">
+          {{ formatDay(openingHoursData.tuesday) }}</span
+        ></span
       >
       <span class="block"
         >Mittwoch:
