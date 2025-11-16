@@ -7,7 +7,7 @@
       <div class="TextLeft">
         <RouterLink to="/dornbacherstrasse">
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
-            Dornbacher Straße 1<br>1170 Wien
+            Dornbacher Straße 1<br />1170 Wien
           </p>
           <p class="text-white q-pt-lg">Kassenordination</p>
           <p class="text-white">mit Schwerpunkt</p>
@@ -17,16 +17,15 @@
       </div>
     </div>
 
-
-      <img class="Logo" src="/public/Logo_zahnwien.png">
-
+    <img class="Logo" src="/public/Logo_zahnwien.png" />
 
     <div class="PicRight" :style="'background-image: url(' + rightImage + ')'">
       <div class="overlay"></div>
       <div class="TextRight">
         <RouterLink to="/mariahilferstrasse">
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
-            Mariahilferstraße 112<br> 1070 Wien
+            Mariahilferstraße 112<br />
+            1070 Wien
           </p>
           <p class="text-white q-pt-lg">Wahlarztordination</p>
           <p class="text-white">mit Schwerpunkt</p>
@@ -46,8 +45,7 @@ const rightImage = import.meta.env.BASE_URL + 'img/Start1_7379_b.jpg'
 </script>
 
 <style lang="scss" scoped>
-
-.Logo{
+.Logo {
   position: fixed;
   inset: 0;
   margin: auto;
@@ -99,49 +97,6 @@ p {
   border-radius: 50px;
   text-align: center;
   z-index: 9999;
-}
-
-@media (max-width: 1200px) {
-  .splitAnimation {
-    flex-direction: column;
-  }
-  .PicLeft, .PicRight {
-    flex: none;
-    width: 100%;
-    height: 50vh;
-  }
-  .splitAnimation:hover .PicLeft:hover,
-  .splitAnimation:hover .PicRight:hover {
-    flex: none;
-  }
-  .TextLeft, .TextRight {
-    transform: translate(-50%, -50%) scale(0.9);
-    padding: 0.5em 1em;
-  }
-  .Logo{
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  background: transparent;
-  height: 100px;
-  z-index: 1000;
-}
-}
-
-@media (max-width: 768px) {
-  .TextLeft, .TextRight {
-    font-size: 0.8rem;
-    padding: 0.5em 0.8em;
-  }
-
-.Logo{
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  background: transparent;
-  height: 100px;
-  z-index: 1000;
-}
 }
 
 .overlay {
