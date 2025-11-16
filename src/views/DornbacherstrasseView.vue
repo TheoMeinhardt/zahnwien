@@ -210,7 +210,7 @@ import L from 'leaflet'
 import { onMounted, ref, type Ref } from 'vue'
 
 import type { locationData, openingHours } from '@/types'
-import { parseOpeningHours } from '@/helpers'
+import { parseOpeningHours, parseImagePath } from '@/helpers'
 import rawData from '@/assets/data/1170/text.json'
 
 const data: Ref<locationData[]> = ref(rawData)
@@ -232,15 +232,11 @@ onMounted(() => {
 })
 
 data.value.forEach((locationDataItem) => {
-  locationDataItem.image = import.meta.env.BASE_URL + 'img/Details/' + locationDataItem.image
+  locationDataItem.image = parseImagePath('img/Details/' + locationDataItem.image)
 })
 
 function redirectTo(url: string): void {
   window.open(url)
-}
-
-function parseImagePath(image: string): string {
-  return import.meta.env.BASE_URL + image
 }
 </script>
 
