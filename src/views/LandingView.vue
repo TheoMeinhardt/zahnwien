@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <img class="Logo" src="/public/Logo_zahnwien.png" />
+    <img class="Logo" :src="parseImagePath('Logo_zahnwien.png')" />
 
     <div class="PicRight" :style="'background-image: url(' + rightImage + ')'">
       <div class="overlay"></div>
@@ -38,9 +38,10 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { parseImagePath } from '@/helpers'
 
-const leftImage = import.meta.env.BASE_URL + 'img/Start1_7216_b.jpg'
-const rightImage = import.meta.env.BASE_URL + 'img/Start1_7379_b.jpg'
+const leftImage = parseImagePath('img/Start1_7216_b.jpg')
+const rightImage = parseImagePath('img/Start1_7379_b.jpg')
 </script>
 
 <style lang="scss" scoped>
