@@ -7,7 +7,7 @@
       <div class="TextLeft">
         <RouterLink to="/dornbacherstrasse">
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
-            Dornbacher Straße 1<br/>1170 Wien
+            Dornbacher Straße 1<br />1170 Wien
           </p>
           <p class="text-white q-pt-lg">Kassenordination</p>
           <p class="text-white">mit Schwerpunkt</p>
@@ -24,7 +24,7 @@
       <div class="TextRight">
         <RouterLink to="/mariahilferstrasse">
           <p class="text-h4 text-weight-bold text-no-wrap text-white">
-            Mariahilferstraße 112<br/>1070 Wien
+            Mariahilferstraße 112<br />1070 Wien
           </p>
           <p class="text-white q-pt-lg">Wahlarztordination</p>
           <p class="text-white">mit Schwerpunkt</p>
@@ -58,6 +58,8 @@ const rightImage = import.meta.env.BASE_URL + 'img/Start1_7379_b.jpg'
   background: transparent;
   height: 300px;
   z-index: 1000;
+  transition: transform 0.8s ease;
+  pointer-events: none;
 }
 a {
   text-decoration: none;
@@ -120,7 +122,8 @@ p {
     height: 200px;
   }
 
-  .TextLeft, .TextRight {
+  .TextLeft,
+  .TextRight {
     p.text-h4 {
       font-size: 1.5rem;
     }
@@ -132,7 +135,8 @@ p {
     flex-direction: column;
   }
 
-  .PicLeft, .PicRight {
+  .PicLeft,
+  .PicRight {
     flex: 1;
   }
 
@@ -145,7 +149,8 @@ p {
     display: none;
   }
 
-  .TextLeft, .TextRight {
+  .TextLeft,
+  .TextRight {
     padding: 0.5em 1em;
 
     p.text-h4 {
@@ -163,7 +168,8 @@ p {
     display: none;
   }
 
-  .TextLeft, .TextRight {
+  .TextLeft,
+  .TextRight {
     p.text-h4 {
       font-size: 1rem;
     }
@@ -173,10 +179,4 @@ p {
     }
   }
 }
-
-.Logo {
-  transition: transform 0.8s ease;
-  pointer-events: none;
-}
-
 </style>
