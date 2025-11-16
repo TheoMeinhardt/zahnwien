@@ -80,7 +80,42 @@
             und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
             deutsch, englisch, französisch oder polnisch an.</span
           >
-          <q-parallax src="https://placehold.co/1280x720" :height="300"></q-parallax>
+          <q-carousel
+            v-model="carouselSlide"
+            transition-prev="jump-right"
+            transition-next="jump-left"
+            swipeable
+            animated
+            control-color="white"
+            prev-icon="arrow_left"
+            next-icon="arrow_right"
+            navigation-icon="radio_button_unchecked"
+            navigation
+            padding
+            arrows
+            infinite
+            :autoplay="carouselAutoplay"
+            @mouseenter="carouselAutoplay = false"
+            @mouseleave="carouselAutoplay = true"
+            height="300px"
+            class="shadow-1 rounded-borders"
+          >
+            <q-carousel-slide
+              :name="0"
+              class="column no-wrap flex-center"
+              :img-src="parseImagePath('img/Ordi_1170/Ordi1_7290.jpg')"
+            />
+            <q-carousel-slide
+              :name="1"
+              class="column no-wrap flex-center"
+              :img-src="parseImagePath('img/Ordi_1170/Ordi2_7224.jpg')"
+            />
+            <q-carousel-slide
+              :name="2"
+              class="column no-wrap flex-center"
+              :img-src="parseImagePath('img/Ordi_1170/Ordi3_7303.jpg')"
+            />
+          </q-carousel>
         </div>
       </div>
 
@@ -175,13 +210,15 @@ import L from 'leaflet'
 import { onMounted, ref, type Ref } from 'vue'
 
 import type { locationData, openingHours } from '@/types'
-import { parseOpeningHours } from '@/helpers'
+import { parseOpeningHours, parseImagePath } from '@/helpers'
 import rawData from '@/assets/data/1170/text.json'
 
 const data: Ref<locationData[]> = ref(rawData)
 const openingHours: Ref<openingHours> = ref(parseOpeningHours())
 const map: Ref<L.Map | undefined> = ref(undefined)
 const mapMarker: Ref<L.Marker | undefined> = ref(undefined)
+const carouselSlide: Ref<number> = ref(0)
+const carouselAutoplay = ref(true)
 
 onMounted(() => {
   map.value = L.map('map').setView([48.22625, 16.3075], 15)
@@ -195,7 +232,7 @@ onMounted(() => {
 })
 
 data.value.forEach((locationDataItem) => {
-  locationDataItem.image = import.meta.env.BASE_URL + 'img/Details/' + locationDataItem.image
+  locationDataItem.image = parseImagePath('img/Details/' + locationDataItem.image)
 })
 
 function redirectTo(url: string): void {
