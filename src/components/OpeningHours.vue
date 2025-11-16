@@ -65,7 +65,6 @@ function formatDay(day: { from: Date; to: Date } | undefined): string {
   if (!day) return 'geschlossen'
   else {
     return (
-      ' ' +
       day.from.toLocaleTimeString('de-AT', {
         hour: '2-digit',
         minute: '2-digit',
