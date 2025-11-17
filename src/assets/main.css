@@ -11,3 +11,21 @@ a {
 body {
   margin: 0;
 }
+
+/* Scroll reveal utility */
+.reveal {
+  transition:
+    opacity 900ms ease-out,
+    transform 900ms ease-out;
+}
+
+.reveal--hidden {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+/* Simple slide-in from bottom to top using transitions */
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
