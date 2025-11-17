@@ -40,13 +40,8 @@
 import { RouterLink } from 'vue-router'
 import { parseImagePath } from '@/helpers'
 
-<<<<<<< HEAD
-const leftImage = import.meta.env.BASE_URL + 'img/Start1Normal.jpg'
-const rightImage = import.meta.env.BASE_URL + 'img/Start2Normal.jpg'
-=======
-const leftImage = parseImagePath('img/Start1_7216_b.jpg')
-const rightImage = parseImagePath('img/Start1_7379_b.jpg')
->>>>>>> c02d7d86a895249bfa61d44f9ec1673af60d57f6
+const leftImage = parseImagePath('img/Start1Normal.jpg')
+const rightImage = parseImagePath('img/Start2Normal.jpg')
 </script>
 
 <style lang="scss" scoped>
