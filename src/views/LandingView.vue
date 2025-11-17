@@ -39,8 +39,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 
-const leftImage = import.meta.env.BASE_URL + 'img/Start1_7216_b.jpg'
-const rightImage = import.meta.env.BASE_URL + 'img/Start1_7379_b.jpg'
+const leftImage = import.meta.env.BASE_URL + 'img/Start1Normal.jpg'
+const rightImage = import.meta.env.BASE_URL + 'img/Start2Normal.jpg'
 </script>
 
 <style lang="scss" scoped>
@@ -111,7 +111,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgb($dark, 0.5);
+  background-color: rgba(0, 0, 0, 0.514);
   z-index: 1;
 }
 
