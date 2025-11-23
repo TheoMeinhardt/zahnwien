@@ -114,7 +114,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.514);
+  background-color: #0000005e;
   z-index: 1;
 }
 
