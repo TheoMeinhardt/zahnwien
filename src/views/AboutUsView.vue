@@ -47,6 +47,7 @@ import NavBar from '@/components/NavBar.vue'
   background: linear-gradient(135deg, #0C132B, #A8C4D0);
   color: white;
   text-align: center;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
 
 }
 
