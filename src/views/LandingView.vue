@@ -52,12 +52,21 @@ const leftPic = ref<HTMLDivElement | null>(null)
 const rightPic = ref<HTMLDivElement | null>(null)
 const threeContainer = ref<HTMLDivElement | null>(null)
 
+
 onMounted(() => {
   if (!threeContainer.value || !splitContainer.value) return
 
   // THREE.js Setup
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
+
+  let hoverLeft = false
+  let hoverRight = false
+
+  // Zielrotation für smooth Übergang
+  let targetRotationX = 0
+  let targetRotationY = 0
+
   camera.position.z = 5
 
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
@@ -78,11 +87,36 @@ onMounted(() => {
     scene.add(model)
   })
 
+
   // Animation und mittige Position berechnen
   const animate = () => {
     requestAnimationFrame(animate)
 
-    if (model) model.rotation.y += 0.01
+    if (model) {
+
+  // NORMALZUSTAND – kein Hover
+  if (!hoverLeft && !hoverRight) {
+    targetRotationX = 0
+    targetRotationY = 0
+  }
+
+  // LINKS HOVER → leicht nach links kippen
+  if (hoverLeft) {
+    targetRotationX = 0        // nicht kippen nach vorne
+    targetRotationY = -0.5     // links kippen
+  }
+
+  // RECHTS HOVER → leicht nach rechts kippen
+  if (hoverRight) {
+    targetRotationX = 0
+    targetRotationY = +0.5    // rechts kippen
+  }
+
+  // SMOOTH Übergang
+  model.rotation.x += (targetRotationX - model.rotation.x) * 0.05
+  model.rotation.y += (targetRotationY - model.rotation.y) * 0.05
+}
+
 
     // dynamische Mitte berechnen
     if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
@@ -98,6 +132,27 @@ onMounted(() => {
     }
 
     renderer.render(scene, camera)
+  }
+
+    if (leftPic.value) {
+    leftPic.value.addEventListener("mouseenter", () => {
+      hoverLeft = true
+      hoverRight = false
+      console.log("qasf")
+    })
+    leftPic.value.addEventListener("mouseleave", () => {
+      hoverLeft = false
+    })
+  }
+
+  if (rightPic.value) {
+    rightPic.value.addEventListener("mouseenter", () => {
+      hoverRight = true
+      hoverLeft = false
+    })
+    rightPic.value.addEventListener("mouseleave", () => {
+      hoverRight = false
+    })
   }
 
   animate()
@@ -141,11 +196,12 @@ onMounted(() => {
   top:0; left:0; right:0; bottom:0;
   background-color: #0000005e;
   z-index:1;
+  pointer-events: none;
 }
 
 .Logo3D {
   position: absolute;
-  padding-top: 150px;
+  padding-top: 10rem;
   width: 800px;
   height: 800px;
   z-index: 1000;
