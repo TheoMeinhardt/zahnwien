@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { RouterLink } from 'vue-router'
 import { parseImagePath } from '@/helpers'
 
