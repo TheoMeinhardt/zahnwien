@@ -44,8 +44,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { RouterLink } from 'vue-router'
 import { parseImagePath } from '@/helpers'
 
-const leftImage = parseImagePath('img/Start1Normal.jpg')
-const rightImage = parseImagePath('img/Start2Normal.jpg')
+const leftImage = parseImagePath('img/Start2_7229_c.jpg')
+const rightImage = parseImagePath('img/Start2_7363_c.jpg')
 
 const splitContainer = ref<HTMLDivElement | null>(null)
 const leftPic = ref<HTMLDivElement | null>(null)
@@ -193,10 +193,11 @@ onMounted(() => {
 
 .overlay {
   position: absolute;
-  top:0; left:0; right:0; bottom:0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background-color: #0000005e;
   z-index:1;
   pointer-events: none;
+
 }
 
 .Logo3D {
@@ -211,7 +212,54 @@ onMounted(() => {
 a { text-decoration: none; }
 p { margin: 0; padding-left: 0; }
 
-@media (max-width:1024px) { .Logo3D { width:300px; height:300px; } }
-@media (max-width:768px) { .Logo3D { display:none; } }
-@media (max-width:480px) { .Logo3D { display:none; } }
+@media (min-width: 1025px) {
+  .splitAnimation:hover .PicLeft:hover { flex: 1.5; }
+  .splitAnimation:hover .PicRight:hover { flex: 1.5; }
+}
+
+/* Tablet & kleiner: Hover deaktivieren + Logo ausblenden */
+@media (max-width: 1024px) {
+  .Logo3D { display: none; }
+
+  .splitAnimation:hover .PicLeft:hover,
+  .splitAnimation:hover .PicRight:hover {
+    flex: 1 !important;
+    transition: none !important;
+  }
+
+  .PicLeft, .PicRight { cursor: default; }
+}
+
+/* Mobile Layout */
+@media (max-width: 600px) {
+  .splitAnimation {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .PicLeft,
+  .PicRight {
+    width: 100%;
+    height: 50vh;
+    flex: unset;
+  }
+
+  .TextLeft,
+  .TextRight {
+    transform: translate(-50%, -50%) scale(0.85);
+    width: 90%;
+    padding: 0.5em 1em;
+  }
+
+  .TextLeft p,
+  .TextRight p {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+}
+
+/* Sehr kleine Bildschirme */
+@media (max-width: 480px) {
+  .Logo3D { display: none; }
+}
 </style>

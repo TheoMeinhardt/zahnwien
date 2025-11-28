@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <div class="input-wrapper">
-                    <span class="input-icon">👤</span>
+                    <span class="input-icon"></span>
                     <input type="text" id="name" name="name" placeholder="Dein Name" required>
                 </div>
             </div>
@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="email">E-Mail</label>
                 <div class="input-wrapper">
-                    <span class="input-icon">✉️</span>
+                    <span class="input-icon"></span>
                     <input type="email" id="email" name="email" placeholder="deine@email.com" required>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="form-group">
                 <label for="message">Nachricht</label>
                 <div class="input-wrapper textarea-wrapper">
-                    <span class="input-icon">💬</span>
+                    <span class="input-icon"></span>
                     <textarea id="message" name="message" placeholder="Deine Nachricht..." required></textarea>
                 </div>
             </div>
@@ -45,7 +45,7 @@ import NavBar from '@/components/NavBar.vue'
 .hero {
   width: 100%;
   padding: 140px 20px 100px;
-  background: linear-gradient(135deg, #0C132B, #A8C4D0);
+  background: linear-gradient(135deg, #22D3EE, #0C4A6E);
   color: white;
   text-align: center;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
@@ -81,7 +81,7 @@ label {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  color: #0077b6;
+  color: #22D3EE;
   font-size: 0.95rem;
 }
 
@@ -98,7 +98,7 @@ label {
 }
 
 .input-wrapper:focus-within {
-  border-color: #0077b6;
+  border-color: #22D3EE;
   box-shadow: 0 0 0 3px rgba(0,119,182,0.15);
 }
 
@@ -139,7 +139,7 @@ textarea {
   padding: 14px;
   border: none;
   border-radius: 14px;
-  background: #0077b6;
+  background: #22D3EE;
   color: white;
   font-size: 1.1rem;
   font-weight: 600;
@@ -149,7 +149,7 @@ textarea {
 }
 
 .submit-btn:hover {
-  background: #005f8c;
+  background: #0C4A6E;
   transform: translateY(-3px);
 }
 
@@ -161,6 +161,11 @@ textarea {
 
   .input-icon {
     font-size: 1.1rem;
+  }
+
+  .headline {
+    margin-bottom: 10px;
+    line-height: 1.2;
   }
 }
 </style>

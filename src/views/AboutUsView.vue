@@ -44,7 +44,7 @@ import NavBar from '@/components/NavBar.vue'
 .hero {
   width: 100%;
   padding: 140px 20px 100px;
-  background: linear-gradient(135deg, #0C132B, #A8C4D0);
+  background: linear-gradient(135deg, #22D3EE, #0C4A6E);
   color: white;
   text-align: center;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
@@ -115,7 +115,7 @@ import NavBar from '@/components/NavBar.vue'
 
 .soloImg {
   width: 100%;
-  height: 260px;
+  height: auto;
   border-radius: 16px;
   object-fit: cover;
   margin-bottom: 15px;
@@ -140,6 +140,7 @@ import NavBar from '@/components/NavBar.vue'
 @media (max-width: 600px) {
   .headline {
     font-size: 1.7rem;
+    line-height: 1.2;
   }
   .card {
     width: 90%;
