@@ -68,7 +68,7 @@ function flip() {
   position: relative;
 
   border: $primary 2px solid;
-  border-radius: 30px;
+  border-radius: 20px;
 
   transition:
     transform 0.15s ease-out,
@@ -81,7 +81,7 @@ function flip() {
 }
 
 .q-img {
-  border-radius: 0px 30px 30px 0px;
+  border-radius: 0px 20px 20px 0px;
 }
 
 .card-back {
