@@ -5,7 +5,18 @@
       <span class="roboto text-dark text-subtitle2 text-weight-regular q-mt-sm">
         {{ detailtext }}
       </span>
-      <q-btn @click="flip()" outline round color="primary" icon="close" />
+
+      <div class="column">
+        <q-btn @click="flip()" outline round color="primary" icon="fa-solid fa-xmark" />
+        <q-btn
+          class="q-mt-sm"
+          @click="redirectTo('mailto:ordination@zahnwien.at?subject=Anfrage an Ordination 1170')"
+          outline
+          round
+          color="primary"
+          icon="fa-regular fa-calendar-check"
+        />
+      </div>
     </div>
 
     <!-- Frontside -->
@@ -58,6 +69,10 @@ function flip() {
     showBack.value = false
     setTimeout(() => (showFront.value = true), FLIP_DURATION)
   }
+}
+
+function redirectTo(url: string): void {
+  window.open(url)
 }
 </script>
 
