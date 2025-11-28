@@ -73,7 +73,8 @@ function formatDay(day: { from: Date; to: Date } | undefined): string {
       day.to.toLocaleTimeString('de-AT', {
         hour: '2-digit',
         minute: '2-digit',
-      })
+      }) +
+      ' Uhr'
     )
   }
 }
