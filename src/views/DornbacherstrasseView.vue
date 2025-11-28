@@ -10,7 +10,53 @@
         <span class="text-h6 text-italic text-weight-regular">1170 Wien</span>
       </div>
 
-      <div class="row wrap items-center">
+      <div class="row wrap items-center justify-between">
+        <!-- Einführungstext -->
+        <div class="col-12 col-md-5" v-reveal="{ once: true }">
+          <span class="block q-my-lg roboto text-body1"
+            >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
+            in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
+            und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
+            deutsch, englisch, französisch oder polnisch an.</span
+          >
+          <q-carousel
+            v-model="carouselSlide"
+            transition-prev="jump-right"
+            transition-next="jump-left"
+            swipeable
+            animated
+            control-color="white"
+            prev-icon="arrow_left"
+            next-icon="arrow_right"
+            navigation-icon="radio_button_unchecked"
+            navigation
+            padding
+            arrows
+            infinite
+            :autoplay="carouselAutoplay"
+            @mouseenter="carouselAutoplay = false"
+            @mouseleave="carouselAutoplay = true"
+            height="300px"
+            class="shadow-1 rounded-borders"
+          >
+            <q-carousel-slide
+              :name="0"
+              class="column no-wrap flex-center"
+              :img-src="parseImagePath('img/Ordi_1170/Ordi1_7290.jpg')"
+            />
+            <q-carousel-slide
+              :name="1"
+              class="column no-wrap flex-center"
+              :img-src="parseImagePath('img/Ordi_1170/Ordi2_7224.jpg')"
+            />
+            <q-carousel-slide
+              :name="2"
+              class="column no-wrap flex-center"
+              :img-src="parseImagePath('img/Ordi_1170/Ordi3_7303.jpg')"
+            />
+          </q-carousel>
+        </div>
+
         <div class="col-12 col-md-6" v-reveal="{ once: true }">
           <!-- Focus chips -->
           <div>
@@ -70,52 +116,6 @@
           <div v-reveal="{ once: true }">
             <OpeningHours :opening-hours-data="openingHours" />
           </div>
-        </div>
-
-        <!-- Einführungstext -->
-        <div class="col-12 col-md-6" v-reveal="{ once: true }">
-          <span class="block q-my-lg roboto text-body1"
-            >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
-            in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
-            und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
-            deutsch, englisch, französisch oder polnisch an.</span
-          >
-          <q-carousel
-            v-model="carouselSlide"
-            transition-prev="jump-right"
-            transition-next="jump-left"
-            swipeable
-            animated
-            control-color="white"
-            prev-icon="arrow_left"
-            next-icon="arrow_right"
-            navigation-icon="radio_button_unchecked"
-            navigation
-            padding
-            arrows
-            infinite
-            :autoplay="carouselAutoplay"
-            @mouseenter="carouselAutoplay = false"
-            @mouseleave="carouselAutoplay = true"
-            height="300px"
-            class="shadow-1 rounded-borders"
-          >
-            <q-carousel-slide
-              :name="0"
-              class="column no-wrap flex-center"
-              :img-src="parseImagePath('img/Ordi_1170/Ordi1_7290.jpg')"
-            />
-            <q-carousel-slide
-              :name="1"
-              class="column no-wrap flex-center"
-              :img-src="parseImagePath('img/Ordi_1170/Ordi2_7224.jpg')"
-            />
-            <q-carousel-slide
-              :name="2"
-              class="column no-wrap flex-center"
-              :img-src="parseImagePath('img/Ordi_1170/Ordi3_7303.jpg')"
-            />
-          </q-carousel>
         </div>
       </div>
 
