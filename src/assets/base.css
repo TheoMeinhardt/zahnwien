@@ -8,14 +8,14 @@
 @font-face {
   font-family: 'TeleGrotesk';
   src: url(./fonts/TeleGroteskNextRegular.ttf) format(truetype);
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TeleGrotesk';
   src: url(./fonts/TeleGroteskNextRegularItalic.ttf) format(truetype);
-  font-weight: normal;
+  font-weight: 400;
   font-style: italic;
 }
 
@@ -36,21 +36,21 @@
 @font-face {
   font-family: 'TeleGrotesk';
   src: url(./fonts/TeleGroteskNextBold.ttf) format(truetype);
-  font-weight: bold;
+  font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TeleGrotesk';
   src: url(./fonts/TeleGroteskNextBoldItalic.ttf) format(truetype);
-  font-weight: bold;
+  font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'TeleGrotesk';
   src: url(./fonts/TeleGroteskNextUltra.ttf) format(truetype);
-  font-weight: bolder;
+  font-weight: 800;
   font-style: normal;
 }
 
