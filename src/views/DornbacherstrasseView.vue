@@ -5,15 +5,15 @@
     <div class="q-mt-xl q-pt-xl q-px-lg">
       <!-- Heading -->
       <div class="inter text-primary" v-reveal="{ once: true }">
-        <span class="gt-sm text-h4 text-weight-bold block">Dornbacherstraße 1</span>
-        <span class="lt-md text-h6 text-weight-bold block">Dornbacherstraße 1</span>
-        <span class="text-h6 text-italic text-weight-regular">1170 Wien</span>
+        <span class="gt-sm text-h4 text-weight-bolder block">Dornbacherstraße 1</span>
+        <span class="lt-md text-h6 text-weight-bolder block">Dornbacherstraße 1</span>
+        <span class="text-h6 text-italic">1170 Wien</span>
       </div>
 
       <div class="row wrap items-center justify-between">
         <!-- Einführungstext -->
         <div class="col-12 col-md-5" v-reveal="{ once: true }">
-          <span class="block q-my-lg roboto text-body1"
+          <span class="block q-my-lg text-body1"
             >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
             in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
             und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
