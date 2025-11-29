@@ -8,6 +8,6 @@ import { RouterView } from 'vue-router'
 
 <style scoped>
 * {
-  font-family: TeleGrotesk;
+  font-family: 'TeleGrotesk';
 }
 </style>
