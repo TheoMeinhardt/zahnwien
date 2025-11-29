@@ -48,6 +48,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { redirectTo } from '@/helpers'
 
 const props = defineProps<{
   header: string
@@ -69,10 +70,6 @@ function flip() {
     showBack.value = false
     setTimeout(() => (showFront.value = true), FLIP_DURATION)
   }
-}
-
-function redirectTo(url: string): void {
-  window.open(url)
 }
 </script>
 
