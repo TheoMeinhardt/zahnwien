@@ -2,7 +2,7 @@
   <div>
     <!-- Regular NavBar for big screens -->
     <div
-      class="navbar row no-wrap justify-between items-baseline gt-sm inter text-center text-subtitle1 q-pa-md"
+      class="navbar row no-wrap justify-between items-baseline gt-sm text-center text-subtitle1 q-pa-md"
       :class="[bgClass, textClass, stickyClass, overlayClass]"
     >
       <RouterLink to="/" class="col-auto">
