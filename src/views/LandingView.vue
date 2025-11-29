@@ -32,15 +32,13 @@
       </div>
     </div>
 
-    <!-- 3D Logo -->
-    <div ref="threeContainer" class="Logo3D"></div>
+    <!-- 3D Logo - nur auf Desktop -->
+    <div v-if="isDesktop" ref="threeContainer" class="Logo3D"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { parseImagePath } from '@/helpers'
 
@@ -52,110 +50,140 @@ const leftPic = ref<HTMLDivElement | null>(null)
 const rightPic = ref<HTMLDivElement | null>(null)
 const threeContainer = ref<HTMLDivElement | null>(null)
 
+// Mobile Detection
+const isDesktop = ref(window.innerWidth > 1024)
 
-onMounted(() => {
-  if (!threeContainer.value || !splitContainer.value) return
-
-  // THREE.js Setup
-  const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
-
-  let hoverLeft = false
-  let hoverRight = false
-
-  // Zielrotation für smooth Übergang
-  let targetRotationX = 0
-  let targetRotationY = 0
-
-  camera.position.z = 5
-
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-  renderer.setSize(800, 800) // größeres Logo
-  threeContainer.value.appendChild(renderer.domElement)
-
-  // Licht
-  scene.add(new THREE.AmbientLight(0xffffff, 1))
-  const dirLight = new THREE.DirectionalLight(0xffffff, 0.5)
-  dirLight.position.set(5, 5, 5)
-  scene.add(dirLight)
-
-  let model: THREE.Group | null = null
-
-  const loader = new GLTFLoader()
-  loader.load('/img/shaded.glb', (gltf: { scene: THREE.Group }) => {
-    model = gltf.scene
-    scene.add(model)
-  })
-
-
-  // Animation und mittige Position berechnen
-  const animate = () => {
-    requestAnimationFrame(animate)
-
-    if (model) {
-
-  // NORMALZUSTAND – kein Hover
-  if (!hoverLeft && !hoverRight) {
-    targetRotationX = 0
-    targetRotationY = 0
-  }
-
-  // LINKS HOVER → leicht nach links kippen
-  if (hoverLeft) {
-    targetRotationX = 0        // nicht kippen nach vorne
-    targetRotationY = -0.5     // links kippen
-  }
-
-  // RECHTS HOVER → leicht nach rechts kippen
-  if (hoverRight) {
-    targetRotationX = 0
-    targetRotationY = +0.5    // rechts kippen
-  }
-
-  // SMOOTH Übergang
-  model.rotation.x += (targetRotationX - model.rotation.x) * 0.05
-  model.rotation.y += (targetRotationY - model.rotation.y) * 0.05
+const handleResize = () => {
+  isDesktop.value = window.innerWidth > 1024
 }
 
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
 
-    // dynamische Mitte berechnen
-    if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
-      const leftRect = leftPic.value.getBoundingClientRect()
-      const rightRect = rightPic.value.getBoundingClientRect()
+  // Three.js nur auf Desktop laden
+  if (!isDesktop.value || !threeContainer.value || !splitContainer.value) return
 
-      const centerX = (leftRect.right + rightRect.left) / 2
-      const centerY = splitContainer.value.clientHeight / 2
+  // THREE.js dynamisch importieren nur auf Desktop
+  Promise.all([
+    import('three'),
+    import('three/examples/jsm/loaders/GLTFLoader.js')
+  ]).then(([THREE, { GLTFLoader }]) => {
+    if (!threeContainer.value || !isDesktop.value) return
 
-      // Logo mittig positionieren
-      threeContainer.value.style.left = `${centerX - threeContainer.value.clientWidth / 2}px`
-      threeContainer.value.style.top = `${centerY - threeContainer.value.clientHeight / 2}px`
+    type THREEModule = typeof THREE
+    type Group = InstanceType<THREEModule['Group']>
+    type Scene = InstanceType<THREEModule['Scene']>
+    type PerspectiveCamera = InstanceType<THREEModule['PerspectiveCamera']>
+    type WebGLRenderer = InstanceType<THREEModule['WebGLRenderer']>
+
+    // THREE.js Setup
+    const scene: Scene = new THREE.Scene()
+    const camera: PerspectiveCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
+
+    let hoverLeft = false
+    let hoverRight = false
+
+    // Zielrotation für smooth Übergang
+    let targetRotationX = 0
+    let targetRotationY = 0
+
+    camera.position.z = 5
+
+    const renderer: WebGLRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
+    renderer.setSize(800, 800)
+    threeContainer.value.appendChild(renderer.domElement)
+
+    // Licht
+    scene.add(new THREE.AmbientLight(0xffffff, 1))
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.5)
+    dirLight.position.set(5, 5, 5)
+    scene.add(dirLight)
+
+    let model: Group | null = null
+
+    const loader = new GLTFLoader()
+    loader.load('/img/shaded.glb', (gltf: { scene: Group }) => {
+      model = gltf.scene
+      scene.add(model)
+    })
+
+    // Animation und mittige Position berechnen
+    const animate = () => {
+      if (!isDesktop.value) return // Stop animation wenn mobile
+
+      requestAnimationFrame(animate)
+
+      if (model) {
+        const ROTATION_ANGLE = 0.5
+        const ROTATION_SMOOTHING = 0.05
+
+        // NORMALZUSTAND – kein Hover
+        if (!hoverLeft && !hoverRight) {
+          targetRotationX = 0
+          targetRotationY = 0
+        }
+
+        // LINKS HOVER → leicht nach links kippen
+        if (hoverLeft) {
+          targetRotationX = 0           // nicht kippen nach vorne
+          targetRotationY = -ROTATION_ANGLE
+        }
+
+        // RECHTS HOVER → leicht nach rechts kippen
+        if (hoverRight) {
+          targetRotationX = 0
+          targetRotationY = ROTATION_ANGLE
+        }
+
+        // SMOOTH Übergang
+        model.rotation.x += (targetRotationX - model.rotation.x) * ROTATION_SMOOTHING
+        model.rotation.y += (targetRotationY - model.rotation.y) * ROTATION_SMOOTHING
+      }
+
+      // dynamische Mitte berechnen
+      if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
+        const leftRect = leftPic.value.getBoundingClientRect()
+        const rightRect = rightPic.value.getBoundingClientRect()
+
+        const centerX = (leftRect.right + rightRect.left) / 2
+        const centerY = splitContainer.value.clientHeight / 2
+
+        // Logo mittig positionieren
+        threeContainer.value.style.left = `${centerX - threeContainer.value.clientWidth / 2}px`
+        threeContainer.value.style.top = `${centerY - threeContainer.value.clientHeight / 2}px`
+      }
+
+      renderer.render(scene, camera)
     }
 
-    renderer.render(scene, camera)
-  }
-
     if (leftPic.value) {
-    leftPic.value.addEventListener("mouseenter", () => {
-      hoverLeft = true
-      hoverRight = false
-      console.log("qasf")
-    })
-    leftPic.value.addEventListener("mouseleave", () => {
-      hoverLeft = false
-    })
-  }
+      leftPic.value.addEventListener("mouseenter", () => {
+        hoverLeft = true
+        hoverRight = false
+      })
+      leftPic.value.addEventListener("mouseleave", () => {
+        hoverLeft = false
+      })
+    }
 
-  if (rightPic.value) {
-    rightPic.value.addEventListener("mouseenter", () => {
-      hoverRight = true
-      hoverLeft = false
-    })
-    rightPic.value.addEventListener("mouseleave", () => {
-      hoverRight = false
-    })
-  }
+    if (rightPic.value) {
+      rightPic.value.addEventListener("mouseenter", () => {
+        hoverRight = true
+        hoverLeft = false
+      })
+      rightPic.value.addEventListener("mouseleave", () => {
+        hoverRight = false
+      })
+    }
 
-  animate()
+    animate()
+  }).catch(err => {
+    console.error('Failed to load Three.js:', err)
+  })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
 })
 </script>
 
@@ -168,7 +196,8 @@ onMounted(() => {
   position: relative;
 }
 
-.PicLeft, .PicRight {
+.PicLeft,
+.PicRight {
   flex: 1;
   background-size: cover;
   background-position: center;
@@ -177,10 +206,16 @@ onMounted(() => {
   cursor: pointer;
 }
 
-.splitAnimation:hover .PicLeft:hover { flex: 1.5; }
-.splitAnimation:hover .PicRight:hover { flex: 1.5; }
+.splitAnimation:hover .PicLeft:hover {
+  flex: 1.5;
+}
 
-.TextLeft, .TextRight {
+.splitAnimation:hover .PicRight:hover {
+  flex: 1.5;
+}
+
+.TextLeft,
+.TextRight {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -193,11 +228,13 @@ onMounted(() => {
 
 .overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #0000005e;
-  z-index:1;
+  z-index: 1;
   pointer-events: none;
-
 }
 
 .Logo3D {
@@ -209,17 +246,30 @@ onMounted(() => {
   pointer-events: none;
 }
 
-a { text-decoration: none; }
-p { margin: 0; padding-left: 0; }
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+  padding-left: 0;
+}
 
 @media (min-width: 1025px) {
-  .splitAnimation:hover .PicLeft:hover { flex: 1.5; }
-  .splitAnimation:hover .PicRight:hover { flex: 1.5; }
+  .splitAnimation:hover .PicLeft:hover {
+    flex: 1.5;
+  }
+
+  .splitAnimation:hover .PicRight:hover {
+    flex: 1.5;
+  }
 }
 
 /* Tablet & kleiner: Hover deaktivieren + Logo ausblenden */
 @media (max-width: 1024px) {
-  .Logo3D { display: none; }
+  .Logo3D {
+    display: none;
+  }
 
   .splitAnimation:hover .PicLeft:hover,
   .splitAnimation:hover .PicRight:hover {
@@ -227,7 +277,10 @@ p { margin: 0; padding-left: 0; }
     transition: none !important;
   }
 
-  .PicLeft, .PicRight { cursor: default; }
+  .PicLeft,
+  .PicRight {
+    cursor: default;
+  }
 }
 
 /* Mobile Layout */
@@ -235,6 +288,7 @@ p { margin: 0; padding-left: 0; }
   .splitAnimation {
     flex-direction: column;
     height: auto;
+    min-height: 100vh;
   }
 
   .PicLeft,
@@ -242,6 +296,13 @@ p { margin: 0; padding-left: 0; }
     width: 100%;
     height: 50vh;
     flex: unset;
+    transition: none !important;
+    cursor: default;
+  }
+
+  .PicLeft:hover,
+  .PicRight:hover {
+    flex: unset !important;
   }
 
   .TextLeft,
@@ -260,6 +321,23 @@ p { margin: 0; padding-left: 0; }
 
 /* Sehr kleine Bildschirme */
 @media (max-width: 480px) {
-  .Logo3D { display: none; }
+  .Logo3D {
+    display: none;
+  }
+
+  .PicLeft,
+  .PicRight {
+    transition: none !important;
+  }
+
+  .TextLeft,
+  .TextRight {
+    transform: translate(-50%, -50%) scale(0.75);
+  }
+
+  .TextLeft p,
+  .TextRight p {
+    font-size: 0.85rem;
+  }
 }
 </style>

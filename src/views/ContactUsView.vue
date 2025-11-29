@@ -11,24 +11,46 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <div class="input-wrapper">
-                    <span class="input-icon"></span>
-                    <input type="text" id="name" name="name" placeholder="Dein Name" required>
+                    <span class="input-icon" aria-hidden="true"></span>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Dein Name"
+                      required
+                      autocomplete="name"
+                      aria-required="true"
+                    >
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="email">E-Mail</label>
                 <div class="input-wrapper">
-                    <span class="input-icon"></span>
-                    <input type="email" id="email" name="email" placeholder="deine@email.com" required>
+                    <span class="input-icon" aria-hidden="true"></span>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="deine@email.com"
+                      required
+                      autocomplete="email"
+                      aria-required="true"
+                    >
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="message">Nachricht</label>
                 <div class="input-wrapper textarea-wrapper">
-                    <span class="input-icon"></span>
-                    <textarea id="message" name="message" placeholder="Deine Nachricht..." required></textarea>
+                    <span class="input-icon" aria-hidden="true"></span>
+                    <textarea
+                      id="message"
+                      name="message"
+                      placeholder="Deine Nachricht..."
+                      required
+                      aria-required="true"
+                    ></textarea>
                 </div>
             </div>
 
