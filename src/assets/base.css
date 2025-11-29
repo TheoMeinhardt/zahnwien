@@ -1,17 +1,59 @@
 @font-face {
-  font-family: inter;
-  src: url(./fonts/Inter.ttf);
+  font-family: 'TeleGrotesk';
+  src: url(./fonts/TeleGroteskNextThin.ttf) format(truetype);
+  font-weight: 100;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: roboto;
-  src: url(./fonts/Robot.ttf);
+  font-family: 'TeleGrotesk';
+  src: url(./fonts/TeleGroteskNextRegular.ttf) format(truetype);
+  font-weight: normal;
+  font-style: normal;
 }
 
-.inter {
-  font-family: 'inter';
+@font-face {
+  font-family: 'TeleGrotesk';
+  src: url(./fonts/TeleGroteskNextRegularItalic.ttf) format(truetype);
+  font-weight: normal;
+  font-style: italic;
 }
 
-.roboto {
-  font-family: 'roboto';
+@font-face {
+  font-family: 'TeleGrotesk';
+  src: url(./fonts/TeleGroteskNextMedium.ttf) format(truetype);
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TeleGrotesk';
+  src: url(./fonts/TeleGroteskNextMediumItalic.ttf) format(truetype);
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TeleGrotesk';
+  src: url(./fonts/TeleGroteskNextBold.ttf) format(truetype);
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TeleGrotesk';
+  src: url(./fonts/TeleGroteskNextBoldItalic.ttf) format(truetype);
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TeleGrotesk';
+  src: url(./fonts/TeleGroteskNextUltra.ttf) format(truetype);
+  font-weight: bolder;
+  font-style: normal;
+}
+
+.tele-grotesk {
+  font-family: 'TeleGrotesk';
 }
