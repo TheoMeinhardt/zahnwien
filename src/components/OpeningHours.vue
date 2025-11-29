@@ -1,6 +1,6 @@
 <template>
   <!-- Opening Hours heading -->
-  <div class="text-body roboto text-weight-regular">
+  <div class="text-body text-weight-regular">
     <div style="width: fit-content">
       <span class="text-h5 text-bold text-primary q-mt-lg block">Öffnungszeiten:</span>
       <span class="block"

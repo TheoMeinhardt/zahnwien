@@ -2,7 +2,7 @@
   <div class="box row">
     <!-- Backside -->
     <div class="card-back col" :class="{ 'back-visible': showBack }">
-      <span class="roboto text-dark text-subtitle2 text-weight-regular q-mt-sm">
+      <span class="text-dark text-subtitle2 text-weight-regular q-mt-sm">
         {{ detailtext }}
       </span>
 
@@ -21,8 +21,8 @@
 
     <!-- Frontside -->
     <div class="col q-mt-xl q-mb-md q-mx-lg front-content" :class="{ 'front-hidden': !showFront }">
-      <span class="inter text-primary text-h5 block">{{ props.header }}</span>
-      <span class="roboto text-dark text-subtitle2 text-weight-regular block q-mt-sm">
+      <span class="text-primary text-h5 block">{{ props.header }}</span>
+      <span class="text-dark text-subtitle2 text-weight-regular block q-mt-sm">
         {{ props.subtext }}</span
       >
       <q-btn
