@@ -5,9 +5,3 @@ import { RouterView } from 'vue-router'
 <template>
   <RouterView />
 </template>
-
-<style scoped>
-* {
-  font-family: 'TeleGrotesk';
-}
-</style>

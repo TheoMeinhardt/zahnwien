@@ -11,6 +11,12 @@ a {
 body {
   margin: 0;
   background-color: #f0f9ff;
+  font-family:
+    'TeleGrotesk',
+    system-ui,
+    -apple-system,
+    'Roboto',
+    sans-serif !important;
 }
 
 /* Scroll reveal utility */
