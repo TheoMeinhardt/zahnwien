@@ -5,43 +5,43 @@
       <span class="text-h5 text-bold text-primary q-mt-lg block">Öffnungszeiten:</span>
       <span class="block"
         >Montag:
-        <span class="float-right" :class="formatClosedOrOpen(openingHoursData.monday)">
+        <span class="float-right q-ml-lg" :class="formatClosedOrOpen(openingHoursData.monday)">
           {{ formatDay(openingHoursData.monday) }}</span
         ></span
       >
       <span class="block"
         >Dienstag:
-        <span class="float-right" :class="formatClosedOrOpen(openingHoursData.tuesday)">
+        <span class="float-right q-ml-lg" :class="formatClosedOrOpen(openingHoursData.tuesday)">
           {{ formatDay(openingHoursData.tuesday) }}</span
         ></span
       >
       <span class="block"
         >Mittwoch:
-        <span class="float-right" :class="formatClosedOrOpen(openingHoursData.wednesday)">
+        <span class="float-right q-ml-lg" :class="formatClosedOrOpen(openingHoursData.wednesday)">
           {{ formatDay(openingHoursData.wednesday) }}</span
         ></span
       >
       <span class="block"
         >Donnerstag:
-        <span class="float-right" :class="formatClosedOrOpen(openingHoursData.thursday)">
+        <span class="float-right q-ml-lg" :class="formatClosedOrOpen(openingHoursData.thursday)">
           {{ formatDay(openingHoursData.thursday) }}</span
         ></span
       >
       <span class="block"
         >Freitag:
-        <span class="float-right" :class="formatClosedOrOpen(openingHoursData.friday)">
+        <span class="float-right q-ml-lg" :class="formatClosedOrOpen(openingHoursData.friday)">
           {{ formatDay(openingHoursData.friday) }}</span
         ></span
       >
       <span class="block"
         >Samstag:
-        <span class="float-right" :class="formatClosedOrOpen(openingHoursData.saturday)">
+        <span class="float-right q-ml-lg" :class="formatClosedOrOpen(openingHoursData.saturday)">
           {{ formatDay(openingHoursData.saturday) }}</span
         ></span
       >
       <span class="block"
         >Sonntag:
-        <span class="float-right" :class="formatClosedOrOpen(openingHoursData.sunday)">
+        <span class="float-right q-ml-lg" :class="formatClosedOrOpen(openingHoursData.sunday)">
           {{ formatDay(openingHoursData.sunday) }}</span
         ></span
       >
