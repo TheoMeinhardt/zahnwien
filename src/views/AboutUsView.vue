@@ -16,7 +16,7 @@
 
     <div class="person card">
       <p class="name">Dr. Isabelle Olivia</p>
-      <img src="img/Uberuns/isabele.jpg" class="soloImg" />
+      <img src="img/Uberuns/isabelle.jpg" class="soloImg" />
       <p class="bio">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
     </div>
 

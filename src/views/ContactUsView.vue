@@ -1,62 +1,43 @@
 <template>
   <NavBar background="dark" text="white" :sticky="true" :overlay="false" />
-    <section class="hero">
+  <section class="hero">
     <div class="hero-content">
       <h1 class="headline">Nehmen Sie Kontakt mit uns auf</h1>
     </div>
-    </section>
-     <div class="container">
+  </section>
+  <div class="container">
 
-        <form>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <div class="input-wrapper">
-                    <span class="input-icon" aria-hidden="true"></span>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      placeholder="Dein Name"
-                      required
-                      autocomplete="name"
-                      aria-required="true"
-                    >
-                </div>
-            </div>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <div class="input-wrapper">
+          <span class="input-icon" aria-hidden="true"></span>
+          <input type="text" id="name" name="name" placeholder="Dein Name" required autocomplete="name"
+            aria-required="true">
+        </div>
+      </div>
 
-            <div class="form-group">
-                <label for="email">E-Mail</label>
-                <div class="input-wrapper">
-                    <span class="input-icon" aria-hidden="true"></span>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="deine@email.com"
-                      required
-                      autocomplete="email"
-                      aria-required="true"
-                    >
-                </div>
-            </div>
+      <div class="form-group">
+        <label for="email">E-Mail</label>
+        <div class="input-wrapper">
+          <span class="input-icon" aria-hidden="true"></span>
+          <input type="email" id="email" name="email" placeholder="deine@email.com" required autocomplete="email"
+            aria-required="true">
+        </div>
+      </div>
 
-            <div class="form-group">
-                <label for="message">Nachricht</label>
-                <div class="input-wrapper textarea-wrapper">
-                    <span class="input-icon" aria-hidden="true"></span>
-                    <textarea
-                      id="message"
-                      name="message"
-                      placeholder="Deine Nachricht..."
-                      required
-                      aria-required="true"
-                    ></textarea>
-                </div>
-            </div>
+      <div class="form-group">
+        <label for="message">Nachricht</label>
+        <div class="input-wrapper textarea-wrapper">
+          <span class="input-icon" aria-hidden="true"></span>
+          <textarea id="message" name="message" placeholder="Deine Nachricht..." required
+            aria-required="true"></textarea>
+        </div>
+      </div>
 
-            <button type="submit" class="submit-btn">Nachricht senden</button>
-        </form>
-    </div>
+      <button type="submit" class="submit-btn">Nachricht senden</button>
+    </form>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -83,13 +64,14 @@ import NavBar from '@/components/NavBar.vue'
   font-weight: 700;
   margin-bottom: 10px;
 }
+
 form {
   background: #ffffff;
   padding: 35px;
   border-radius: 20px;
   max-width: 550px;
   margin: 40px auto;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
   color: #222;
 }
 
@@ -121,7 +103,7 @@ label {
 
 .input-wrapper:focus-within {
   border-color: #22D3EE;
-  box-shadow: 0 0 0 3px rgba(0,119,182,0.15);
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
 }
 
 

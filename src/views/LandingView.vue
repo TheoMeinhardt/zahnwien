@@ -41,6 +41,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { parseImagePath } from '@/helpers'
+import type * as THREEType from 'three'
 
 const leftImage = parseImagePath('img/Start2_7229_c.jpg')
 const rightImage = parseImagePath('img/Start2_7363_c.jpg')
@@ -50,40 +51,42 @@ const leftPic = ref<HTMLDivElement | null>(null)
 const rightPic = ref<HTMLDivElement | null>(null)
 const threeContainer = ref<HTMLDivElement | null>(null)
 
-// Mobile Detection
 const isDesktop = ref(window.innerWidth > 1024)
-
 const handleResize = () => {
   isDesktop.value = window.innerWidth > 1024
 }
 
+// Cleanup Refs
+let rendererRef: THREEType.WebGLRenderer | null = null
+let modelRef: THREEType.Group | null = null
+let animationId: number | null = null
+
+let leftEnter: (() => void) | null = null
+let leftLeave: (() => void) | null = null
+let rightEnter: (() => void) | null = null
+let rightLeave: (() => void) | null = null
+
 onMounted(() => {
   window.addEventListener('resize', handleResize)
 
-  // Three.js nur auf Desktop laden
   if (!isDesktop.value || !threeContainer.value || !splitContainer.value) return
 
-  // THREE.js dynamisch importieren nur auf Desktop
   Promise.all([
     import('three'),
     import('three/examples/jsm/loaders/GLTFLoader.js')
   ]).then(([THREE, { GLTFLoader }]) => {
     if (!threeContainer.value || !isDesktop.value) return
 
-    type THREEModule = typeof THREE
-    type Group = InstanceType<THREEModule['Group']>
-    type Scene = InstanceType<THREEModule['Scene']>
-    type PerspectiveCamera = InstanceType<THREEModule['PerspectiveCamera']>
-    type WebGLRenderer = InstanceType<THREEModule['WebGLRenderer']>
+    type Group = InstanceType<typeof THREE.Group>
+    type Scene = InstanceType<typeof THREE.Scene>
+    type PerspectiveCamera = InstanceType<typeof THREE.PerspectiveCamera>
+    type WebGLRenderer = InstanceType<typeof THREE.WebGLRenderer>
 
-    // THREE.js Setup
     const scene: Scene = new THREE.Scene()
     const camera: PerspectiveCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
 
     let hoverLeft = false
     let hoverRight = false
-
-    // Zielrotation für smooth Übergang
     let targetRotationX = 0
     let targetRotationY = 0
 
@@ -91,64 +94,52 @@ onMounted(() => {
 
     const renderer: WebGLRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
     renderer.setSize(800, 800)
+    rendererRef = renderer
     threeContainer.value.appendChild(renderer.domElement)
 
-    // Licht
     scene.add(new THREE.AmbientLight(0xffffff, 1))
     const dirLight = new THREE.DirectionalLight(0xffffff, 0.5)
     dirLight.position.set(5, 5, 5)
     scene.add(dirLight)
 
     let model: Group | null = null
-
     const loader = new GLTFLoader()
-    loader.load('/img/shaded.glb', (gltf: { scene: Group }) => {
-      model = gltf.scene
-      scene.add(model)
-    })
+    loader.load(
+      '/img/shaded.glb',
+      (gltf: { scene: Group }) => {
+        model = gltf.scene
+        scene.add(model)
+      },
+      undefined, // onProgress callback (optional)
+      (error) => {
+        console.error('Error loading 3D model:', error)
+      }
+    )
 
-    // Animation und mittige Position berechnen
     const animate = () => {
-      if (!isDesktop.value) return // Stop animation wenn mobile
-
-      requestAnimationFrame(animate)
+      if (!isDesktop.value) return
+      animationId = requestAnimationFrame(animate)
 
       if (model) {
         const ROTATION_ANGLE = 0.5
         const ROTATION_SMOOTHING = 0.05
 
-        // NORMALZUSTAND – kein Hover
         if (!hoverLeft && !hoverRight) {
           targetRotationX = 0
           targetRotationY = 0
         }
+        if (hoverLeft) targetRotationY = -ROTATION_ANGLE
+        if (hoverRight) targetRotationY = ROTATION_ANGLE
 
-        // LINKS HOVER → leicht nach links kippen
-        if (hoverLeft) {
-          targetRotationX = 0           // nicht kippen nach vorne
-          targetRotationY = -ROTATION_ANGLE
-        }
-
-        // RECHTS HOVER → leicht nach rechts kippen
-        if (hoverRight) {
-          targetRotationX = 0
-          targetRotationY = ROTATION_ANGLE
-        }
-
-        // SMOOTH Übergang
         model.rotation.x += (targetRotationX - model.rotation.x) * ROTATION_SMOOTHING
         model.rotation.y += (targetRotationY - model.rotation.y) * ROTATION_SMOOTHING
       }
 
-      // dynamische Mitte berechnen
       if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
         const leftRect = leftPic.value.getBoundingClientRect()
         const rightRect = rightPic.value.getBoundingClientRect()
-
         const centerX = (leftRect.right + rightRect.left) / 2
         const centerY = splitContainer.value.clientHeight / 2
-
-        // Logo mittig positionieren
         threeContainer.value.style.left = `${centerX - threeContainer.value.clientWidth / 2}px`
         threeContainer.value.style.top = `${centerY - threeContainer.value.clientHeight / 2}px`
       }
@@ -156,36 +147,53 @@ onMounted(() => {
       renderer.render(scene, camera)
     }
 
-    if (leftPic.value) {
-      leftPic.value.addEventListener("mouseenter", () => {
-        hoverLeft = true
-        hoverRight = false
-      })
-      leftPic.value.addEventListener("mouseleave", () => {
-        hoverLeft = false
-      })
-    }
+    leftEnter = () => { hoverLeft = true; hoverRight = false }
+    leftLeave = () => { hoverLeft = false }
+    rightEnter = () => { hoverRight = true; hoverLeft = false }
+    rightLeave = () => { hoverRight = false }
 
-    if (rightPic.value) {
-      rightPic.value.addEventListener("mouseenter", () => {
-        hoverRight = true
-        hoverLeft = false
-      })
-      rightPic.value.addEventListener("mouseleave", () => {
-        hoverRight = false
-      })
-    }
+    leftPic.value?.addEventListener('mouseenter', leftEnter)
+    leftPic.value?.addEventListener('mouseleave', leftLeave)
+    rightPic.value?.addEventListener('mouseenter', rightEnter)
+    rightPic.value?.addEventListener('mouseleave', rightLeave)
 
     animate()
-  }).catch(err => {
-    console.error('Failed to load Three.js:', err)
-  })
+  }).catch(err => console.error('Failed to load Three.js:', err))
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
+
+  if (animationId !== null) cancelAnimationFrame(animationId)
+
+  if (leftPic.value && leftEnter && leftLeave) {
+    leftPic.value.removeEventListener('mouseenter', leftEnter)
+    leftPic.value.removeEventListener('mouseleave', leftLeave)
+  }
+  if (rightPic.value && rightEnter && rightLeave) {
+    rightPic.value.removeEventListener('mouseenter', rightEnter)
+    rightPic.value.removeEventListener('mouseleave', rightLeave)
+  }
+
+  if (rendererRef) {
+    rendererRef.dispose()
+    rendererRef.forceContextLoss?.()
+    rendererRef.domElement = null as unknown as HTMLCanvasElement
+    rendererRef = null
+  }
+
+  if (modelRef) {
+    modelRef.traverse((obj: THREEType.Object3D) => {
+      if ((obj as THREEType.Mesh).geometry) (obj as THREEType.Mesh).geometry.dispose()
+      const mat = (obj as THREEType.Mesh).material
+      if (Array.isArray(mat)) mat.forEach(m => m.dispose())
+      else if (mat) mat.dispose()
+    })
+    modelRef = null
+  }
 })
 </script>
+
 
 <style scoped lang="scss">
 .splitAnimation {
