@@ -25,7 +25,7 @@
 
     <div class="row justify-between text-body2 q-mt-lg">
       <div class="col-2 text-left">
-        <span>Copyright 2025 - All rights reserved</span>
+        <span>© Copyright 2025 - All rights reserved</span>
       </div>
       <div class="col-1 text-center">
         <RouterLink to="/privacypolicy" class="text-accent">Datenschutzerklärung</RouterLink>
