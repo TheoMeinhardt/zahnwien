@@ -1,7 +1,7 @@
 <template>
   <div ref="splitContainer" class="splitAnimation">
     <!-- Linkes Bild -->
-    <div ref="leftPic" class="PicLeft" :style="'background-image: url(' + leftImage + ')'">
+    <div ref="leftPic" class="PicLeft" :style="{ backgroundImage: `url(${leftImage})` }">
       <div class="overlay"></div>
       <div class="TextLeft">
         <RouterLink to="/dornbacherstrasse">
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Rechtes Bild -->
-    <div ref="rightPic" class="PicRight" :style="'background-image: url(' + rightImage + ')'">
+    <div ref="rightPic" class="PicRight" :style="{ backgroundImage: `url(${rightImage})` }">
       <div class="overlay"></div>
       <div class="TextRight">
         <RouterLink to="/mariahilferstrasse">
@@ -52,6 +52,7 @@ const rightPic = ref<HTMLDivElement | null>(null)
 const threeContainer = ref<HTMLDivElement | null>(null)
 
 const isDesktop = ref(window.innerWidth > 1024)
+
 const handleResize = () => {
   isDesktop.value = window.innerWidth > 1024
 }
@@ -74,91 +75,108 @@ onMounted(() => {
   Promise.all([
     import('three'),
     import('three/examples/jsm/loaders/GLTFLoader.js')
-  ]).then(([THREE, { GLTFLoader }]) => {
-    if (!threeContainer.value || !isDesktop.value) return
+  ])
+    .then(([THREE, { GLTFLoader }]) => {
+      if (!threeContainer.value || !isDesktop.value) return
 
-    type Group = InstanceType<typeof THREE.Group>
-    type Scene = InstanceType<typeof THREE.Scene>
-    type PerspectiveCamera = InstanceType<typeof THREE.PerspectiveCamera>
-    type WebGLRenderer = InstanceType<typeof THREE.WebGLRenderer>
+      type Group = InstanceType<typeof THREE.Group>
+      type Scene = InstanceType<typeof THREE.Scene>
+      type PerspectiveCamera = InstanceType<typeof THREE.PerspectiveCamera>
+      type WebGLRenderer = InstanceType<typeof THREE.WebGLRenderer>
+      type GLTFResult = { scene: Group }
 
-    const scene: Scene = new THREE.Scene()
-    const camera: PerspectiveCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
+      const scene: Scene = new THREE.Scene()
+      const camera: PerspectiveCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
 
-    let hoverLeft = false
-    let hoverRight = false
-    let targetRotationX = 0
-    let targetRotationY = 0
+      let hoverLeft = false
+      let hoverRight = false
+      let targetRotationX = 0
+      let targetRotationY = 0
 
-    camera.position.z = 5
+      camera.position.z = 5
 
-    const renderer: WebGLRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-    renderer.setSize(800, 800)
-    rendererRef = renderer
-    threeContainer.value.appendChild(renderer.domElement)
+      const renderer: WebGLRenderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true
+      })
+      renderer.setSize(800, 800)
+      rendererRef = renderer
+      threeContainer.value.appendChild(renderer.domElement)
 
-    scene.add(new THREE.AmbientLight(0xffffff, 1))
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.5)
-    dirLight.position.set(5, 5, 5)
-    scene.add(dirLight)
+      scene.add(new THREE.AmbientLight(0xffffff, 1))
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.5)
+      dirLight.position.set(5, 5, 5)
+      scene.add(dirLight)
 
-    let model: Group | null = null
-    const loader = new GLTFLoader()
-    loader.load(
-      '/img/shaded.glb',
-      (gltf: { scene: Group }) => {
-        model = gltf.scene
-        scene.add(model)
-      },
-      undefined, // onProgress callback (optional)
-      (error) => {
-        console.error('Error loading 3D model:', error)
-      }
-    )
-
-    const animate = () => {
-      if (!isDesktop.value) return
-      animationId = requestAnimationFrame(animate)
-
-      if (model) {
-        const ROTATION_ANGLE = 0.5
-        const ROTATION_SMOOTHING = 0.05
-
-        if (!hoverLeft && !hoverRight) {
-          targetRotationX = 0
-          targetRotationY = 0
+      let model: Group | null = null
+      const loader = new GLTFLoader()
+      loader.load(
+        '/img/shaded.glb',
+        (gltf: GLTFResult) => {
+          model = gltf.scene
+          modelRef = model
+          scene.add(model)
+        },
+        undefined,
+        (error) => {
+          console.error('Error loading 3D model:', error)
         }
-        if (hoverLeft) targetRotationY = -ROTATION_ANGLE
-        if (hoverRight) targetRotationY = ROTATION_ANGLE
+      )
 
-        model.rotation.x += (targetRotationX - model.rotation.x) * ROTATION_SMOOTHING
-        model.rotation.y += (targetRotationY - model.rotation.y) * ROTATION_SMOOTHING
+      const animate = () => {
+        if (!isDesktop.value) return
+        animationId = requestAnimationFrame(animate)
+
+        if (model) {
+          const ROTATION_ANGLE = 0.5
+          const ROTATION_SMOOTHING = 0.05
+
+          if (!hoverLeft && !hoverRight) {
+            targetRotationX = 0
+            targetRotationY = 0
+          }
+          if (hoverLeft) targetRotationY = -ROTATION_ANGLE
+          if (hoverRight) targetRotationY = ROTATION_ANGLE
+
+          model.rotation.x += (targetRotationX - model.rotation.x) * ROTATION_SMOOTHING
+          model.rotation.y += (targetRotationY - model.rotation.y) * ROTATION_SMOOTHING
+        }
+
+        if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
+          const leftRect = leftPic.value.getBoundingClientRect()
+          const rightRect = rightPic.value.getBoundingClientRect()
+          const centerX = (leftRect.right + rightRect.left) / 2
+          const centerY = splitContainer.value.clientHeight / 2
+          threeContainer.value.style.left = `${centerX - threeContainer.value.clientWidth / 2}px`
+          threeContainer.value.style.top = `${centerY - threeContainer.value.clientHeight / 2}px`
+        }
+
+        renderer.render(scene, camera)
       }
 
-      if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
-        const leftRect = leftPic.value.getBoundingClientRect()
-        const rightRect = rightPic.value.getBoundingClientRect()
-        const centerX = (leftRect.right + rightRect.left) / 2
-        const centerY = splitContainer.value.clientHeight / 2
-        threeContainer.value.style.left = `${centerX - threeContainer.value.clientWidth / 2}px`
-        threeContainer.value.style.top = `${centerY - threeContainer.value.clientHeight / 2}px`
+      leftEnter = () => {
+        hoverLeft = true
+        hoverRight = false
+      }
+      leftLeave = () => {
+        hoverLeft = false
+      }
+      rightEnter = () => {
+        hoverRight = true
+        hoverLeft = false
+      }
+      rightLeave = () => {
+        hoverRight = false
       }
 
-      renderer.render(scene, camera)
-    }
+      leftPic.value?.addEventListener('mouseenter', leftEnter)
+      leftPic.value?.addEventListener('mouseleave', leftLeave)
+      rightPic.value?.addEventListener('mouseenter', rightEnter)
+      rightPic.value?.addEventListener('mouseleave', rightLeave)
 
-    leftEnter = () => { hoverLeft = true; hoverRight = false }
-    leftLeave = () => { hoverLeft = false }
-    rightEnter = () => { hoverRight = true; hoverLeft = false }
-    rightLeave = () => { hoverRight = false }
-
-    leftPic.value?.addEventListener('mouseenter', leftEnter)
-    leftPic.value?.addEventListener('mouseleave', leftLeave)
-    rightPic.value?.addEventListener('mouseenter', rightEnter)
-    rightPic.value?.addEventListener('mouseleave', rightLeave)
-
-    animate()
-  }).catch(err => console.error('Failed to load Three.js:', err))
+      animate()
+    })
+    .catch((err) => console.error('Failed to load Three.js:', err))
 })
 
 onUnmounted(() => {
@@ -177,23 +195,30 @@ onUnmounted(() => {
 
   if (rendererRef) {
     rendererRef.dispose()
-    rendererRef.forceContextLoss?.()
-    rendererRef.domElement = null as unknown as HTMLCanvasElement
+    if (rendererRef.forceContextLoss) {
+      rendererRef.forceContextLoss()
+    }
+    if (rendererRef.domElement && rendererRef.domElement.parentNode) {
+      rendererRef.domElement.parentNode.removeChild(rendererRef.domElement)
+    }
     rendererRef = null
   }
 
   if (modelRef) {
     modelRef.traverse((obj: THREEType.Object3D) => {
-      if ((obj as THREEType.Mesh).geometry) (obj as THREEType.Mesh).geometry.dispose()
-      const mat = (obj as THREEType.Mesh).material
-      if (Array.isArray(mat)) mat.forEach(m => m.dispose())
-      else if (mat) mat.dispose()
+      const mesh = obj as THREEType.Mesh
+      if (mesh.geometry) mesh.geometry.dispose()
+      const mat = mesh.material
+      if (Array.isArray(mat)) {
+        mat.forEach((m) => m.dispose())
+      } else if (mat) {
+        mat.dispose()
+      }
     })
     modelRef = null
   }
 })
 </script>
-
 
 <style scoped lang="scss">
 .splitAnimation {
@@ -240,7 +265,7 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #0000005e;
+  background-color: rgba(0, 0, 0, 0.37);
   z-index: 1;
   pointer-events: none;
 }

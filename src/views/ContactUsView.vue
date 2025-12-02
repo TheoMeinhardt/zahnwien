@@ -6,32 +6,50 @@
     </div>
   </section>
   <div class="container">
-
-    <form>
+    <form @submit.prevent="handleSubmit">
       <div class="form-group">
         <label for="name">Name</label>
         <div class="input-wrapper">
-          <span class="input-icon" aria-hidden="true"></span>
-          <input type="text" id="name" name="name" placeholder="Dein Name" required autocomplete="name"
-            aria-required="true">
+          <input
+            id="name"
+            v-model="formData.name"
+            type="text"
+            name="name"
+            placeholder="Dein Name"
+            required
+            autocomplete="name"
+            aria-required="true"
+          />
         </div>
       </div>
 
       <div class="form-group">
         <label for="email">E-Mail</label>
         <div class="input-wrapper">
-          <span class="input-icon" aria-hidden="true"></span>
-          <input type="email" id="email" name="email" placeholder="deine@email.com" required autocomplete="email"
-            aria-required="true">
+          <input
+            id="email"
+            v-model="formData.email"
+            type="email"
+            name="email"
+            placeholder="deine@email.com"
+            required
+            autocomplete="email"
+            aria-required="true"
+          />
         </div>
       </div>
 
       <div class="form-group">
         <label for="message">Nachricht</label>
         <div class="input-wrapper textarea-wrapper">
-          <span class="input-icon" aria-hidden="true"></span>
-          <textarea id="message" name="message" placeholder="Deine Nachricht..." required
-            aria-required="true"></textarea>
+          <textarea
+            id="message"
+            v-model="formData.message"
+            name="message"
+            placeholder="Deine Nachricht..."
+            required
+            aria-required="true"
+          ></textarea>
         </div>
       </div>
 
@@ -41,14 +59,32 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue'
+
+const formData = ref({
+  name: '',
+  email: '',
+  message: ''
+})
+
+const handleSubmit = () => {
+  // Form submission logic hier
+  console.log('Form submitted:', formData.value)
+  // Reset form
+  formData.value = {
+    name: '',
+    email: '',
+    message: ''
+  }
+}
 </script>
 
 <style scoped>
 .hero {
   width: 100%;
   padding: 140px 20px 100px;
-  background: linear-gradient(135deg, #22D3EE, #0C4A6E);
+  background: linear-gradient(135deg, #22d3ee, #0c4a6e);
   color: white;
   text-align: center;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
@@ -63,6 +99,12 @@ import NavBar from '@/components/NavBar.vue'
   font-size: 2.4rem;
   font-weight: 700;
   margin-bottom: 10px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 form {
@@ -85,10 +127,9 @@ label {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  color: #22D3EE;
+  color: #22d3ee;
   font-size: 0.95rem;
 }
-
 
 .input-wrapper {
   position: relative;
@@ -102,10 +143,9 @@ label {
 }
 
 .input-wrapper:focus-within {
-  border-color: #22D3EE;
-  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
 }
-
 
 .input-icon {
   position: absolute;
@@ -113,7 +153,6 @@ label {
   font-size: 1.2rem;
   opacity: 0.7;
 }
-
 
 input,
 textarea {
@@ -133,30 +172,31 @@ textarea {
 }
 
 .textarea-wrapper {
-  padding-left: 45px !important;
+  padding-left: 45px;
   padding-top: 10px;
+  align-items: flex-start;
 }
-
 
 .submit-btn {
   width: 100%;
   padding: 14px;
   border: none;
   border-radius: 14px;
-  background: #22D3EE;
+  background: #22d3ee;
   color: white;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
   margin-top: 10px;
 }
 
 .submit-btn:hover {
-  background: #0C4A6E;
+  background: #0c4a6e;
   transform: translateY(-3px);
 }
-
 
 @media (max-width: 600px) {
   form {
@@ -170,6 +210,7 @@ textarea {
   .headline {
     margin-bottom: 10px;
     line-height: 1.2;
+    font-size: 2rem;
   }
 }
 </style>
