@@ -89,43 +89,112 @@
     nächsten Besuch wiederzuerkennen. Wenn Sie dies nicht wünschen, so können Sie Ihren Browser so
     einrichten, dass er Sie über das Setzen von Cookies informiert und Sie dies nur im Einzelfall
     erlauben. Bei der Deaktivierung von Cookies kann die Funktionalität unserer Website
-    eingeschränkt sein. Google Fonts Unsere Website verwendet Schriftarten von „Google Fonts“. Der
-    Dienstanbieter dieser Funktion ist: • Google Ireland Limited Gordon House, Barrow Street Dublin
-    4. Ireland Tel: +353 1 543 1000 Beim Aufrufen dieser Webseite lädt Ihr Browser Schriftarten und
-    speichert diese in den Cache. Da Sie, als Besucher der Webseite, Daten des Dienstanbieters
-    empfangen kann Google unter Umständen Cookies auf Ihrem Rechner setzen oder analysieren. Die
-    Nutzung von „Google-Fonts“ dient der Optimierung unserer Dienstleistung und der einheitlichen
-    Darstellung von Inhalten. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit.
-    f DSGVO dar. Weitere Informationen zu Google Fonts erhalten Sie unter folgendem Link:
-    https://developers.google.com/fonts/faq Weitere Informationen über den Umgang mit Nutzerdaten
-    von Google können Sie der Datenschutzerklärung entnehmen:
-    https://policies.google.com/privacy?hl=de . Google verarbeitet die Daten auch in den USA, hat
-    sich jedoch dem EU-US Privacy-Shield unterworfen. https://www.privacyshield.gov/EU-US-Framework
-    Server-Log Files Diese Webseite und der damit verbundene Provider erhebt im Zuge der
-    Webseitennutzung automatisch Informationen im Rahmen sogenannter „Server-Log Files“. Dies
-    betrifft insbesondere: • IP-Adresse oder Hostname • den verwendeten Browser • Land/Region aus
-    dem der Browserzugriff erfolgt • Aufenthaltsdauer auf der Webseite sowie Datum und Uhrzeit •
-    aufgerufene Seiten der Webseite • Spracheinstellungen und Betriebssystem • „Leaving-Page“ (auf
-    welcher URL hat der Benutzer die Webseite verlassen) • ISP (Internet Service Provider) Diese
-    erhobenen Informationen werden nicht personenbezogen verarbeitet oder mit personenbezogenen
-    Daten in Verbindung gebracht. Der Webseitenbetreiber behält es sich vor, im Falle von
-    Bekanntwerden rechtswidriger Tätigkeiten, diese Daten auszuwerten oder zu überprüfen. Newsletter
+    eingeschränkt sein.
+    <br />
+    <br />
+
+    <span class="text-h4 block">Google Fonts</span>
+    Unsere Website verwendet Schriftarten von „Google Fonts“. Der Dienstanbieter dieser Funktion
+    ist:
+    <ul>
+      <li>
+        Google Ireland Limited Gordon House, Barrow Street Dublin 4. Ireland <br />
+        Tel: +353 1 543 1000
+      </li>
+    </ul>
+    Beim Aufrufen dieser Webseite lädt Ihr Browser Schriftarten und speichert diese in den Cache. Da
+    Sie, als Besucher der Webseite, Daten des Dienstanbieters empfangen kann Google unter Umständen
+    Cookies auf Ihrem Rechner setzen oder analysieren.
+    <br />
+    <br />
+    Die Nutzung von „Google-Fonts“ dient der Optimierung unserer Dienstleistung und der
+    einheitlichen Darstellung von Inhalten. Dies stellt ein berechtigtes Interesse im Sinne von Art.
+    6 Abs. 1 lit. f DSGVO dar.
+    <br />
+    <br />
+    Weitere Informationen zu Google Fonts erhalten Sie unter folgendem Link:
+    <RouterLink to="https://developers.google.com/fonts/faq"
+      >https://developers.google.com/fonts/faq</RouterLink
+    >
+    <br />
+    Weitere Informationen über den Umgang mit Nutzerdaten von Google können Sie der
+    Datenschutzerklärung entnehmen:
+    <RouterLink to="https://policies.google.com/privacy?hl=de"
+      >https://policies.google.com/privacy?hl=de</RouterLink
+    >.
+    <br />
+    Google verarbeitet die Daten auch in den USA, hat sich jedoch dem EU-US Privacy-Shield
+    unterworfen.
+    <RouterLink to="https://www.privacyshield.gov/EU-US-Framework"
+      >https://www.privacyshield.gov/EU-US-Framework</RouterLink
+    >
+    <br />
+    <br />
+
+    <span class="text-h4 block">Server-Log Files</span>
+    Diese Webseite und der damit verbundene Provider erhebt im Zuge der Webseitennutzung automatisch
+    Informationen im Rahmen sogenannter „Server-Log Files“. Dies betrifft insbesondere:
+    <ul>
+      <li>IP-Adresse oder Hostname</li>
+      <li>den verwendeten Browser</li>
+      <li>Land/Region aus dem der Browserzugriff erfolgt</li>
+      <li>Aufenthaltsdauer auf der Webseite sowie Datum und Uhrzeit</li>
+      <li>aufgerufene Seiten der Webseite</li>
+      <li>Spracheinstellungen und Betriebssystem</li>
+      <li>„Leaving-Page“ (auf welcher URL hat der Benutzer die Webseite verlassen)</li>
+      <li>ISP (Internet Service Provider)</li>
+    </ul>
+    Diese erhobenen Informationen werden nicht personenbezogen verarbeitet oder mit
+    personenbezogenen Daten in Verbindung gebracht.
+    <br />
+    <br />
+    Der Webseitenbetreiber behält es sich vor, im Falle von Bekanntwerden rechtswidriger
+    Tätigkeiten, diese Daten auszuwerten oder zu überprüfen.
+    <br />
+    <br />
+
+    <span class="text-h4 block">Newsletter</span>
     Sie haben die Möglichkeit, über unsere Website unseren Newsletter zu abonnieren. Hierfür
     benötigen wir Ihre E-Mail-Adresse und ihre Erklärung, dass Sie mit dem Bezug des Newsletters
-    einverstanden sind. Wenn Sie die Möglichkeit nutzen unseren Newsletter zu abonnieren, wird Ihre
-    Email-Adresse und Ihre Zustimmung/Einverständniserklärung über den Bezug des Newsletters
-    benötigt. In Folge auf die Anmeldung zu unserem Newsletter, erhalten Sie von uns ein
-    Bestätigungs-Email mit einem Link zur Anmeldebestätigung. Eine Stornierung des Newsletters ist
-    jederzeit möglich. Ihre Daten im Zusammenhang mit dem Newsletter-Versand werden im Falle einer
-    Stornierung umgehend von uns gelöscht. Die Rechtmäßigkeit der erfolgten Datenverarbeitung bis
-    zum Widerruf, welche aufgrund der Zustimmung passiert ist, wird nicht berührt. Ihre Rechte als
-    Betroffener Sie als Betroffener haben bezüglich Ihrer Daten, welche bei uns gespeichert sind
-    grundsätzlich ein Recht auf: • Auskunft • Löschung der Daten • Berichtigung der Daten •
-    Übertragbarkeit der Daten • Wiederruf und Widerspruch zur Datenverarbeitung • Einschränkung Wenn
-    sie vermuten, dass im Zuge der Verarbeitung Ihrer Daten Verstöße gegen das Datenschutzrecht
+    einverstanden sind.
+    <br />
+    <br />
+    Wenn Sie die Möglichkeit nutzen unseren Newsletter zu abonnieren, wird Ihre Email-Adresse und
+    Ihre Zustimmung/Einverständniserklärung über den Bezug des Newsletters benötigt. In Folge auf
+    die Anmeldung zu unserem Newsletter, erhalten Sie von uns ein Bestätigungs-Email mit einem Link
+    zur Anmeldebestätigung. Eine Stornierung des Newsletters ist jederzeit möglich.
+    <br />
+    <br />
+    Ihre Daten im Zusammenhang mit dem Newsletter-Versand werden im Falle einer Stornierung umgehend
+    von uns gelöscht. Die Rechtmäßigkeit der erfolgten Datenverarbeitung bis zum Widerruf, welche
+    aufgrund der Zustimmung passiert ist, wird nicht berührt.
+    <br />
+    <br />
+
+    <span class="text-h4 block">Ihre Rechte als Betroffener</span>
+    Sie als Betroffener haben bezüglich Ihrer Daten, welche bei uns gespeichert sind grundsätzlich
+    ein Recht auf:
+    <ul>
+      <li>Auskunft</li>
+      <li>Löschung der Daten</li>
+      <li>Berichtigung der Daten</li>
+      <li>Übertragbarkeit der Daten</li>
+      <li>Wiederruf und Widerspruch zur Datenverarbeitung</li>
+      <li>Einschränkung</li>
+    </ul>
+    Wenn sie vermuten, dass im Zuge der Verarbeitung Ihrer Daten Verstöße gegen das Datenschutzrecht
     passiert sind, so haben Sie die Möglichkeit sich bei der Ordination von Dr. Olivia oder der
-    Datenschutzbehörde zu beschweren. Diese Datenschutzerklärung wird von der Ordination Dr. Olivia
-    periodisch aktualisiert und auf Letztstand gebracht. Version 1.0 11/2025
+    Datenschutzbehörde zu beschweren.
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <span class="text-italic text-body2 block text-center"
+      >Diese Datenschutzerklärung wird von der Ordination Dr. Olivia periodisch aktualisiert und auf
+      Letztstand gebracht. Version 1.0 11/2025</span
+    >
   </div>
 </template>
 
