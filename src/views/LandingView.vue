@@ -53,10 +53,6 @@ const threeContainer = ref<HTMLDivElement | null>(null)
 
 const isDesktop = ref(window.innerWidth > 1024)
 
-const handleResize = () => {
-  isDesktop.value = window.innerWidth > 1024
-}
-
 // Cleanup Refs
 let rendererRef: THREEType.WebGLRenderer | null = null
 let modelRef: THREEType.Group | null = null
@@ -66,6 +62,68 @@ let leftEnter: (() => void) | null = null
 let leftLeave: (() => void) | null = null
 let rightEnter: (() => void) | null = null
 let rightLeave: (() => void) | null = null
+
+// Position des 3D Logos aktualisieren - wird nur bei Resize aufgerufen
+const updateLogoPosition = () => {
+  if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
+    const leftRect = leftPic.value.getBoundingClientRect()
+    const rightRect = rightPic.value.getBoundingClientRect()
+    const centerX = (leftRect.right + rightRect.left) / 2
+    const centerY = splitContainer.value.clientHeight / 2
+    threeContainer.value.style.left = `${centerX - threeContainer.value.clientWidth / 2}px`
+    threeContainer.value.style.top = `${centerY - threeContainer.value.clientHeight / 2}px`
+  }
+}
+
+const handleResize = () => {
+  const wasDesktop = isDesktop.value
+  isDesktop.value = window.innerWidth > 1024
+
+  // Cleanup bei Wechsel von Desktop zu Mobile
+  if (wasDesktop && !isDesktop.value) {
+    if (animationId !== null) {
+      cancelAnimationFrame(animationId)
+      animationId = null
+    }
+    cleanup3D()
+  }
+}
+
+const cleanup3D = () => {
+  if (leftPic.value && leftEnter && leftLeave) {
+    leftPic.value.removeEventListener('mouseenter', leftEnter)
+    leftPic.value.removeEventListener('mouseleave', leftLeave)
+  }
+  if (rightPic.value && rightEnter && rightLeave) {
+    rightPic.value.removeEventListener('mouseenter', rightEnter)
+    rightPic.value.removeEventListener('mouseleave', rightLeave)
+  }
+
+  if (rendererRef) {
+    rendererRef.dispose()
+    if (rendererRef.forceContextLoss) {
+      rendererRef.forceContextLoss()
+    }
+    if (rendererRef.domElement && rendererRef.domElement.parentNode) {
+      rendererRef.domElement.parentNode.removeChild(rendererRef.domElement)
+    }
+    rendererRef = null
+  }
+
+  if (modelRef) {
+    modelRef.traverse((obj: THREEType.Object3D) => {
+      const mesh = obj as THREEType.Mesh
+      if (mesh.geometry) mesh.geometry.dispose()
+      const mat = mesh.material
+      if (Array.isArray(mat)) {
+        mat.forEach((m) => m.dispose())
+      } else if (mat) {
+        mat.dispose()
+      }
+    })
+    modelRef = null
+  }
+}
 
 onMounted(() => {
   window.addEventListener('resize', handleResize)
@@ -79,14 +137,8 @@ onMounted(() => {
     .then(([THREE, { GLTFLoader }]) => {
       if (!threeContainer.value || !isDesktop.value) return
 
-      type Group = InstanceType<typeof THREE.Group>
-      type Scene = InstanceType<typeof THREE.Scene>
-      type PerspectiveCamera = InstanceType<typeof THREE.PerspectiveCamera>
-      type WebGLRenderer = InstanceType<typeof THREE.WebGLRenderer>
-      type GLTFResult = { scene: Group }
-
-      const scene: Scene = new THREE.Scene()
-      const camera: PerspectiveCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
+      const scene: THREEType.Scene = new THREE.Scene()
+      const camera: THREEType.PerspectiveCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
 
       let hoverLeft = false
       let hoverRight = false
@@ -95,7 +147,7 @@ onMounted(() => {
 
       camera.position.z = 5
 
-      const renderer: WebGLRenderer = new THREE.WebGLRenderer({
+      const renderer: THREEType.WebGLRenderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: true
       })
@@ -108,11 +160,11 @@ onMounted(() => {
       dirLight.position.set(5, 5, 5)
       scene.add(dirLight)
 
-      let model: Group | null = null
+      let model: THREEType.Group | null = null
       const loader = new GLTFLoader()
       loader.load(
         '/img/shaded.glb',
-        (gltf: GLTFResult) => {
+        (gltf) => {
           model = gltf.scene
           modelRef = model
           scene.add(model)
@@ -122,6 +174,9 @@ onMounted(() => {
           console.error('Error loading 3D model:', error)
         }
       )
+
+      // Initial Logo-Position setzen
+      updateLogoPosition()
 
       const animate = () => {
         if (!isDesktop.value) return
@@ -142,6 +197,7 @@ onMounted(() => {
           model.rotation.y += (targetRotationY - model.rotation.y) * ROTATION_SMOOTHING
         }
 
+        // Logo-Position wird in jedem Frame aktualisiert (wie im Original)
         if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
           const leftRect = leftPic.value.getBoundingClientRect()
           const rightRect = rightPic.value.getBoundingClientRect()
@@ -184,39 +240,7 @@ onUnmounted(() => {
 
   if (animationId !== null) cancelAnimationFrame(animationId)
 
-  if (leftPic.value && leftEnter && leftLeave) {
-    leftPic.value.removeEventListener('mouseenter', leftEnter)
-    leftPic.value.removeEventListener('mouseleave', leftLeave)
-  }
-  if (rightPic.value && rightEnter && rightLeave) {
-    rightPic.value.removeEventListener('mouseenter', rightEnter)
-    rightPic.value.removeEventListener('mouseleave', rightLeave)
-  }
-
-  if (rendererRef) {
-    rendererRef.dispose()
-    if (rendererRef.forceContextLoss) {
-      rendererRef.forceContextLoss()
-    }
-    if (rendererRef.domElement && rendererRef.domElement.parentNode) {
-      rendererRef.domElement.parentNode.removeChild(rendererRef.domElement)
-    }
-    rendererRef = null
-  }
-
-  if (modelRef) {
-    modelRef.traverse((obj: THREEType.Object3D) => {
-      const mesh = obj as THREEType.Mesh
-      if (mesh.geometry) mesh.geometry.dispose()
-      const mat = mesh.material
-      if (Array.isArray(mat)) {
-        mat.forEach((m) => m.dispose())
-      } else if (mat) {
-        mat.dispose()
-      }
-    })
-    modelRef = null
-  }
+  cleanup3D()
 })
 </script>
 
@@ -304,15 +328,16 @@ p {
     display: none;
   }
 
-  .splitAnimation:hover .PicLeft:hover,
-  .splitAnimation:hover .PicRight:hover {
-    flex: 1 !important;
-    transition: none !important;
-  }
-
   .PicLeft,
   .PicRight {
+    flex: 1;
+    transition: none;
     cursor: default;
+  }
+
+  .splitAnimation:hover .PicLeft:hover,
+  .splitAnimation:hover .PicRight:hover {
+    flex: 1;
   }
 }
 
@@ -329,13 +354,8 @@ p {
     width: 100%;
     height: 50vh;
     flex: unset;
-    transition: none !important;
+    transition: none;
     cursor: default;
-  }
-
-  .PicLeft:hover,
-  .PicRight:hover {
-    flex: unset !important;
   }
 
   .TextLeft,
@@ -360,7 +380,7 @@ p {
 
   .PicLeft,
   .PicRight {
-    transition: none !important;
+    transition: none;
   }
 
   .TextLeft,

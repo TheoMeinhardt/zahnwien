@@ -138,20 +138,12 @@ label {
   background: #f7f7f7;
   border-radius: 14px;
   border: 1px solid #d8d8d8;
-  padding-left: 42px;
   transition: all 0.25s ease;
 }
 
 .input-wrapper:focus-within {
   border-color: #22d3ee;
   box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
-}
-
-.input-icon {
-  position: absolute;
-  left: 14px;
-  font-size: 1.2rem;
-  opacity: 0.7;
 }
 
 input,
