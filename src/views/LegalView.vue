@@ -1,5 +1,7 @@
 <template>
-  <div class="q-pa-xl text-body1">
+  <NavBar background="dark" text="white" :overlay="false" :sticky="true" />
+
+  <div class="q-pa-xl q-mt-xl text-body1">
     <span class="text-h3 block">Impressum</span>
     Eigentümer, Herausgeber und für den Inhalt dieser Website verantwortlich:
     <br />
@@ -64,6 +66,17 @@
     Konzept, Design und Umsetzung von .BAT Infotainment . . . Hier dürfen die Jungs noch was
     reinschreiben wenn sie wollen.
   </div>
+
+  <Footer />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import NavBar from '@/components/NavBar.vue'
+import Footer from '@/components/FooterComponent.vue'
+
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  window.scrollTo(0, 0)
+})
+</script>

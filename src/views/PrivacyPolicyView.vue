@@ -1,5 +1,7 @@
 <template>
-  <div class="q-pa-xl text-body1">
+  <NavBar background="dark" text="white" :overlay="false" :sticky="true" />
+
+  <div class="q-pa-xl q-mt-xl text-body1">
     <span class="text-h3 block">Datenschutzerklärung der Ordination Dr. Olivia</span>
     Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Ihre Daten werden daher
     ausschließlich auf Grundlage der gesetzlichen Bestimmungen der Europäischen
@@ -196,8 +198,18 @@
       Letztstand gebracht. Version 1.0 11/2025</span
     >
   </div>
+
+  <Footer />
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
+
+import NavBar from '@/components/NavBar.vue'
+import Footer from '@/components/FooterComponent.vue'
+
+onMounted(() => {
+  window.scrollTo(0, 0)
+})
 </script>
