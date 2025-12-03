@@ -2,16 +2,27 @@
   <div class="box row">
     <!-- Backside -->
     <div class="card-back col" :class="{ 'back-visible': showBack }">
-      <span class="roboto text-dark text-subtitle2 text-weight-regular q-mt-sm">
+      <span class="text-dark text-subtitle2 text-weight-regular q-mt-sm">
         {{ detailtext }}
       </span>
-      <q-btn @click="flip()" outline round color="primary" icon="close" />
+
+      <div class="column">
+        <q-btn @click="flip()" outline round color="primary" icon="fa-solid fa-xmark" />
+        <q-btn
+          class="q-mt-sm"
+          @click="redirectTo('mailto:ordination@zahnwien.at?subject=Anfrage an Ordination 1170')"
+          outline
+          round
+          color="primary"
+          icon="fa-regular fa-calendar-check"
+        />
+      </div>
     </div>
 
     <!-- Frontside -->
     <div class="col q-mt-xl q-mb-md q-mx-lg front-content" :class="{ 'front-hidden': !showFront }">
-      <span class="inter text-primary text-h5 block">{{ props.header }}</span>
-      <span class="roboto text-dark text-subtitle2 text-weight-regular block q-mt-sm">
+      <span class="text-primary text-h5 block">{{ props.header }}</span>
+      <span class="text-dark text-subtitle2 text-weight-regular block q-mt-sm">
         {{ props.subtext }}</span
       >
       <q-btn
@@ -37,6 +48,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { redirectTo } from '@/helpers'
 
 const props = defineProps<{
   header: string
@@ -68,7 +80,7 @@ function flip() {
   position: relative;
 
   border: $primary 2px solid;
-  border-radius: 30px;
+  border-radius: 20px;
 
   transition:
     transform 0.15s ease-out,
@@ -81,7 +93,7 @@ function flip() {
 }
 
 .q-img {
-  border-radius: 0px 30px 30px 0px;
+  border-radius: 0px 20px 20px 0px;
 }
 
 .card-back {

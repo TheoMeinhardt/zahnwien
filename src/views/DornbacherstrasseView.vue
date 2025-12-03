@@ -4,77 +4,16 @@
 
     <div class="q-mt-xl q-pt-xl q-px-lg">
       <!-- Heading -->
-      <div class="inter text-primary" v-reveal="{ once: true }">
-        <span class="gt-sm text-h4 text-weight-bold block">Dornbacherstraße 1</span>
-        <span class="lt-md text-h6 text-weight-bold block">Dornbacherstraße 1</span>
-        <span class="text-h6 text-italic text-weight-regular">1170 Wien</span>
+      <div class="text-primary" v-reveal="{ once: true }">
+        <span class="gt-sm text-h4 text-weight-bolder block">Dornbacherstraße 1</span>
+        <span class="lt-md text-h6 text-weight-bolder block">Dornbacherstraße 1</span>
+        <span class="text-h6 text-italic">1170 Wien</span>
       </div>
 
-      <div class="row wrap items-center">
-        <div class="col-12 col-md-6" v-reveal="{ once: true }">
-          <!-- Focus chips -->
-          <div>
-            <!-- Focus heading -->
-            <span class="text-h5 text-bold text-primary q-mt-lg block">Fokus:</span>
-
-            <div class="inter row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="teethMedicin"
-                >Allgemeine Zahnmedizin</Chip
-              >
-
-              <Chip
-                v-reveal="{ once: true }"
-                color="white"
-                text-color="primary"
-                :img="teethImplants"
-                >Implantologie</Chip
-              >
-
-              <Chip
-                v-reveal="{ once: true }"
-                color="white"
-                text-color="primary"
-                :img="teethAesthetic"
-                >Ästhetik</Chip
-              >
-            </div>
-          </div>
-
-          <!-- Equipment chips -->
-          <div>
-            <!-- Equipment heading -->
-            <span class="text-h5 text-bold text-primary q-mt-lg block">Ausstattung:</span>
-
-            <div class="inter row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="xray"
-                >Röntgen</Chip
-              >
-
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" img="">DVT</Chip>
-
-              <Chip
-                v-reveal="{ once: true }"
-                color="white"
-                text-color="primary"
-                :img="digitalWorkflow"
-                >digitale Workflows</Chip
-              >
-
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="scan3d"
-                >3D-Scan</Chip
-              >
-            </div>
-          </div>
-
-          <!-- Opening Hours -->
-          <div v-reveal="{ once: true }">
-            <OpeningHours :opening-hours-data="openingHours" />
-          </div>
-        </div>
-
+      <div class="row wrap items-center justify-between">
         <!-- Einführungstext -->
-        <div class="col-12 col-md-6" v-reveal="{ once: true }">
-          <span class="block q-my-lg roboto text-body1"
+        <div class="col-12 col-md-5" v-reveal="{ once: true }">
+          <span class="block q-my-lg text-body1"
             >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
             in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
             und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
@@ -117,10 +56,71 @@
             />
           </q-carousel>
         </div>
+
+        <div class="col-12 col-md-6" v-reveal="{ once: true }">
+          <!-- Focus chips -->
+          <div>
+            <!-- Focus heading -->
+            <span class="text-h5 text-bold text-primary q-mt-lg block">Fokus:</span>
+
+            <div class="row text-italic text-weight-light q-mt-sm">
+              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="teethMedicin"
+                >Allgemeine Zahnmedizin</Chip
+              >
+
+              <Chip
+                v-reveal="{ once: true }"
+                color="white"
+                text-color="primary"
+                :img="teethImplants"
+                >Implantologie</Chip
+              >
+
+              <Chip
+                v-reveal="{ once: true }"
+                color="white"
+                text-color="primary"
+                :img="teethAesthetic"
+                >Ästhetik</Chip
+              >
+            </div>
+          </div>
+
+          <!-- Equipment chips -->
+          <div>
+            <!-- Equipment heading -->
+            <span class="text-h5 text-bold text-primary q-mt-lg block">Ausstattung:</span>
+
+            <div class="row text-italic text-weight-light q-mt-sm">
+              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="xray"
+                >Röntgen</Chip
+              >
+
+              <Chip v-reveal="{ once: true }" color="white" text-color="primary" img="">DVT</Chip>
+
+              <Chip
+                v-reveal="{ once: true }"
+                color="white"
+                text-color="primary"
+                :img="digitalWorkflow"
+                >digitale Workflows</Chip
+              >
+
+              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="scan3d"
+                >3D-Scan</Chip
+              >
+            </div>
+          </div>
+
+          <!-- Opening Hours -->
+          <div v-reveal="{ once: true }">
+            <OpeningHours :opening-hours-data="openingHours" />
+          </div>
+        </div>
       </div>
 
       <div class="q-mt-xl">
-        <span class="inter text-primary text-h3 text-weight-bold block" v-reveal="{ once: true }"
+        <span class="text-primary text-h3 text-weight-bold block" v-reveal="{ once: true }"
           >Leistungen</span
         >
 
@@ -139,14 +139,12 @@
       </div>
 
       <!-- Kontakt und Karte -->
-      <span
-        class="inter text-primary text-h3 text-weight-bold block q-mt-xl"
-        v-reveal="{ once: true }"
+      <span class="text-primary text-h3 text-weight-bold block q-mt-xl" v-reveal="{ once: true }"
         >Kontakt</span
       >
       <div class="row q-mb-xl">
         <div class="col-12 col-md-6 q-pt-md">
-          <span v-reveal="{ once: true }" class="roboto text-body1 block q-mb-sm q-ml-sm"
+          <span v-reveal="{ once: true }" class="text-body1 block q-mb-sm q-ml-sm"
             >Bei Fragen oder wenn Sie weitere Informationen benötigen, senden Sie uns bitte eine
             E‑Mail oder rufen Sie uns an.
             <span class="text-primary text-weight-bold">Wir helfen Ihnen gerne weiter!</span></span
@@ -156,29 +154,37 @@
             @click="redirectTo('https://maps.app.goo.gl/ELQbS8hAhRYHtrQ16')"
             clickable
             size="md"
-            color="primary"
-            dark
+            color="white"
             icon="map"
+            square
+            dense
+            class="text-black"
             >Dornbacherstraße 1, 1170 Wien</q-chip
           >
+          <br />
           <q-chip
             v-reveal="{ once: true }"
             @click="redirectTo('tel:01/4864627')"
             size="md"
             clickable
-            color="primary"
-            dark
+            color="white"
             icon="phone"
+            square
+            dense
+            class="text-black"
             >01/486 46 27</q-chip
           >
+          <br />
           <q-chip
             v-reveal="{ once: true }"
             @click="redirectTo('mailto:ordination@zahnwien.at?subject=Anfrage an Ordination 1170')"
             clickable
             size="md"
-            color="primary"
-            dark
+            color="white"
             icon="mail"
+            square
+            dense
+            class="text-black"
             >ordination@zahnwien.at</q-chip
           >
 
@@ -210,7 +216,7 @@ import L from 'leaflet'
 import { onMounted, ref, type Ref } from 'vue'
 
 import type { locationData, openingHours } from '@/types'
-import { parseOpeningHours, parseImagePath } from '@/helpers'
+import { parseOpeningHours, parseImagePath, redirectTo } from '@/helpers'
 import rawData from '@/assets/data/1170/text.json'
 
 const data: Ref<locationData[]> = ref(rawData)
@@ -234,10 +240,6 @@ onMounted(() => {
 data.value.forEach((locationDataItem) => {
   locationDataItem.image = parseImagePath('img/Details/' + locationDataItem.image)
 })
-
-function redirectTo(url: string): void {
-  window.open(url)
-}
 </script>
 
 <style scoped>
