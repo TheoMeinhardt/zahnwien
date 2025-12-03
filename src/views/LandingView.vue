@@ -50,6 +50,10 @@ const splitContainer = ref<HTMLDivElement | null>(null)
 const leftPic = ref<HTMLDivElement | null>(null)
 const rightPic = ref<HTMLDivElement | null>(null)
 const threeContainer = ref<HTMLDivElement | null>(null)
+let hoverLeft = false
+let hoverRight = false
+let targetRotationX = 0
+let targetRotationY = 0
 
 const isDesktop = ref(window.innerWidth > 1024)
 
@@ -57,6 +61,7 @@ const isDesktop = ref(window.innerWidth > 1024)
 let rendererRef: THREEType.WebGLRenderer | null = null
 let modelRef: THREEType.Group | null = null
 let animationId: number | null = null
+let isMounted = true
 
 let leftEnter: (() => void) | null = null
 let leftLeave: (() => void) | null = null
@@ -101,8 +106,10 @@ const cleanup3D = () => {
 
   if (rendererRef) {
     rendererRef.dispose()
-    if (rendererRef.forceContextLoss) {
-      rendererRef.forceContextLoss()
+    const gl = rendererRef.getContext && rendererRef.getContext()
+    const loseContextExt = gl && gl.getExtension && gl.getExtension('WEBGL_lose_context')
+    if (loseContextExt && loseContextExt.loseContext) {
+      loseContextExt.loseContext()
     }
     if (rendererRef.domElement && rendererRef.domElement.parentNode) {
       rendererRef.domElement.parentNode.removeChild(rendererRef.domElement)
@@ -128,22 +135,14 @@ const cleanup3D = () => {
 onMounted(() => {
   window.addEventListener('resize', handleResize)
 
-  if (!isDesktop.value || !threeContainer.value || !splitContainer.value) return
-
-  Promise.all([
-    import('three'),
-    import('three/examples/jsm/loaders/GLTFLoader.js')
-  ])
+  const initialIsDesktop = isDesktop.value
+  if (!initialIsDesktop || !threeContainer.value || !splitContainer.value) return
+  Promise.all([import('three'), import('three/examples/jsm/loaders/GLTFLoader.js')])
     .then(([THREE, { GLTFLoader }]) => {
-      if (!threeContainer.value || !isDesktop.value) return
+      if (!threeContainer.value || !initialIsDesktop || !isMounted) return
 
       const scene: THREEType.Scene = new THREE.Scene()
       const camera: THREEType.PerspectiveCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
-
-      let hoverLeft = false
-      let hoverRight = false
-      let targetRotationX = 0
-      let targetRotationY = 0
 
       camera.position.z = 5
 
@@ -163,7 +162,7 @@ onMounted(() => {
       let model: THREEType.Group | null = null
       const loader = new GLTFLoader()
       loader.load(
-        '/img/shaded.glb',
+        '/img/zahnwien.glb',
         (gltf) => {
           model = gltf.scene
           modelRef = model
@@ -179,7 +178,11 @@ onMounted(() => {
       updateLogoPosition()
 
       const animate = () => {
-        if (!isDesktop.value) return
+        // Guard against animation continuing after unmount
+        if (!isMounted || !isDesktop.value || !rendererRef || !threeContainer.value) {
+          return
+        }
+
         animationId = requestAnimationFrame(animate)
 
         if (model) {
@@ -236,9 +239,15 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  // Set mounted flag first to stop animation loop
+  isMounted = false
+
   window.removeEventListener('resize', handleResize)
 
-  if (animationId !== null) cancelAnimationFrame(animationId)
+  if (animationId !== null) {
+    cancelAnimationFrame(animationId)
+    animationId = null
+  }
 
   cleanup3D()
 })
@@ -285,6 +294,7 @@ onUnmounted(() => {
 
 .overlay {
   position: absolute;
+
   top: 0;
   left: 0;
   right: 0;
@@ -296,7 +306,6 @@ onUnmounted(() => {
 
 .Logo3D {
   position: absolute;
-  padding-top: 10rem;
   width: 800px;
   height: 800px;
   z-index: 1000;
