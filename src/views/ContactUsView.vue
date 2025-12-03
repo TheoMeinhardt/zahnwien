@@ -1,71 +1,56 @@
 <template>
   <NavBar background="dark" text="white" :sticky="true" :overlay="false" />
+
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <h1 class="headline">Nehmen Sie Kontakt mit uns auf</h1>
+      <p class="subline">Wir beantworten Ihre Fragen schnell und zuverlässig</p>
     </div>
   </section>
+
+  <!-- Formular -->
   <div class="container">
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
         <label for="name">Name</label>
-        <div class="input-wrapper">
-          <input
-            id="name"
-            v-model="formData.name"
-            type="text"
-            name="name"
-            placeholder="Dein Name"
-            required
-            autocomplete="name"
-            aria-required="true"
-            :disabled="isSubmitting"
-          />
-        </div>
+        <input
+          id="name"
+          v-model="formData.name"
+          type="text"
+          placeholder="Dein Name"
+          required
+          :disabled="isSubmitting"
+        />
       </div>
 
       <div class="form-group">
         <label for="email">E-Mail</label>
-        <div class="input-wrapper">
-          <input
-            id="email"
-            v-model="formData.email"
-            type="email"
-            name="email"
-            placeholder="deine@email.com"
-            required
-            autocomplete="email"
-            aria-required="true"
-            :disabled="isSubmitting"
-          />
-        </div>
+        <input
+          id="email"
+          v-model="formData.email"
+          type="email"
+          placeholder="deine@email.com"
+          required
+          :disabled="isSubmitting"
+        />
       </div>
 
       <div class="form-group">
         <label for="message">Nachricht</label>
-        <div class="input-wrapper textarea-wrapper">
-          <textarea
-            id="message"
-            v-model="formData.message"
-            name="message"
-            placeholder="Deine Nachricht..."
-            required
-            aria-required="true"
-            :disabled="isSubmitting"
-          ></textarea>
-        </div>
+        <textarea
+          id="message"
+          v-model="formData.message"
+          placeholder="Deine Nachricht..."
+          required
+          :disabled="isSubmitting"
+        ></textarea>
       </div>
 
-      <button
-        type="submit"
-        class="submit-btn"
-        :disabled="isSubmitting"
-        :class="{ 'is-submitting': isSubmitting }"
-      >
+      <button type="submit" class="submit-btn" :disabled="isSubmitting">
         <span v-if="!isSubmitting">Nachricht senden</span>
         <span v-else class="loading-content">
-          <span class="spinner"></span>
-          Wird gesendet...
+          <span class="spinner"></span> Wird gesendet...
         </span>
       </button>
 
@@ -82,51 +67,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue'
+import { ref } from 'vue'
 
-const formData = ref({
-  name: '',
-  email: '',
-  message: ''
-})
-
+const formData = ref({ name: '', email: '', message: '' })
 const isSubmitting = ref(false)
 const submitStatus = ref<'idle' | 'success' | 'error'>('idle')
 
 const handleSubmit = async () => {
-  if (isSubmitting.value) return // Prevent double submission
-
+  if (isSubmitting.value) return
   isSubmitting.value = true
   submitStatus.value = 'idle'
-
   try {
-    // Simulate API call - replace with your actual submission logic
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    // Simuliere API-Call (hier ersetzen mit echter Logik)
+    await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    console.log('Form submitted:', formData.value)
-
-    // Reset form on success
-    formData.value = {
-      name: '',
-      email: '',
-      message: ''
-    }
-
+    // Form zurücksetzen
+    formData.value = { name: '', email: '', message: '' }
     submitStatus.value = 'success'
-
-    // Clear success message after 5 seconds
-    setTimeout(() => {
-      submitStatus.value = 'idle'
-    }, 5000)
-  } catch (error) {
-    console.error('Submission error:', error)
+    setTimeout(() => (submitStatus.value = 'idle'), 5000)
+  } catch {
+    // ESLint-sicher ohne unused var
     submitStatus.value = 'error'
-
-    // Clear error message after 5 seconds
-    setTimeout(() => {
-      submitStatus.value = 'idle'
-    }, 5000)
+    setTimeout(() => (submitStatus.value = 'idle'), 5000)
   } finally {
     isSubmitting.value = false
   }
@@ -154,6 +117,11 @@ const handleSubmit = async () => {
   margin-bottom: 10px;
 }
 
+.subline {
+  font-size: 1.2rem;
+  opacity: 0.85;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -161,7 +129,7 @@ const handleSubmit = async () => {
 }
 
 form {
-  background: #ffffff;
+  background: #fff;
   padding: 35px;
   border-radius: 20px;
   max-width: 550px;
@@ -183,32 +151,18 @@ label {
   font-size: 0.95rem;
 }
 
-.input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: #f7f7f7;
-  border-radius: 14px;
-  border: 1px solid #d8d8d8;
-  transition: all 0.25s ease;
-}
-
-.input-wrapper:focus-within {
-  border-color: #22d3ee;
-  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
-}
-
 input,
 textarea {
   width: 100%;
   padding: 12px 14px;
   border: none;
-  background: transparent;
+  border-radius: 14px;
+  background: #f7f7f7;
   font-size: 1rem;
   outline: none;
   resize: none;
   color: #222;
-  transition: opacity 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 input:disabled,
@@ -222,12 +176,6 @@ textarea {
   padding-top: 14px;
 }
 
-.textarea-wrapper {
-  padding-left: 45px;
-  padding-top: 10px;
-  align-items: flex-start;
-}
-
 .submit-btn {
   width: 100%;
   padding: 14px;
@@ -238,10 +186,7 @@ textarea {
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition:
-    background 0.3s ease,
-    transform 0.2s ease,
-    opacity 0.2s ease;
+  transition: all 0.3s ease;
   margin-top: 10px;
   position: relative;
 }
@@ -255,10 +200,6 @@ textarea {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
-}
-
-.submit-btn.is-submitting {
-  background: #0c4a6e;
 }
 
 .loading-content {
@@ -331,9 +272,8 @@ textarea {
   }
 
   .headline {
-    margin-bottom: 10px;
-    line-height: 1.2;
     font-size: 2rem;
+    line-height: 1.2;
   }
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <NavBar background="dark" text="white" :sticky="true" :overlay="false" />
 
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <h1 class="headline">Ihre innovativen Zahnärztinnen in Dornbach und Mariahilf</h1>
@@ -8,57 +9,42 @@
     </div>
   </section>
 
-  <div class="group-wrapper">
+  <!-- Gruppenbild -->
+  <div class="group-wrapper" v-reveal="{ once: true }">
     <img class="groupImg" src="img/Uberuns/Gruppenbild.jpg" alt="Gruppenbild des Teams" />
   </div>
 
+  <!-- Team-Karten -->
   <div class="soloPics">
-    <article class="person card">
-      <h2 class="name">Dr. Isabelle Olivia</h2>
-      <img src="img/Uberuns/isabelle.jpg" class="soloImg" alt="Dr. Isabelle Olivia" />
-      <p class="bio">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-        et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-        diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-        gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-      </p>
-    </article>
-
-    <article class="person card">
-      <h2 class="name">Dr. Ewa Olivia</h2>
-      <img src="img/Uberuns/Eva.jpg" class="soloImg" alt="Dr. Ewa Olivia" />
-      <p class="bio">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-        et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-        diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-        gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-      </p>
-    </article>
-
-    <article class="person card">
-      <h2 class="name">Dr. Miriam Matejka</h2>
-      <img src="img/Uberuns/dentist3.jpg" class="soloImg" alt="Dr. Miriam Matejka" />
-      <p class="bio">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-        et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-        diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-        gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-      </p>
+    <article class="person card" v-for="member in team" :key="member.name" v-reveal="{ once: true }">
+      <img :src="member.img" class="soloImg" :alt="member.name" />
+      <h2 class="name">{{ member.name }}</h2>
+      <p class="bio">{{ member.bio }}</p>
     </article>
   </div>
 </template>
 
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
+import { ref } from 'vue'
+
+const team = ref([
+  {
+    name: 'Dr. Isabelle Olivia',
+    img: 'img/Uberuns/isabelle.jpg',
+    bio: 'Dr. Isabelle Olivia ist spezialisiert auf ästhetische Zahnmedizin, Implantologie und digitale Workflows. Sie legt Wert auf individuelle Betreuung und moderne Behandlungsmethoden.'
+  },
+  {
+    name: 'Dr. Ewa Olivia',
+    img: 'img/Uberuns/Eva.jpg',
+    bio: 'Dr. Ewa Olivia arbeitet mit einem Fokus auf Prophylaxe, Parodontologie und Kinderzahnmedizin. Sie schafft eine angenehme und entspannte Atmosphäre für alle Patienten.'
+  },
+  {
+    name: 'Dr. Miriam Matejka',
+    img: 'img/Uberuns/dentist3.jpg',
+    bio: 'Dr. Miriam Matejka bringt langjährige Erfahrung in der Chirurgie und Implantologie mit. Sie sorgt für präzise Behandlungen und höchste Qualitätsstandards.'
+  }
+])
 </script>
 
 <style scoped>
@@ -87,7 +73,7 @@ import NavBar from '@/components/NavBar.vue'
   opacity: 0.85;
 }
 
-/* GROUP IMAGE */
+/* Gruppenbild */
 .group-wrapper {
   margin-top: 60px;
   display: flex;
@@ -102,6 +88,7 @@ import NavBar from '@/components/NavBar.vue'
   object-fit: cover;
 }
 
+/* Teamkarten */
 .soloPics {
   display: flex;
   justify-content: center;
@@ -124,9 +111,7 @@ import NavBar from '@/components/NavBar.vue'
   padding: 24px;
   width: 300px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -138,7 +123,7 @@ import NavBar from '@/components/NavBar.vue'
   font-size: 1.4rem;
   font-weight: 700;
   color: #0077b6;
-  margin: 0 0 12px 0;
+  margin: 12px 0;
 }
 
 .soloImg {
@@ -146,36 +131,22 @@ import NavBar from '@/components/NavBar.vue'
   height: auto;
   border-radius: 16px;
   object-fit: cover;
-  margin-bottom: 15px;
 }
 
 .bio {
   font-style: italic;
   line-height: 1.4;
   color: #444;
-  margin: 0;
-  flex-grow: 1;
 }
 
 @media (max-width: 900px) {
-  .headline {
-    font-size: 2rem;
-  }
-  .groupImg {
-    width: 90%;
-  }
+  .headline { font-size: 2rem; }
+  .groupImg { width: 90%; }
 }
 
 @media (max-width: 600px) {
-  .headline {
-    font-size: 1.7rem;
-    line-height: 1.2;
-  }
-  .card {
-    width: 90%;
-  }
-  .soloPics {
-    padding: 0 10px;
-  }
+  .headline { font-size: 1.7rem; line-height: 1.2; }
+  .card { width: 90%; }
+  .soloPics { padding: 0 10px; }
 }
 </style>
