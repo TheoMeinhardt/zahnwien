@@ -48,7 +48,7 @@
     <br />
     <br />
     Weitere Informationen finden Sie unter dem Link der zuständigen Behörde
-    <RouterLink to="https://www.dsb.gv.at/">https://www.dsb.gv.at/</RouterLink>
+    <a href="https://www.dsb.gv.at/">https://www.dsb.gv.at/</a>
     <br />
     <br />
     <span class="text-h6">Sie erreichen uns unter folgenden Kontaktdaten:</span>
@@ -115,20 +115,17 @@
     <br />
     <br />
     Weitere Informationen zu Google Fonts erhalten Sie unter folgendem Link:
-    <RouterLink to="https://developers.google.com/fonts/faq"
-      >https://developers.google.com/fonts/faq</RouterLink
-    >
+    <a href="https://developers.google.com/fonts/faq">https://developers.google.com/fonts/faq</a>
     <br />
     Weitere Informationen über den Umgang mit Nutzerdaten von Google können Sie der
     Datenschutzerklärung entnehmen:
-    <RouterLink to="https://policies.google.com/privacy?hl=de"
-      >https://policies.google.com/privacy?hl=de</RouterLink
+    <a href="https://policies.google.com/privacy?hl=de">https://policies.google.com/privacy?hl=de</a
     >.
     <br />
     Google verarbeitet die Daten auch in den USA, hat sich jedoch dem EU-US Privacy-Shield
     unterworfen.
-    <RouterLink to="https://www.privacyshield.gov/EU-US-Framework"
-      >https://www.privacyshield.gov/EU-US-Framework</RouterLink
+    <a href="https://www.privacyshield.gov/EU-US-Framework"
+      >https://www.privacyshield.gov/EU-US-Framework</a
     >
     <br />
     <br />
@@ -204,12 +201,11 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
 
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/FooterComponent.vue'
 
 onMounted(() => {
-  window.sc-rollTv(0o 0s
+  window.scrollTo(0, 0)
 })
 </script>
