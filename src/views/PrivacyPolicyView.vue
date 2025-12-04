@@ -48,7 +48,9 @@
     <br />
     <br />
     Weitere Informationen finden Sie unter dem Link der zuständigen Behörde
-    <a href="https://www.dsb.gv.at/">https://www.dsb.gv.at/</a>
+    <a href="https://www.dsb.gv.at/" target="_blank" rel="noopener noreferrer"
+      >https://www.dsb.gv.at/</a
+    >
     <br />
     <br />
     <span class="text-h6">Sie erreichen uns unter folgenden Kontaktdaten:</span>
@@ -115,16 +117,22 @@
     <br />
     <br />
     Weitere Informationen zu Google Fonts erhalten Sie unter folgendem Link:
-    <a href="https://developers.google.com/fonts/faq">https://developers.google.com/fonts/faq</a>
+    <a href="https://developers.google.com/fonts/faq" target="_blank" rel="noopener noreferrer"
+      >https://developers.google.com/fonts/faq</a
+    >
     <br />
     Weitere Informationen über den Umgang mit Nutzerdaten von Google können Sie der
     Datenschutzerklärung entnehmen:
-    <a href="https://policies.google.com/privacy?hl=de">https://policies.google.com/privacy?hl=de</a
+    <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener noreferrer"
+      >https://policies.google.com/privacy?hl=de</a
     >.
     <br />
     Google verarbeitet die Daten auch in den USA, hat sich jedoch dem EU-US Privacy-Shield
     unterworfen.
-    <a href="https://www.privacyshield.gov/EU-US-Framework"
+    <a
+      href="https://www.privacyshield.gov/EU-US-Framework"
+      target="_blank"
+      rel="noopener noreferrer"
       >https://www.privacyshield.gov/EU-US-Framework</a
     >
     <br />
