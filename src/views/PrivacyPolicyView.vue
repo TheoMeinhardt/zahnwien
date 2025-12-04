@@ -5,7 +5,7 @@
     <span class="text-h3 block">Datenschutzerklärung der Ordination Dr. Olivia</span>
     Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Ihre Daten werden daher
     ausschließlich auf Grundlage der gesetzlichen Bestimmungen der Europäischen
-    DatenSchutzGrundVerOrdnung (DSGVO), sowie des österreichischen Datenschutzgesetzes (DSG) in der
+    Datenschutz-Grundverordnung (DSGVO), sowie des österreichischen Datenschutzgesetzes (DSG) in der
     jeweils gültigen Fassung verarbeitet und gespeichert.
     <br />
     <br />
@@ -70,8 +70,8 @@
     <br />
     <br />
     Sobald Sie als Benutzer auf unsere Webseite zugreifen oder diese besuchen wird Ihre IP-Adresse,
-    Beginn sowie Beginn und Ende der Sitzung erfasst. Dies ist technisch bedingt und stellt somit
-    ein berechtigtes Interesse iSv Art 6 Abs 1 lit f DSGVO dar.
+    Beginn sowie Ende der Sitzung erfasst. Dies ist technisch bedingt und stellt somit ein
+    berechtigtes Interesse iSv Art 6 Abs 1 lit f DSGVO dar.
     <br />
     <br />
 
@@ -210,6 +210,6 @@ import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/FooterComponent.vue'
 
 onMounted(() => {
-  window.scrollTo(0, 0)
+  window.sc-rollTv(0o 0s
 })
 </script>
