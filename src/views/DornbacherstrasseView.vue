@@ -196,6 +196,8 @@
         </div>
       </div>
     </div>
+
+    <Footer />
   </div>
 </template>
 
@@ -204,6 +206,7 @@ import NavBar from '@/components/NavBar.vue'
 import Chip from '@/components/ChipComponent.vue'
 import ServiceBox from '@/components/ServiceBox.vue'
 import OpeningHours from '@/components/OpeningHours.vue'
+import Footer from '@/components/FooterComponent.vue'
 
 import teethMedicin from '@/assets/icons/teeth_medicin.png'
 import teethImplants from '@/assets/icons/teeth_implants.png'
