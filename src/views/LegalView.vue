@@ -71,10 +71,10 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/FooterComponent.vue'
-
-import { onMounted } from 'vue'
 
 onMounted(() => {
   window.scrollTo(0, 0)
