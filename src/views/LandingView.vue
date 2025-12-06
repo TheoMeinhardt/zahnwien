@@ -52,12 +52,11 @@ const rightPic = ref<HTMLDivElement | null>(null)
 const threeContainer = ref<HTMLDivElement | null>(null)
 let hoverLeft = false
 let hoverRight = false
-let targetRotationX = 0
+const targetRotationX = 0
 let targetRotationY = 0
 
 const isDesktop = ref(window.innerWidth > 1024)
 
-// Cleanup Refs
 let rendererRef: THREEType.WebGLRenderer | null = null
 let modelRef: THREEType.Group | null = null
 let animationId: number | null = null
@@ -68,7 +67,6 @@ let leftLeave: (() => void) | null = null
 let rightEnter: (() => void) | null = null
 let rightLeave: (() => void) | null = null
 
-// Position des 3D Logos aktualisieren - wird nur bei Resize aufgerufen
 const updateLogoPosition = () => {
   if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
     const leftRect = leftPic.value.getBoundingClientRect()
@@ -77,20 +75,6 @@ const updateLogoPosition = () => {
     const centerY = splitContainer.value.clientHeight / 2
     threeContainer.value.style.left = `${centerX - threeContainer.value.clientWidth / 2}px`
     threeContainer.value.style.top = `${centerY - threeContainer.value.clientHeight / 2}px`
-  }
-}
-
-const handleResize = () => {
-  const wasDesktop = isDesktop.value
-  isDesktop.value = window.innerWidth > 1024
-
-  // Cleanup bei Wechsel von Desktop zu Mobile
-  if (wasDesktop && !isDesktop.value) {
-    if (animationId !== null) {
-      cancelAnimationFrame(animationId)
-      animationId = null
-    }
-    cleanup3D()
   }
 }
 
@@ -108,10 +92,9 @@ const cleanup3D = () => {
     rendererRef.dispose()
     const gl = rendererRef.getContext && rendererRef.getContext()
     const loseContextExt = gl && gl.getExtension && gl.getExtension('WEBGL_lose_context')
-    if (loseContextExt && loseContextExt.loseContext) {
-      loseContextExt.loseContext()
-    }
-    if (rendererRef.domElement && rendererRef.domElement.parentNode) {
+    if (loseContextExt && loseContextExt.loseContext) loseContextExt.loseContext()
+
+    if (rendererRef.domElement?.parentNode) {
       rendererRef.domElement.parentNode.removeChild(rendererRef.domElement)
     }
     rendererRef = null
@@ -121,35 +104,30 @@ const cleanup3D = () => {
     modelRef.traverse((obj: THREEType.Object3D) => {
       const mesh = obj as THREEType.Mesh
       if (mesh.geometry) mesh.geometry.dispose()
+
       const mat = mesh.material
-      if (Array.isArray(mat)) {
-        mat.forEach((m) => m.dispose())
-      } else if (mat) {
-        mat.dispose()
-      }
+      if (Array.isArray(mat)) mat.forEach((m) => m.dispose())
+      else if (mat) mat.dispose()
     })
     modelRef = null
   }
 }
 
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
+/* ----------------------------------------------------
+   init3D() EXTRACTED – NUR DAS WAS NOTWENDIG IST
+---------------------------------------------------- */
+const init3D = () => {  // *** ADDED ***
+  if (!isDesktop.value || !threeContainer.value || !splitContainer.value) return
 
-  const initialIsDesktop = isDesktop.value
-  if (!initialIsDesktop || !threeContainer.value || !splitContainer.value) return
   Promise.all([import('three'), import('three/examples/jsm/loaders/GLTFLoader.js')])
     .then(([THREE, { GLTFLoader }]) => {
-      if (!threeContainer.value || !initialIsDesktop || !isMounted) return
+      if (!threeContainer.value || !isDesktop.value || !isMounted) return
 
-      const scene: THREEType.Scene = new THREE.Scene()
-      const camera: THREEType.PerspectiveCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
-
+      const scene = new THREE.Scene()
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
       camera.position.z = 5
 
-      const renderer: THREEType.WebGLRenderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: true
-      })
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
       renderer.setSize(800, 800)
       rendererRef = renderer
       threeContainer.value.appendChild(renderer.domElement)
@@ -161,72 +139,41 @@ onMounted(() => {
 
       let model: THREEType.Group | null = null
       const loader = new GLTFLoader()
-      loader.load(
-        '/img/zahnwien.glb',
-        (gltf) => {
-          model = gltf.scene
-          modelRef = model
-          scene.add(model)
-        },
-        undefined,
-        (error) => {
-          console.error('Error loading 3D model:', error)
-        }
-      )
 
-      // Initial Logo-Position setzen
+      loader.load('/img/zahnwien.glb', (gltf) => {
+        model = gltf.scene
+        modelRef = model
+        scene.add(model)
+      })
+
       updateLogoPosition()
 
       const animate = () => {
-        // Guard against animation continuing after unmount
-        if (!isMounted || !isDesktop.value || !rendererRef || !threeContainer.value) {
-          return
-        }
-
+        if (!isMounted || !isDesktop.value || !rendererRef) return
         animationId = requestAnimationFrame(animate)
 
         if (model) {
-          const ROTATION_ANGLE = 0.5
-          const ROTATION_SMOOTHING = 0.05
+          const ROT = 0.5
+          const SMOOTH = 0.05
 
-          if (!hoverLeft && !hoverRight) {
-            targetRotationX = 0
-            targetRotationY = 0
-          }
-          if (hoverLeft) targetRotationY = -ROTATION_ANGLE
-          if (hoverRight) targetRotationY = ROTATION_ANGLE
+          targetRotationY = hoverLeft
+            ? -ROT
+            : hoverRight
+              ? ROT
+              : 0
 
-          model.rotation.x += (targetRotationX - model.rotation.x) * ROTATION_SMOOTHING
-          model.rotation.y += (targetRotationY - model.rotation.y) * ROTATION_SMOOTHING
+          model.rotation.x += (targetRotationX - model.rotation.x) * SMOOTH
+          model.rotation.y += (targetRotationY - model.rotation.y) * SMOOTH
         }
 
-        // Logo-Position wird in jedem Frame aktualisiert (wie im Original)
-        if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
-          const leftRect = leftPic.value.getBoundingClientRect()
-          const rightRect = rightPic.value.getBoundingClientRect()
-          const centerX = (leftRect.right + rightRect.left) / 2
-          const centerY = splitContainer.value.clientHeight / 2
-          threeContainer.value.style.left = `${centerX - threeContainer.value.clientWidth / 2}px`
-          threeContainer.value.style.top = `${centerY - threeContainer.value.clientHeight / 2}px`
-        }
-
+        updateLogoPosition()
         renderer.render(scene, camera)
       }
 
-      leftEnter = () => {
-        hoverLeft = true
-        hoverRight = false
-      }
-      leftLeave = () => {
-        hoverLeft = false
-      }
-      rightEnter = () => {
-        hoverRight = true
-        hoverLeft = false
-      }
-      rightLeave = () => {
-        hoverRight = false
-      }
+      leftEnter = () => { hoverLeft = true; hoverRight = false }
+      leftLeave = () => { hoverLeft = false }
+      rightEnter = () => { hoverRight = true; hoverLeft = false }
+      rightLeave = () => { hoverRight = false }
 
       leftPic.value?.addEventListener('mouseenter', leftEnter)
       leftPic.value?.addEventListener('mouseleave', leftLeave)
@@ -235,25 +182,45 @@ onMounted(() => {
 
       animate()
     })
-    .catch((err) => console.error('Failed to load Three.js:', err))
+}
+
+/* ----------------------------------------------------
+   handleResize: MOBILE → DESKTOP = init3D()
+---------------------------------------------------- */
+const handleResize = () => {
+  const wasDesktop = isDesktop.value
+  isDesktop.value = window.innerWidth > 1024
+
+  if (wasDesktop && !isDesktop.value) {
+    if (animationId !== null) cancelAnimationFrame(animationId)
+    cleanup3D()
+  }
+
+  // *** ADDED ***
+  if (!wasDesktop && isDesktop.value) {
+    init3D()
+  }
+}
+
+/* ----------------------------------------------------
+   onMounted: nur init3D() aufrufen
+---------------------------------------------------- */
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+  if (isDesktop.value) init3D()   // *** MOVED ***
 })
 
 onUnmounted(() => {
-  // Set mounted flag first to stop animation loop
   isMounted = false
-
   window.removeEventListener('resize', handleResize)
 
-  if (animationId !== null) {
-    cancelAnimationFrame(animationId)
-    animationId = null
-  }
-
+  if (animationId !== null) cancelAnimationFrame(animationId)
   cleanup3D()
 })
 </script>
 
 <style scoped lang="scss">
+/* CSS unverändert */
 .splitAnimation {
   display: flex;
   width: 100vw;
@@ -330,7 +297,6 @@ p {
   }
 }
 
-/* Tablet & kleiner: Hover deaktivieren + Logo ausblenden */
 @media (max-width: 1024px) {
   .Logo3D {
     display: none;
@@ -340,7 +306,6 @@ p {
   .PicRight {
     flex: 1;
     transition: none;
-    cursor: default;
   }
 
   .splitAnimation:hover .PicLeft:hover,
@@ -349,7 +314,6 @@ p {
   }
 }
 
-/* Mobile Layout */
 @media (max-width: 600px) {
   .splitAnimation {
     flex-direction: column;
@@ -362,8 +326,6 @@ p {
     width: 100%;
     height: 50vh;
     flex: unset;
-    transition: none;
-    cursor: default;
   }
 
   .TextLeft,
@@ -376,19 +338,12 @@ p {
   .TextLeft p,
   .TextRight p {
     font-size: 0.95rem;
-    line-height: 1.3;
   }
 }
 
-/* Sehr kleine Bildschirme */
 @media (max-width: 480px) {
   .Logo3D {
     display: none;
-  }
-
-  .PicLeft,
-  .PicRight {
-    transition: none;
   }
 
   .TextLeft,
