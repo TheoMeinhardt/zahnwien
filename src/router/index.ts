@@ -6,7 +6,6 @@ import MariahilferstrasseView from '@/views/MariahilferstrasseView.vue'
 import AboutUsView from '@/views/AboutUsView.vue'
 import PrivacyPolicyView from '@/views/PrivacyPolicyView.vue'
 import LegalView from '@/views/LegalView.vue'
-import ContactUsView from '@/views/ContactUsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,11 +43,6 @@ const router = createRouter({
       path: '/privacypolicy',
       component: PrivacyPolicyView,
       name: 'PrivacyPolicyView',
-    },
-        {
-      path: '/contactus',
-      component: ContactUsView,
-      name: 'ContactUsView',
     },
   ],
 })

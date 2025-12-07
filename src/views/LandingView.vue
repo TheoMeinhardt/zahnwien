@@ -1,7 +1,8 @@
 <template>
-  <div ref="splitContainer" class="splitAnimation">
-    <!-- Linkes Bild -->
-    <div ref="leftPic" class="PicLeft" :style="{ backgroundImage: `url(${leftImage})` }">
+  <!-- Hier kommt HTML -->
+
+  <div class="splitAnimation">
+    <div class="PicLeft" :style="'background-image: url(' + leftImage + ')'">
       <div class="overlay"></div>
       <div class="TextLeft">
         <RouterLink to="/dornbacherstrasse">
@@ -16,8 +17,9 @@
       </div>
     </div>
 
-    <!-- Rechtes Bild -->
-    <div ref="rightPic" class="PicRight" :style="{ backgroundImage: `url(${rightImage})` }">
+    <img class="Logo" :src="parseImagePath('Logo_zahnwien.png')" />
+
+    <div class="PicRight" :style="'background-image: url(' + rightImage + ')'">
       <div class="overlay"></div>
       <div class="TextRight">
         <RouterLink to="/mariahilferstrasse">
@@ -31,213 +33,49 @@
         </RouterLink>
       </div>
     </div>
-
-    <!-- 3D Logo - nur auf Desktop -->
-    <div v-if="isDesktop" ref="threeContainer" class="Logo3D"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { parseImagePath } from '@/helpers'
-import type * as THREEType from 'three'
 
-const leftImage = parseImagePath('img/Start2_7229_c.jpg')
-const rightImage = parseImagePath('img/Start2_7363_c.jpg')
-
-const splitContainer = ref<HTMLDivElement | null>(null)
-const leftPic = ref<HTMLDivElement | null>(null)
-const rightPic = ref<HTMLDivElement | null>(null)
-const threeContainer = ref<HTMLDivElement | null>(null)
-let hoverLeft = false
-let hoverRight = false
-const targetRotationX = 0
-let targetRotationY = 0
-
-const isDesktop = ref(window.innerWidth > 1024)
-
-let rendererRef: THREEType.WebGLRenderer | null = null
-let modelRef: THREEType.Group | null = null
-let animationId: number | null = null
-let isMounted = true
-
-let leftEnter: (() => void) | null = null
-let leftLeave: (() => void) | null = null
-let rightEnter: (() => void) | null = null
-let rightLeave: (() => void) | null = null
-
-const updateLogoPosition = () => {
-  if (splitContainer.value && leftPic.value && rightPic.value && threeContainer.value) {
-    const leftRect = leftPic.value.getBoundingClientRect()
-    const rightRect = rightPic.value.getBoundingClientRect()
-    const centerX = (leftRect.right + rightRect.left) / 2
-    const centerY = splitContainer.value.clientHeight / 2
-    threeContainer.value.style.left = `${centerX - threeContainer.value.clientWidth / 2}px`
-    threeContainer.value.style.top = `${centerY - threeContainer.value.clientHeight / 2}px`
-  }
-}
-
-const cleanup3D = () => {
-  if (leftPic.value && leftEnter && leftLeave) {
-    leftPic.value.removeEventListener('mouseenter', leftEnter)
-    leftPic.value.removeEventListener('mouseleave', leftLeave)
-  }
-  if (rightPic.value && rightEnter && rightLeave) {
-    rightPic.value.removeEventListener('mouseenter', rightEnter)
-    rightPic.value.removeEventListener('mouseleave', rightLeave)
-  }
-
-  if (rendererRef) {
-    rendererRef.dispose()
-    const gl = rendererRef.getContext && rendererRef.getContext()
-    const loseContextExt = gl && gl.getExtension && gl.getExtension('WEBGL_lose_context')
-    if (loseContextExt && loseContextExt.loseContext) loseContextExt.loseContext()
-
-    if (rendererRef.domElement?.parentNode) {
-      rendererRef.domElement.parentNode.removeChild(rendererRef.domElement)
-    }
-    rendererRef = null
-  }
-
-  if (modelRef) {
-    modelRef.traverse((obj: THREEType.Object3D) => {
-      const mesh = obj as THREEType.Mesh
-      if (mesh.geometry) mesh.geometry.dispose()
-
-      const mat = mesh.material
-      if (Array.isArray(mat)) mat.forEach((m) => m.dispose())
-      else if (mat) mat.dispose()
-    })
-    modelRef = null
-  }
-}
-
-/* ----------------------------------------------------
-   init3D() EXTRACTED – NUR DAS WAS NOTWENDIG IST
----------------------------------------------------- */
-const init3D = () => {  // *** ADDED ***
-  if (!isDesktop.value || !threeContainer.value || !splitContainer.value) return
-
-  Promise.all([import('three'), import('three/examples/jsm/loaders/GLTFLoader.js')])
-    .then(([THREE, { GLTFLoader }]) => {
-      if (!threeContainer.value || !isDesktop.value || !isMounted) return
-
-      const scene = new THREE.Scene()
-      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
-      camera.position.z = 5
-
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-      renderer.setSize(800, 800)
-      rendererRef = renderer
-      threeContainer.value.appendChild(renderer.domElement)
-
-      scene.add(new THREE.AmbientLight(0xffffff, 1))
-      const dirLight = new THREE.DirectionalLight(0xffffff, 0.5)
-      dirLight.position.set(5, 5, 5)
-      scene.add(dirLight)
-
-      let model: THREEType.Group | null = null
-      const loader = new GLTFLoader()
-
-            loader.load(
-        '/img/zahnwien.glb',
-        (gltf) => {
-          model = gltf.scene
-          modelRef = model
-          scene.add(model)
-        },
-        undefined,
-        (error) => {
-          console.error('Error loading 3D model:', error)
-        }
-      )
-
-      updateLogoPosition()
-
-      const animate = () => {
-        if (!isMounted || !isDesktop.value || !rendererRef) return
-        animationId = requestAnimationFrame(animate)
-
-        if (model) {
-          const ROT = 0.5
-          const SMOOTH = 0.05
-
-          targetRotationY = hoverLeft
-            ? -ROT
-            : hoverRight
-              ? ROT
-              : 0
-
-          model.rotation.x += (targetRotationX - model.rotation.x) * SMOOTH
-          model.rotation.y += (targetRotationY - model.rotation.y) * SMOOTH
-        }
-
-        updateLogoPosition()
-        renderer.render(scene, camera)
-      }
-
-      leftEnter = () => { hoverLeft = true; hoverRight = false }
-      leftLeave = () => { hoverLeft = false }
-      rightEnter = () => { hoverRight = true; hoverLeft = false }
-      rightLeave = () => { hoverRight = false }
-
-      leftPic.value?.addEventListener('mouseenter', leftEnter)
-      leftPic.value?.addEventListener('mouseleave', leftLeave)
-      rightPic.value?.addEventListener('mouseenter', rightEnter)
-      rightPic.value?.addEventListener('mouseleave', rightLeave)
-
-      animate()
-    })
-}
-
-/* ----------------------------------------------------
-   handleResize: MOBILE → DESKTOP = init3D()
----------------------------------------------------- */
-let resizeTimeout: number | null = null
-const handleResize = () => {
-  if (resizeTimeout !== null) {
-    clearTimeout(resizeTimeout)
-  }
-  resizeTimeout = window.setTimeout(() => {
-    const wasDesktop = isDesktop.value
-    isDesktop.value = window.innerWidth > 1024
-    if (wasDesktop && !isDesktop.value) {
-      if (animationId !== null) cancelAnimationFrame(animationId)
-      cleanup3D()
-    }
-    // *** ADDED ***
-    if (!wasDesktop && isDesktop.value) {
-      init3D()
-    }
-  }, 150)
-}
-
-/* ----------------------------------------------------
-   onMounted: nur init3D() aufrufen
----------------------------------------------------- */
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-  if (isDesktop.value) init3D()   // *** MOVED ***
-})
-
-onUnmounted(() => {
-  isMounted = false
-  window.removeEventListener('resize', handleResize)
-
-  if (animationId !== null) cancelAnimationFrame(animationId)
-  cleanup3D()
-})
+const leftImage = parseImagePath('img/Start1_7216_b.jpg')
+const rightImage = parseImagePath('img/Start1_7379_b.jpg')
 </script>
 
-<style scoped lang="scss">
-/* CSS unverändert */
+<style lang="scss" scoped>
+.splitAnimation:hover .PicLeft:hover + .Logo {
+  transform: translate(calc(105% - 2.5vw));
+}
+
+.splitAnimation:has(.PicRight:hover) .Logo {
+  transform: translate(calc(-60% - 2.5vw));
+}
+.Logo {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  background: transparent;
+  height: 300px;
+  z-index: 1000;
+  transition: transform 0.8s ease;
+  pointer-events: none;
+}
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+  padding-left: 0;
+}
+
 .splitAnimation {
   display: flex;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  position: relative;
 }
 
 .PicLeft,
@@ -276,85 +114,70 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.37);
+  background: rgb($dark, 0.5);
   z-index: 1;
-  pointer-events: none;
-}
-
-.Logo3D {
-  position: absolute;
-  width: 800px;
-  height: 800px;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-p {
-  margin: 0;
-  padding-left: 0;
 }
 
 @media (max-width: 1024px) {
-  .Logo3D {
-    display: none;
+  .Logo {
+    height: 200px;
+  }
+
+  .TextLeft,
+  .TextRight {
+    p.text-h4 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .splitAnimation {
+    flex-direction: column;
   }
 
   .PicLeft,
   .PicRight {
     flex: 1;
-    transition: none;
   }
 
   .splitAnimation:hover .PicLeft:hover,
   .splitAnimation:hover .PicRight:hover {
-    flex: 1;
-  }
-}
-
-@media (max-width: 600px) {
-  .splitAnimation {
-    flex-direction: column;
-    height: auto;
-    min-height: 100vh;
+    flex: 1.5;
   }
 
-  .PicLeft,
-  .PicRight {
-    width: 100%;
-    height: 50vh;
-    flex: unset;
-  }
-
-  .TextLeft,
-  .TextRight {
-    transform: translate(-50%, -50%) scale(0.85);
-    width: 90%;
-    padding: 0.5em 1em;
-  }
-
-  .TextLeft p,
-  .TextRight p {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .Logo3D {
+  .Logo {
     display: none;
   }
 
   .TextLeft,
   .TextRight {
-    transform: translate(-50%, -50%) scale(0.75);
+    padding: 0.5em 1em;
+
+    p.text-h4 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .Logo {
+    display: none;
   }
 
-  .TextLeft p,
-  .TextRight p {
-    font-size: 0.85rem;
+  .TextLeft,
+  .TextRight {
+    p.text-h4 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+    }
   }
 }
 </style>
