@@ -21,11 +21,14 @@
       <h2 class="name">{{ member.name }}</h2>
       <p class="bio">{{ member.bio }}</p>
     </article>
+
   </div>
+     <Footer />
 </template>
 
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
+import Footer from '@/components/FooterComponent.vue'
 import { ref } from 'vue'
 
 const team = ref([
