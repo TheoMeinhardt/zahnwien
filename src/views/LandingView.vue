@@ -141,7 +141,7 @@ const init3D = () => {  // *** ADDED ***
       const loader = new GLTFLoader()
 
             loader.load(
-        '/img/zahnwien.glb',
+        './img/zahnwien.glb',
         (gltf) => {
           model = gltf.scene
           modelRef = model
