@@ -36,7 +36,7 @@ const team = ref([
   },
   {
     name: 'Dr. Ewa Olivia',
-    img: 'img/Uberuns/Eva.jpg',
+    img: 'img/Uberuns/Ewa.jpg',
     bio: 'Dr. Ewa Olivia arbeitet mit einem Fokus auf Prophylaxe, Parodontologie und Kinderzahnmedizin. Sie schafft eine angenehme und entspannte Atmosphäre für alle Patienten.'
   },
   {

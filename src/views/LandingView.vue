@@ -140,11 +140,18 @@ const init3D = () => {  // *** ADDED ***
       let model: THREEType.Group | null = null
       const loader = new GLTFLoader()
 
-      loader.load('/img/zahnwien.glb', (gltf) => {
-        model = gltf.scene
-        modelRef = model
-        scene.add(model)
-      })
+            loader.load(
+        '/img/zahnwien.glb',
+        (gltf) => {
+          model = gltf.scene
+          modelRef = model
+          scene.add(model)
+        },
+        undefined,
+        (error) => {
+          console.error('Error loading 3D model:', error)
+        }
+      )
 
       updateLogoPosition()
 
@@ -187,19 +194,23 @@ const init3D = () => {  // *** ADDED ***
 /* ----------------------------------------------------
    handleResize: MOBILE → DESKTOP = init3D()
 ---------------------------------------------------- */
+let resizeTimeout: number | null = null
 const handleResize = () => {
-  const wasDesktop = isDesktop.value
-  isDesktop.value = window.innerWidth > 1024
-
-  if (wasDesktop && !isDesktop.value) {
-    if (animationId !== null) cancelAnimationFrame(animationId)
-    cleanup3D()
+  if (resizeTimeout !== null) {
+    clearTimeout(resizeTimeout)
   }
-
-  // *** ADDED ***
-  if (!wasDesktop && isDesktop.value) {
-    init3D()
-  }
+  resizeTimeout = window.setTimeout(() => {
+    const wasDesktop = isDesktop.value
+    isDesktop.value = window.innerWidth > 1024
+    if (wasDesktop && !isDesktop.value) {
+      if (animationId !== null) cancelAnimationFrame(animationId)
+      cleanup3D()
+    }
+    // *** ADDED ***
+    if (!wasDesktop && isDesktop.value) {
+      init3D()
+    }
+  }, 150)
 }
 
 /* ----------------------------------------------------
@@ -285,16 +296,6 @@ a {
 p {
   margin: 0;
   padding-left: 0;
-}
-
-@media (min-width: 1025px) {
-  .splitAnimation:hover .PicLeft:hover {
-    flex: 1.5;
-  }
-
-  .splitAnimation:hover .PicRight:hover {
-    flex: 1.5;
-  }
 }
 
 @media (max-width: 1024px) {
