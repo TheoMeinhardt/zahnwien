@@ -16,7 +16,7 @@
       <RouterLink to="/" class="col-auto">Standorte</RouterLink>
       <RouterLink to="/" class="col-auto">Leistungen</RouterLink>
       <RouterLink to="/" class="col-auto">Jobs</RouterLink>
-      <RouterLink to="/" class="col-auto">Kontakt</RouterLink>
+      <RouterLink to="/contactUs" class="col-auto">Kontakt</RouterLink>
     </div>
 
     <!-- collapsed NavBar for small screens -->
