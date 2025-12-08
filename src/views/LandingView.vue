@@ -339,7 +339,7 @@ p {
 
   .TextLeft p,
   .TextRight p {
-    font-size: 1.35re;
+    font-size: 1.35rem;
   }
 }
 

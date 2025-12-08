@@ -99,14 +99,6 @@ const ordination2Images = [
   background: #f8f9fa;
 }
 
-.gallery-title {
-  font-size: 3rem;
-  margin-bottom: 3rem;
-  color: $primary;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
 .ordination-title {
   font-size: 2rem;
   margin: 2rem 0 1rem 0;
