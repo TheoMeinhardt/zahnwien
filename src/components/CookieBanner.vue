@@ -43,12 +43,14 @@ function declineCookies(): void {
 
 <style lang="scss" scoped>
 .cookie-banner {
+  left: 50%;
+  transform: translateX(-50%);
+
   height: fit-content;
   width: 50vw;
   min-width: 200px;
 
   z-index: 10000;
-  transform: translateX(25vw);
   border-radius: 20px;
 }
 </style>
