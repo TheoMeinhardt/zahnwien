@@ -197,7 +197,14 @@
       </div>
     </div>
 
-    <Footer />
+    <Footer
+      :location-info="{
+        name: 'Ordination Dornbach',
+        street: 'Dornbacher Straße 1',
+        zipcode: '1170 Wien',
+        email: 'ordination@zahnwien.at',
+      }"
+    />
   </div>
 </template>
 
