@@ -2,6 +2,9 @@
   <div
     v-show="showCookieBanner"
     class="cookie-banner absolute absolute-bottom bg-accent q-mb-lg row"
+    role="dialog"
+    aria-labelledby="cookie-banner-title"
+    aria-describedby="cookie-banner-description"
   >
     <div class="col-12 col-md-9 q-pa-md">
       <span class="block text-subtitle1 text-bold">Cookies</span>
