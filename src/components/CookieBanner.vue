@@ -1,0 +1,58 @@
+<template>
+  <div
+    v-show="showCookieBanner"
+    class="cookie-banner bg-accent q-mb-lg row"
+    role="dialog"
+    aria-labelledby="cookie-banner-title"
+    aria-describedby="cookie-banner-description"
+  >
+    <div class="col-12 col-md-9 q-pa-md">
+      <span id="cookie-banner-title" class="block text-subtitle1 text-bold">Cookies</span>
+      <span id="cookie-banner-description" class="text-body2"
+        >Wir verwenden keinerlei Cookies um Ihre Nutzung dieser Webseite in welcher Weise auch immer
+        zu speichern. Als Interessent und Besucher dieser Seite werden Sie völlig anonym behandelt.
+        Wir werden erst Daten von Ihnen speichern wenn Sie mit uns in Kontakt getreten sind.</span
+      >
+    </div>
+    <div class="col-12 col-md-3 column justify-center items-center">
+      <div class="col-auto">
+        <q-btn @click="declineCookies" outline rounded color="primary" label="ablehnen" />
+      </div>
+      <div class="col-auto">
+        <q-btn @click="acceptCookies" flat rounded color="primary" label="akzeptieren" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const STORAGE_KEY = 'cookie_banner_dismissed'
+const showCookieBanner = ref<boolean>(!(localStorage.getItem(STORAGE_KEY) === 'true'))
+
+function acceptCookies(): void {
+  localStorage.setItem(STORAGE_KEY, 'true')
+  showCookieBanner.value = false
+}
+
+function declineCookies(): void {
+  showCookieBanner.value = false
+}
+</script>
+
+<style lang="scss" scoped>
+.cookie-banner {
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  height: fit-content;
+  width: 50vw;
+  min-width: 200px;
+
+  z-index: 10000;
+  border-radius: 20px;
+}
+</style>

@@ -1,10 +1,10 @@
 <template>
   <div class="bg-primary text-accent q-pa-lg">
-    <div class="text-body1 text-weight-medium">
-      <span class="block">Ordination Dornbach</span>
-      <span class="block">Dornbacherstraße 1</span>
-      <span class="block">1170 Wien</span>
-      <span class="block">ordination@zahnwien.at</span>
+    <div v-if="props.locationInfo" class="text-body1 text-weight-medium">
+      <span class="block">{{ props.locationInfo.name }}</span>
+      <span class="block">{{ props.locationInfo.street }}</span>
+      <span class="block">{{ props.locationInfo.zipcode }}</span>
+      <span class="block">{{ props.locationInfo.email }}</span>
     </div>
 
     <div class="text-accent q-mt-lg">
@@ -39,6 +39,15 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+
+const props = defineProps<{
+  locationInfo?: {
+    name: string
+    street: string
+    zipcode: string
+    email: string
+  }
+}>()
 </script>
 
 <style scoped lang="scss"></style>
