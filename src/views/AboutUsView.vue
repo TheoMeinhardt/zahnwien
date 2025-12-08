@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/FooterComponent.vue'
-import { ref } from 'vue'
+import { ref } from 'vue' 
 
 const team = ref([
   {
