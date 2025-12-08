@@ -339,7 +339,7 @@ p {
 
   .TextLeft p,
   .TextRight p {
-    font-size: 0.95rem;
+    font-size: 1.35re;
   }
 }
 
@@ -355,7 +355,7 @@ p {
 
   .TextLeft p,
   .TextRight p {
-    font-size: 0.85rem;
+    font-size: 1.55rem;
     line-height: 1.1;
   }
 }
