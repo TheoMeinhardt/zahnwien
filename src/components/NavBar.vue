@@ -1,23 +1,10 @@
 <template>
   <div>
     <!-- Regular NavBar for big screens -->
-    <div class="navbar row no-wrap justify-between items-baseline gt-sm text-center text-subtitle1 q-pa-md"
-      :class="[bgClass, textClass, stickyClass, overlayClass]">
-      <RouterLink to="/" class="col-auto">
-        <q-img src="@/assets/icons/logo.png" width="1.5rem" fit="contain" />
-      </RouterLink>
 
-      <div class="col-6"></div>
-
-      <RouterLink to="/contactUs" class="col-2 text-weight-bolder">Terminvereinbarung</RouterLink>
-      <RouterLink to="/aboutUs" class="col-auto q-gutter-x-lg">Über uns</RouterLink>
-      <RouterLink to="/home" class="col-auto">Standorte</RouterLink>
-      <RouterLink to="/" class="col-auto">Leistungen</RouterLink>
-      <RouterLink to="/contactUs" class="col-auto">Kontakt</RouterLink>
-    </div>
 
     <!-- collapsed NavBar for small screens -->
-    <div class="mobile-navbar row full-width lt-md q-pa-md"
+    <div class="mobile-navbar row full-width q-pa-md"
       :class="[bgClass, textClass, stickyClass, overlayClass, animationClass]">
       <RouterLink to="/" class="col-auto">
         <q-img src="@/assets/icons/logo.png" width="1.5rem" fit="contain" />
@@ -82,4 +69,5 @@ a {
 .mobile-navbar.shown {
   max-height: 100vh;
 }
+
 </style>
