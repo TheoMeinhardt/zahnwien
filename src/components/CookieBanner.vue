@@ -7,8 +7,8 @@
     aria-describedby="cookie-banner-description"
   >
     <div class="col-12 col-md-9 q-pa-md">
-      <span class="block text-subtitle1 text-bold">Cookies</span>
-      <span class="text-body2"
+      <span id="cookie-banner-title" class="block text-subtitle1 text-bold">Cookies</span>
+      <span id="cookie-banner-description" class="text-body2"
         >Wir verwenden keinerlei Cookies um Ihre Nutzung dieser Webseite in welcher Weise auch immer
         zu speichern. Als Interessent und Besucher dieser Seite werden Sie völlig anonym behandelt.
         Wir werden erst Daten von Ihnen speichern wenn Sie mit uns in Kontakt getreten sind.</span
