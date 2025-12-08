@@ -201,7 +201,7 @@
       :location-info="{
         name: 'Ordination Dornbach',
         street: 'Dornbacher Straße 1',
-        zipcode: '1190 Wien',
+        zipcode: '1170 Wien',
         email: 'ordination@zahnwien.at',
       }"
     />
