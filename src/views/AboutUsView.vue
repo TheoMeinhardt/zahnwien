@@ -50,11 +50,11 @@ const team = ref([
 ])
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .hero {
   width: 100%;
   padding: 140px 20px 100px;
-  background: linear-gradient(135deg, #22d3ee, #0c4a6e);
+  background: linear-gradient(135deg, $primary, $secondary);
   color: white;
   text-align: center;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
@@ -84,8 +84,8 @@ const team = ref([
 }
 
 .groupImg {
-  width: 85%;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 1200px;
   border-radius: 18px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
   object-fit: cover;
@@ -109,17 +109,24 @@ const team = ref([
 }
 
 .card {
+  max-width: 300px;
+  overflow: hidden;
+  position: relative;
+
   background: white;
+  border: $primary 2px solid;
   border-radius: 20px;
+
   padding: 24px;
-  width: 300px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  transition:
+    transform 0.15s ease-out,
+    box-shadow 0.25s ease-out;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+  transform: scale(1.025);
+  box-shadow: 0px 0px 10px $primary;
 }
 
 .name {
