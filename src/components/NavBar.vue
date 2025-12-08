@@ -19,7 +19,7 @@
         <RouterLink to="/contactUs" class="col-2 text-weight-bolder">Terminvereinbarung</RouterLink>
         <RouterLink to="/aboutUs" class="col-auto">Über uns</RouterLink>
         <RouterLink to="/home" class="col-auto">Standorte</RouterLink>
-        <RouterLink to="/" class="col-auto">Leistungen</RouterLink>
+        <RouterLink to="/galerie" class="col-auto">Galerie</RouterLink>
         <RouterLink to="/contactUs" class="col-auto">Kontakt</RouterLink>
       </nav>
     </div>
