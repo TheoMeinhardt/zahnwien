@@ -1,5 +1,8 @@
 <template>
-  <div class="cookie-banner absolute absolute-bottom bg-accent q-mb-lg row">
+  <div
+    v-show="showCookieBanner"
+    class="cookie-banner absolute absolute-bottom bg-accent q-mb-lg row"
+  >
     <div class="col-12 col-md-9 q-pa-md">
       <span class="block text-subtitle1 text-bold">Cookies</span>
       <span class="text-body2"
@@ -10,16 +13,20 @@
     </div>
     <div class="col-12 col-md-3 column justify-center items-center">
       <div class="col-auto">
-        <q-btn outline rounded color="primary" label="ablehnen" />
+        <q-btn @click="showCookieBanner = false" outline rounded color="primary" label="ablehnen" />
       </div>
       <div class="col-auto">
-        <q-btn flat rounded color="primary" label="akzeptieren" />
+        <q-btn @click="showCookieBanner = false" flat rounded color="primary" label="akzeptieren" />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const showCookieBanner = ref<boolean>(true)
+</script>
 
 <style lang="scss" scoped>
 .cookie-banner {
