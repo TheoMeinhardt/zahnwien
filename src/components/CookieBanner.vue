@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="showCookieBanner"
-    class="cookie-banner absolute absolute-bottom bg-accent q-mb-lg row"
+    class="cookie-banner bg-accent q-mb-lg row"
     role="dialog"
     aria-labelledby="cookie-banner-title"
     aria-describedby="cookie-banner-description"
@@ -43,6 +43,8 @@ function declineCookies(): void {
 
 <style lang="scss" scoped>
 .cookie-banner {
+  position: absolute;
+  bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
 
