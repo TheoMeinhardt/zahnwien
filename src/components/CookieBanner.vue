@@ -13,10 +13,10 @@
     </div>
     <div class="col-12 col-md-3 column justify-center items-center">
       <div class="col-auto">
-        <q-btn @click="showCookieBanner = false" outline rounded color="primary" label="ablehnen" />
+        <q-btn @click="dismissCookieBanner" outline rounded color="primary" label="ablehnen" />
       </div>
       <div class="col-auto">
-        <q-btn @click="showCookieBanner = false" flat rounded color="primary" label="akzeptieren" />
+        <q-btn @click="dismissCookieBanner" flat rounded color="primary" label="akzeptieren" />
       </div>
     </div>
   </div>
@@ -25,7 +25,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const showCookieBanner = ref<boolean>(true)
+const STORAGE_KEY = 'cookie_banner_dismissed'
+const showCookieBanner = ref<boolean>(!(localStorage.getItem(STORAGE_KEY) == 'true'))
+
+function dismissCookieBanner(): void {
+  localStorage.setItem(STORAGE_KEY, 'true')
+  showCookieBanner.value = false
+}
 </script>
 
 <style lang="scss" scoped>
