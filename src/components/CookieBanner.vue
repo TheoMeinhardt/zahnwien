@@ -29,7 +29,7 @@
 import { ref } from 'vue'
 
 const STORAGE_KEY = 'cookie_banner_dismissed'
-const showCookieBanner = ref<boolean>(!(localStorage.getItem(STORAGE_KEY) == 'true'))
+const showCookieBanner = ref<boolean>(!(localStorage.getItem(STORAGE_KEY) === 'true'))
 
 function acceptCookies(): void {
   localStorage.setItem(STORAGE_KEY, 'true')
@@ -43,7 +43,7 @@ function declineCookies(): void {
 
 <style lang="scss" scoped>
 .cookie-banner {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
