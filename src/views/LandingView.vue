@@ -334,11 +334,12 @@ p {
     transform: translate(-50%, -50%) scale(0.85);
     width: 90%;
     padding: 0.5em 1em;
+    line-height: 1.3;
   }
 
   .TextLeft p,
   .TextRight p {
-    font-size: 0.95rem;
+    font-size: 1.35rem;
   }
 }
 
@@ -354,7 +355,8 @@ p {
 
   .TextLeft p,
   .TextRight p {
-    font-size: 0.85rem;
+    font-size: 1.55rem;
+    line-height: 1.1;
   }
 }
 </style>
