@@ -34,37 +34,38 @@
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/FooterComponent.vue'
 
-// === Bilder Arrays ===
+import { parseImagePath } from '@/helpers'
+
 const ordination1Images = [
-  './img/Ordi_1070/VFN_7361.jpg',
-  './img/Ordi_1070/VFN_7363.jpg',
-  './img/Ordi_1070/VFN_7366.jpg',
-  './img/Ordi_1070/VFN_7370.jpg',
-  './img/Ordi_1070/VFN_7374.jpg',
-  './img/Ordi_1070/VFN_7376.jpg',
-  './img/Ordi_1070/VFN_7379.jpg',
-  './img/Ordi_1070/VFN_7390.jpg',
-  './img/Ordi_1070/VFN_7392.jpg',
-  './img/Ordi_1070/VFN_7393.jpg',
-  './img/Ordi_1070/VFN_7395.jpg'
+  parseImagePath('img/Ordi_1070/VFN_7361.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7363.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7366.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7370.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7374.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7376.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7379.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7390.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7392.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7393.jpg'),
+  parseImagePath('img/Ordi_1070/VFN_7395.jpg')
 ]
 
 const ordination2Images = [
-  './img/Ordi_1170/Ordi1_7290.jpg',
-  './img/Ordi_1170/Ordi2_7224.jpg',
-  './img/Ordi_1170/Ordi3_7303.jpg',
-  './img/Ordi_1170/VFN_7216.jpg',
-  './img/Ordi_1170/VFN_7219.jpg',
-  './img/Ordi_1170/VFN_7224.jpg',
-  './img/Ordi_1170/VFN_7225.jpg',
-  './img/Ordi_1170/VFN_7229.jpg',
-  './img/Ordi_1170/VFN_7230.jpg',
-  './img/Ordi_1170/VFN_7234.jpg',
-  './img/Ordi_1170/VFN_7243.jpg',
-  './img/Ordi_1170/VFN_7244.jpg',
-  './img/Ordi_1170/VFN_7245.jpg',
-  './img/Ordi_1170/VFN_7248.jpg',
-  './img/Ordi_1170/VFN_7249.jpg'
+  parseImagePath('img/Ordi_1170/Ordi1_7290.jpg'),
+  parseImagePath('img/Ordi_1170/Ordi2_7224.jpg'),
+  parseImagePath('img/Ordi_1170/Ordi3_7303.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7216.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7219.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7224.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7225.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7229.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7230.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7234.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7243.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7244.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7245.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7248.jpg'),
+  parseImagePath('img/Ordi_1170/VFN_7249.jpg')
 ]
 </script>
 
