@@ -228,9 +228,10 @@ import { onMounted, ref, type Ref } from 'vue'
 import type { locationData, openingHours } from '@/types'
 import { parseOpeningHours, parseImagePath, redirectTo } from '@/helpers'
 import rawData from '@/assets/data/1170/text.json'
+import rawOpeningHours from '@/assets/data/1170/openingHours.json'
 
 const data: Ref<locationData[]> = ref(rawData)
-const openingHours: Ref<openingHours> = ref(parseOpeningHours())
+const openingHours: Ref<openingHours> = ref(parseOpeningHours(rawOpeningHours))
 const map: Ref<L.Map | undefined> = ref(undefined)
 const mapMarker: Ref<L.Marker | undefined> = ref(undefined)
 const carouselSlide: Ref<number> = ref(0)
