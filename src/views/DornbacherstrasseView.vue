@@ -172,7 +172,7 @@
             square
             dense
             class="text-black"
-            >01/486 46 27</q-chip
+            >01-48 64 627</q-chip
           >
           <br />
           <q-chip

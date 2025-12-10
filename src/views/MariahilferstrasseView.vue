@@ -162,7 +162,7 @@
           <br />
           <q-chip
             v-reveal="{ once: true }"
-            @click="redirectTo('tel:01/4864627')"
+            @click="redirectTo('tel:06644633073')"
             size="md"
             clickable
             color="white"
@@ -170,7 +170,7 @@
             square
             dense
             class="text-black"
-            >01/486 46 27</q-chip
+            >0664-46 33 073</q-chip
           >
           <br />
           <q-chip
