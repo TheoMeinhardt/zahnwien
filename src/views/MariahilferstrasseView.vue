@@ -37,7 +37,7 @@
             :autoplay="carouselAutoplay"
             @mouseenter="carouselAutoplay = false"
             @mouseleave="carouselAutoplay = true"
-            height="300px"
+            height="40vh"
             class="shadow-1 rounded-borders"
           >
             <q-carousel-slide
