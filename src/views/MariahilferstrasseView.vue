@@ -13,11 +13,11 @@
       <div class="row wrap items-center justify-between">
         <!-- Einführungstext -->
         <div class="col-12 col-md-5" v-reveal="{ once: true }">
-          <span class="block q-my-lg text-body1"
-            >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
-            in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
-            und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
-            deutsch, englisch, französisch oder polnisch an.</span
+          <span class="block q-my-lg text-body1 text-justify"
+            >In unserer neuen sehr zentral gelegenen Wahlarztordination direkt auf der
+            Mariahilferstraße empfangen wir Sie in einem modernen, künstlerischen Ambiente in einem
+            typischen Wiener Gebäude. Lehnen Sie Sich zurück, genießen den Flair und die innovativen
+            zahnärztlichen Leistungen unseres fortschrittlichen jungen Teams.</span
           >
           <q-carousel
             v-model="carouselSlide"

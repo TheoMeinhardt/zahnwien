@@ -13,7 +13,7 @@
       <div class="row wrap items-center justify-between">
         <!-- Einführungstext -->
         <div class="col-12 col-md-5" v-reveal="{ once: true }">
-          <span class="block q-my-lg text-body1"
+          <span class="block q-my-lg text-body1 text-justify"
             >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
             in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
             und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
