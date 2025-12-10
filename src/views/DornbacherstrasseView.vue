@@ -7,7 +7,8 @@
       <div class="text-primary" v-reveal="{ once: true }">
         <span class="gt-sm text-h4 text-weight-bolder block">Dornbacherstraße 1</span>
         <span class="lt-md text-h6 text-weight-bolder block">Dornbacherstraße 1</span>
-        <span class="text-h6 text-italic">1170 Wien</span>
+        <span class="gt-sm text-h4 text-italic">1170 Wien</span>
+        <span class="lt-md text-h6 text-italic">1170 Wien</span>
       </div>
 
       <div class="row wrap items-center justify-between">
