@@ -57,6 +57,10 @@ const router = createRouter({
       name: 'GalerieView',
     },
   ],
+
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 export default router
