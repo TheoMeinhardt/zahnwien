@@ -11,7 +11,7 @@
   <section class="gallery-section">
 
     <!-- Ordination 1 -->
-    <h2 class="ordination-title">Dornbacherstrasse</h2>
+    <h1 class="ordination-title">Mariahilferstraße</h1>
     <div class="gallery-grid">
       <div v-for="(img, index) in ordination1Images" :key="'o1-' + index" class="gallery-card">
         <img :src="img" alt="Ordination 1 Bild" />
@@ -19,7 +19,7 @@
     </div>
 
     <!-- Ordination 2 -->
-    <h2 class="ordination-title">Mariahilferstraße</h2>
+    <h1 class="ordination-title">Dornbacherstrasse</h1>
     <div class="gallery-grid">
       <div v-for="(img, index) in ordination2Images" :key="'o2-' + index" class="gallery-card">
         <img :src="img" alt="Ordination 2 Bild" />
@@ -109,7 +109,7 @@ const ordination2Images = [
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 2rem;
   margin-bottom: 4rem;
 }
@@ -132,9 +132,6 @@ const ordination2Images = [
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 
-    img {
-      transform: scale(1.1);
-    }
   }
 }
 </style>
