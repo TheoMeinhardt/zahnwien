@@ -38,9 +38,24 @@
 
   <!-- Lightbox -->
   <Transition name="lightbox">
-    <div v-if="lightboxOpen" class="lightbox-overlay" @click.self="closeLightbox">
-      <button class="close-btn" @click="closeLightbox">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <div
+      v-if="lightboxOpen"
+      class="lightbox-overlay"
+      @click.self="closeLightbox"
+      @touchstart="handleTouchStart"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchEnd"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Bildgalerie"
+    >
+      <button
+        ref="closeButton"
+        class="close-btn"
+        @click="closeLightbox"
+        aria-label="Schließen"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" role="img" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
@@ -50,15 +65,16 @@
         class="nav-btn prev-btn"
         @click="prevImage"
         :disabled="currentIndex === 0"
+        aria-label="Vorheriges Bild"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" role="img" aria-hidden="true">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </button>
 
       <div class="lightbox-content">
-        <img :src="currentImages[currentIndex]" alt="Großansicht" />
-        <div class="image-counter">
+        <img :src="currentImages[currentIndex]" :alt="`Bild ${currentIndex + 1} von ${currentImages.length}`" />
+        <div class="image-counter" aria-live="polite">
           {{ currentIndex + 1 }} / {{ currentImages.length }}
         </div>
       </div>
@@ -67,8 +83,9 @@
         class="nav-btn next-btn"
         @click="nextImage"
         :disabled="currentIndex === currentImages.length - 1"
+        aria-label="Nächstes Bild"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" role="img" aria-hidden="true">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </button>
@@ -79,7 +96,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/FooterComponent.vue'
 import { parseImagePath } from '@/helpers'
@@ -119,17 +136,29 @@ const ordination2Images = [
 const lightboxOpen = ref(false)
 const currentImages = ref<string[]>([])
 const currentIndex = ref(0)
+const closeButton = ref<HTMLButtonElement | null>(null)
+const previouslyFocusedElement = ref<HTMLElement | null>(null)
 
-const openLightbox = (images: string[], index: number) => {
+// Touch/Swipe handling
+const touchStartX = ref(0)
+const touchEndX = ref(0)
+const minSwipeDistance = 50
+
+const openLightbox = async (images: string[], index: number) => {
+  previouslyFocusedElement.value = document.activeElement as HTMLElement
   currentImages.value = images
   currentIndex.value = index
   lightboxOpen.value = true
   document.body.style.overflow = 'hidden'
+
+  await nextTick()
+  closeButton.value?.focus()
 }
 
 const closeLightbox = () => {
   lightboxOpen.value = false
   document.body.style.overflow = ''
+  previouslyFocusedElement.value?.focus()
 }
 
 const nextImage = () => {
@@ -144,6 +173,33 @@ const prevImage = () => {
   }
 }
 
+// Touch event handlers for swipe
+const handleTouchStart = (e: TouchEvent) => {
+  touchStartX.value = e.touches[0].clientX
+}
+
+const handleTouchMove = (e: TouchEvent) => {
+  touchEndX.value = e.touches[0].clientX
+}
+
+const handleTouchEnd = () => {
+  const swipeDistance = touchStartX.value - touchEndX.value
+
+  if (Math.abs(swipeDistance) > minSwipeDistance) {
+    if (swipeDistance > 0) {
+      // Swipe left - next image
+      nextImage()
+    } else {
+      // Swipe right - previous image
+      prevImage()
+    }
+  }
+
+  // Reset values
+  touchStartX.value = 0
+  touchEndX.value = 0
+}
+
 // Keyboard navigation
 const handleKeydown = (e: KeyboardEvent) => {
   if (!lightboxOpen.value) return
@@ -153,9 +209,15 @@ const handleKeydown = (e: KeyboardEvent) => {
   if (e.key === 'ArrowLeft') prevImage()
 }
 
-if (typeof window !== 'undefined') {
+onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
-}
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleKeydown)
+  // Restore overflow unconditionally to prevent stuck scroll state
+  document.body.style.overflow = ''
+})
 </script>
 
 <style scoped lang="scss">
@@ -238,6 +300,7 @@ if (typeof window !== 'undefined') {
   justify-content: center;
   z-index: 9999;
   padding: 2rem;
+  touch-action: pan-y; /* Allow vertical scrolling but handle horizontal swipes */
 }
 
 .lightbox-content {
@@ -254,6 +317,7 @@ if (typeof window !== 'undefined') {
     object-fit: contain;
     border-radius: 15px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    user-select: none; /* Prevent image selection during swipe */
   }
 }
 
@@ -366,22 +430,13 @@ if (typeof window !== 'undefined') {
     gap: 1.5rem;
   }
 
+  /* Hide navigation buttons on mobile */
   .nav-btn {
-    width: 50px;
-    height: 50px;
+    display: none;
+  }
 
-    svg {
-      width: 28px;
-      height: 28px;
-    }
-
-    &.prev-btn {
-      left: 1rem;
-    }
-
-    &.next-btn {
-      right: 1rem;
-    }
+  .lightbox-overlay {
+    padding: 1rem;
   }
 
   .close-btn {
@@ -399,6 +454,12 @@ if (typeof window !== 'undefined') {
   .image-counter {
     font-size: 1rem;
     padding: 0.4rem 1rem;
+  }
+
+  .lightbox-content {
+    img {
+      max-height: 80vh;
+    }
   }
 }
 </style>
