@@ -8,100 +8,35 @@
     </div>
   </section>
 
-  <section class="gallery-section">
-    <!-- Ordination 1 -->
-    <h1 class="ordination-title">Mariahilferstraße</h1>
-    <div class="gallery-grid">
-      <div
-        v-for="(img, index) in ordination1Images"
-        :key="'o1-' + index"
-        class="gallery-card"
-        @click="openLightbox(ordination1Images, index)"
-      >
-        <img :src="img" alt="Ordination 1 Bild" />
-      </div>
+  <h2 class="überschrift">Mariahilferstraße</h2>
+  <section class="grid">
+    <div class="box" v-for="(img, index) in Mariahilfer" :key="index">
+      <img :src="img" width="500px" @click="openBigImgMaria(index)">
     </div>
-
-    <!-- Ordination 2 -->
-    <h1 class="ordination-title">Dornbacherstrasse</h1>
-    <div class="gallery-grid">
-      <div
-        v-for="(img, index) in ordination2Images"
-        :key="'o2-' + index"
-        class="gallery-card"
-        @click="openLightbox(ordination2Images, index)"
-      >
-        <img :src="img" alt="Ordination 2 Bild" />
-      </div>
+  </section>
+  <h2 class="überschrift">Dornbacherstraße</h2>
+  <section class="grid">
+    <div class="box" v-for="(img, index) in Dornbacher" :key="index" >
+      <img :src="img" width="500px" @click="openBigImgDorn(index)">
     </div>
   </section>
 
-  <!-- Lightbox -->
-  <Transition name="lightbox">
-    <div
-      v-if="lightboxOpen"
-      class="lightbox-overlay"
-      @click.self="closeLightbox"
-      @touchstart="handleTouchStart"
-      @touchmove="handleTouchMove"
-      @touchend="handleTouchEnd"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Bildgalerie"
-    >
-      <button
-        ref="closeButton"
-        class="close-btn"
-        @click="closeLightbox"
-        aria-label="Schließen"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" role="img" aria-hidden="true">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-
-      <button
-        class="nav-btn prev-btn"
-        @click="prevImage"
-        :disabled="currentIndex === 0"
-        aria-label="Vorheriges Bild"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" role="img" aria-hidden="true">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
-
-      <div class="lightbox-content">
-        <img :src="currentImages[currentIndex]" :alt="`Bild ${currentIndex + 1} von ${currentImages.length}`" />
-        <div class="image-counter" aria-live="polite">
-          {{ currentIndex + 1 }} / {{ currentImages.length }}
-        </div>
-      </div>
-
-      <button
-        class="nav-btn next-btn"
-        @click="nextImage"
-        :disabled="currentIndex === currentImages.length - 1"
-        aria-label="Nächstes Bild"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" role="img" aria-hidden="true">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-    </div>
-  </Transition>
-
+  <div class="BigImgOverlay" v-if="showBigImg">
+    <button class="btnLeft" @click="left()">←</button>
+    <img class="bigImg" :src="currentImg">
+    <button class="btnRight" @click="right()">→</button>
+    <button class="btnClose" @click="closeBigImg()">×</button>
+  </div>
   <Footer />
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/FooterComponent.vue'
 import { parseImagePath } from '@/helpers'
 
-const ordination1Images = [
+const Mariahilfer = [
   parseImagePath('img/Ordi_1070/VFN_7361.jpg'),
   parseImagePath('img/Ordi_1070/VFN_7363.jpg'),
   parseImagePath('img/Ordi_1070/VFN_7366.jpg'),
@@ -115,7 +50,7 @@ const ordination1Images = [
   parseImagePath('img/Ordi_1070/VFN_7395.jpg')
 ]
 
-const ordination2Images = [
+const Dornbacher = [
   parseImagePath('img/Ordi_1170/Ordi1_7290.jpg'),
   parseImagePath('img/Ordi_1170/Ordi2_7224.jpg'),
   parseImagePath('img/Ordi_1170/Ordi3_7303.jpg'),
@@ -133,91 +68,53 @@ const ordination2Images = [
   parseImagePath('img/Ordi_1170/VFN_7249.jpg')
 ]
 
-const lightboxOpen = ref(false)
-const currentImages = ref<string[]>([])
-const currentIndex = ref(0)
-const closeButton = ref<HTMLButtonElement | null>(null)
-const previouslyFocusedElement = ref<HTMLElement | null>(null)
+const showBigImg = ref(false);
+const currentImg = ref('');
 
-// Touch/Swipe handling
-const touchStartX = ref(0)
-const touchEndX = ref(0)
-const minSwipeDistance = 50
-
-const openLightbox = async (images: string[], index: number) => {
-  previouslyFocusedElement.value = document.activeElement as HTMLElement
-  currentImages.value = images
-  currentIndex.value = index
-  lightboxOpen.value = true
-  document.body.style.overflow = 'hidden'
-
-  await nextTick()
-  closeButton.value?.focus()
+function openBigImgDorn(index: number) {
+  currentImg.value = Dornbacher[index];
+  showBigImg.value = true
 }
 
-const closeLightbox = () => {
-  lightboxOpen.value = false
-  document.body.style.overflow = ''
-  previouslyFocusedElement.value?.focus()
+function openBigImgMaria(index: number) {
+  currentImg.value = Mariahilfer[index];
+  showBigImg.value = true
 }
 
-const nextImage = () => {
-  if (currentIndex.value < currentImages.value.length - 1) {
-    currentIndex.value++
+function closeBigImg() {
+  showBigImg.value = false
+}
+
+function right() {
+  if(currentImg.value.includes("1070"))
+  {
+    const index = Mariahilfer.indexOf(currentImg.value);
+    const nextIndex = (index + 1) % Mariahilfer.length;
+    openBigImgMaria(nextIndex);
+  }
+  else
+  {
+    const index = Dornbacher.indexOf(currentImg.value);
+    const nextIndex = (index + 1) % Dornbacher.length;
+    openBigImgDorn(nextIndex);
   }
 }
 
-const prevImage = () => {
-  if (currentIndex.value > 0) {
-    currentIndex.value--
+function left() {
+  if(currentImg.value.includes("1070"))
+  {
+    const index = Mariahilfer.indexOf(currentImg.value);
+    const nextIndex = (index - 1) % Mariahilfer.length;
+    openBigImgMaria(nextIndex);
+  }
+  else
+  {
+    const index = Dornbacher.indexOf(currentImg.value);
+    const nextIndex = (index - 1) % Dornbacher.length;
+    openBigImgDorn(nextIndex);
   }
 }
 
-// Touch event handlers for swipe
-const handleTouchStart = (e: TouchEvent) => {
-  touchStartX.value = e.touches[0].clientX
-}
-
-const handleTouchMove = (e: TouchEvent) => {
-  touchEndX.value = e.touches[0].clientX
-}
-
-const handleTouchEnd = () => {
-  const swipeDistance = touchStartX.value - touchEndX.value
-
-  if (Math.abs(swipeDistance) > minSwipeDistance) {
-    if (swipeDistance > 0) {
-      // Swipe left - next image
-      nextImage()
-    } else {
-      // Swipe right - previous image
-      prevImage()
-    }
-  }
-
-  // Reset values
-  touchStartX.value = 0
-  touchEndX.value = 0
-}
-
-// Keyboard navigation
-const handleKeydown = (e: KeyboardEvent) => {
-  if (!lightboxOpen.value) return
-
-  if (e.key === 'Escape') closeLightbox()
-  if (e.key === 'ArrowRight') nextImage()
-  if (e.key === 'ArrowLeft') prevImage()
-}
-
-onMounted(() => {
-  window.addEventListener('keydown', handleKeydown)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', handleKeydown)
-  // Restore overflow unconditionally to prevent stuck scroll state
-  document.body.style.overflow = ''
-})
 </script>
 
 <style scoped lang="scss">
@@ -241,225 +138,100 @@ onBeforeUnmount(() => {
   margin-bottom: 10px;
 }
 
-.subline {
-  font-size: 1.2rem;
-  opacity: 0.85;
-}
-
-.gallery-section {
-  padding: 3rem 2rem;
-  text-align: center;
-  background: #f8f9fa;
-}
-
-.ordination-title {
-  font-size: 2rem;
+.überschrift{
+  font-size: 3rem;
   margin: 2rem 0 1rem 0;
   color: $primary;
-  font-weight: 600;
+  font-weight: 500;
+  text-align: center;
 }
-
-.gallery-grid {
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 30px;
 }
 
-.gallery-card {
-  overflow: hidden;
+.box {
+  display: flex;
+  justify-content: center;
+}
+
+.box img {
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  object-fit: cover;
   border-radius: 25px;
   border: 3px solid $primary;
-  transition: transform 0.2s ease-out, box-shadow 0.3s ease-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-
-  img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 10px $primary;
-  }
 }
 
-/* Lightbox Styles */
-.lightbox-overlay {
+.box img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px $primary;
+}
+
+.BigImgOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.95);
+  background-color: rgba(0,0,0,0.9);
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 9999;
-  padding: 2rem;
-  touch-action: pan-y; /* Allow vertical scrolling but handle horizontal swipes */
-}
-
-.lightbox-content {
-  max-width: 90vw;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-
-  img {
-    max-width: 100%;
-    max-height: 85vh;
-    object-fit: contain;
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    user-select: none; /* Prevent image selection during swipe */
-  }
+  z-index: 9999;
 }
 
-.image-counter {
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 500;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.5rem 1.5rem;
-  border-radius: 25px;
-  backdrop-filter: blur(10px);
+.BigImgOverlay .bigImg {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
-.close-btn {
+.BigImgOverlay button{
   position: absolute;
-  top: 2rem;
-  right: 2rem;
-  background: linear-gradient(135deg, $primary, $secondary);
-  border: none;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  background-color: $primary;
   color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
   cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   transition: all 0.3s ease;
-  z-index: 10000;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-
-  &:hover {
-    transform: scale(1.1) rotate(90deg);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
-  }
-
-  &:active {
-    transform: scale(0.95) rotate(90deg);
-  }
 }
 
-.nav-btn {
-  position: absolute;
+.BigImgOverlay .btnClose {
+  top: 20px;
+  right: 20px;
+}
+
+.BigImgOverlay .btnLeft {
+  left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(135deg, $primary, $secondary);
-  border: none;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-
-  &:hover:not(:disabled) {
-    transform: translateY(-50%) scale(1.15);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
-  }
-
-  &:active:not(:disabled) {
-    transform: translateY(-50%) scale(0.95);
-  }
-
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  &.prev-btn {
-    left: 2rem;
-  }
-
-  &.next-btn {
-    right: 2rem;
-  }
 }
 
-/* Lightbox Transitions */
-.lightbox-enter-active,
-.lightbox-leave-active {
-  transition: opacity 0.3s ease;
+.BigImgOverlay .btnRight {
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.lightbox-enter-from,
-.lightbox-leave-to {
-  opacity: 0;
-}
-
-.lightbox-enter-active .lightbox-content,
-.lightbox-leave-active .lightbox-content {
-  transition: transform 0.3s ease;
-}
-
-.lightbox-enter-from .lightbox-content {
-  transform: scale(0.8);
-}
-
-.lightbox-leave-to .lightbox-content {
-  transform: scale(0.8);
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  /* Hide navigation buttons on mobile */
-  .nav-btn {
-    display: none;
-  }
-
-  .lightbox-overlay {
-    padding: 1rem;
-  }
-
-  .close-btn {
-    width: 50px;
-    height: 50px;
-    top: 1rem;
-    right: 1rem;
-
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-  }
-
-  .image-counter {
-    font-size: 1rem;
-    padding: 0.4rem 1rem;
-  }
-
-  .lightbox-content {
-    img {
-      max-height: 80vh;
-    }
-  }
+.BigImgOverlay .btnClose:hover,
+.BigImgOverlay .btnLeft:hover,
+.BigImgOverlay .btnRight:hover {
+  background-color: $secondary;
+  border-radius: 30%;
+  width: 55px;
+  height: 55px;
 }
 </style>
