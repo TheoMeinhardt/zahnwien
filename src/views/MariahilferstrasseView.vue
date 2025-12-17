@@ -212,7 +212,7 @@ import Footer from '@/components/FooterComponent.vue'
 
 import aligner from '@/assets/icons/aligner.png'
 import children from '@/assets/icons/children.png'
-import digitalScans from '@/assets/icons/digital-scans.png'
+import digitalScans from '@/assets/icons/digital_scans.png'
 import jaw from '@/assets/icons/jaw.png'
 import partner from '@/assets/icons/partner.png'
 import teethAesthetic from '@/assets/icons/teeth_aesthetic.png'
