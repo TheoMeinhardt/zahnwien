@@ -75,6 +75,7 @@ function flip() {
 
 <style lang="scss" scoped>
 .box {
+  height: 40vh !important;
   min-width: 45vw;
   overflow: hidden;
   position: relative;

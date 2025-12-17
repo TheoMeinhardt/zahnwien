@@ -7,13 +7,14 @@
       <div class="text-primary" v-reveal="{ once: true }">
         <span class="gt-sm text-h4 text-weight-bolder block">Dornbacherstraße 1</span>
         <span class="lt-md text-h6 text-weight-bolder block">Dornbacherstraße 1</span>
-        <span class="text-h6 text-italic">1170 Wien</span>
+        <span class="gt-sm text-h4 text-italic">1170 Wien</span>
+        <span class="lt-md text-h6 text-italic">1170 Wien</span>
       </div>
 
       <div class="row wrap items-center justify-between">
         <!-- Einführungstext -->
         <div class="col-12 col-md-5" v-reveal="{ once: true }">
-          <span class="block q-my-lg text-body1"
+          <span class="block q-my-lg text-body1 text-justify"
             >In unserer Kassenordination in Dornbach heißen wir Sie bereits seit 1989 – mittlerweile
             in 3. Generation - herzlich willkommen. Wir kooperieren mit MKG AKH Wien und St. Pölten
             und bieten hier nach Absprache auch erweiterte Öffnungszeiten an. Wir sprechen Sie auf
@@ -36,7 +37,7 @@
             :autoplay="carouselAutoplay"
             @mouseenter="carouselAutoplay = false"
             @mouseleave="carouselAutoplay = true"
-            height="300px"
+            height="40vh"
             class="shadow-1 rounded-borders"
           >
             <q-carousel-slide
@@ -64,13 +65,17 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Fokus:</span>
 
             <div class="row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="teethMedicin"
+              <Chip
+                v-reveal="{ once: true }"
+                color="accent"
+                text-color="primary"
+                :img="teethMedicin"
                 >Allgemeine Zahnmedizin</Chip
               >
 
               <Chip
                 v-reveal="{ once: true }"
-                color="white"
+                color="accent"
                 text-color="primary"
                 :img="teethImplants"
                 >Implantologie</Chip
@@ -78,7 +83,7 @@
 
               <Chip
                 v-reveal="{ once: true }"
-                color="white"
+                color="accent"
                 text-color="primary"
                 :img="teethAesthetic"
                 >Ästhetik</Chip
@@ -92,21 +97,21 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Ausstattung:</span>
 
             <div class="row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="xray"
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="xray"
                 >Röntgen</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" img="">DVT</Chip>
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img="">DVT</Chip>
 
               <Chip
                 v-reveal="{ once: true }"
-                color="white"
+                color="accent"
                 text-color="primary"
                 :img="digitalWorkflow"
                 >digitale Workflows</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="scan3d"
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="scan3d"
                 >3D-Scan</Chip
               >
             </div>
@@ -172,7 +177,7 @@
             square
             dense
             class="text-black"
-            >01/486 46 27</q-chip
+            >01-48 64 627</q-chip
           >
           <br />
           <q-chip
@@ -228,9 +233,10 @@ import { onMounted, ref, type Ref } from 'vue'
 import type { locationData, openingHours } from '@/types'
 import { parseOpeningHours, parseImagePath, redirectTo } from '@/helpers'
 import rawData from '@/assets/data/1170/text.json'
+import rawOpeningHours from '@/assets/data/1170/openingHours.json'
 
 const data: Ref<locationData[]> = ref(rawData)
-const openingHours: Ref<openingHours> = ref(parseOpeningHours())
+const openingHours: Ref<openingHours> = ref(parseOpeningHours(rawOpeningHours))
 const map: Ref<L.Map | undefined> = ref(undefined)
 const mapMarker: Ref<L.Marker | undefined> = ref(undefined)
 const carouselSlide: Ref<number> = ref(0)
