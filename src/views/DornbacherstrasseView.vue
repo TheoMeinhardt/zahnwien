@@ -101,7 +101,9 @@
                 >Röntgen</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img="">DVT</Chip>
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="dvt"
+                >DVT</Chip
+              >
 
               <Chip
                 v-reveal="{ once: true }"
@@ -159,7 +161,7 @@
             @click="redirectTo('https://maps.app.goo.gl/ELQbS8hAhRYHtrQ16')"
             clickable
             size="md"
-            color="white"
+            color="accent"
             icon="map"
             square
             dense
@@ -172,7 +174,7 @@
             @click="redirectTo('tel:01/4864627')"
             size="md"
             clickable
-            color="white"
+            color="accent"
             icon="phone"
             square
             dense
@@ -185,7 +187,7 @@
             @click="redirectTo('mailto:ordination@zahnwien.at?subject=Anfrage an Ordination 1170')"
             clickable
             size="md"
-            color="white"
+            color="accent"
             icon="mail"
             square
             dense
@@ -226,6 +228,7 @@ import teethAesthetic from '@/assets/icons/teeth_aesthetic.png'
 import digitalWorkflow from '@/assets/icons/digital_workflow.png'
 import scan3d from '@/assets/icons/3d-scan.png'
 import xray from '@/assets/icons/x-ray.png'
+import dvt from '@/assets/icons/DVT.png'
 
 import L from 'leaflet'
 import { onMounted, ref, type Ref } from 'vue'
