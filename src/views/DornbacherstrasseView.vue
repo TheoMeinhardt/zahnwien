@@ -161,7 +161,7 @@
             @click="redirectTo('https://maps.app.goo.gl/ELQbS8hAhRYHtrQ16')"
             clickable
             size="md"
-            color="white"
+            color="accent"
             icon="map"
             square
             dense
@@ -174,7 +174,7 @@
             @click="redirectTo('tel:01/4864627')"
             size="md"
             clickable
-            color="white"
+            color="accent"
             icon="phone"
             square
             dense
@@ -187,7 +187,7 @@
             @click="redirectTo('mailto:ordination@zahnwien.at?subject=Anfrage an Ordination 1170')"
             clickable
             size="md"
-            color="white"
+            color="accent"
             icon="mail"
             square
             dense
