@@ -65,13 +65,17 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Fokus:</span>
 
             <div class="row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="teethMedicin"
+              <Chip
+                v-reveal="{ once: true }"
+                color="accent"
+                text-color="primary"
+                :img="teethMedicin"
                 >Kieferorthopädie</Chip
               >
 
               <Chip
                 v-reveal="{ once: true }"
-                color="white"
+                color="accent"
                 text-color="primary"
                 :img="teethImplants"
                 >Invisalign</Chip
@@ -79,7 +83,7 @@
 
               <Chip
                 v-reveal="{ once: true }"
-                color="white"
+                color="accent"
                 text-color="primary"
                 :img="teethAesthetic"
                 >Kinderbehandlung</Chip
@@ -93,19 +97,19 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Ausstattung:</span>
 
             <div class="row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="xray"
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="xray"
                 >Digitale Scans</Chip
               >
 
               <Chip
                 v-reveal="{ once: true }"
-                color="white"
+                color="accent"
                 text-color="primary"
                 :img="digitalWorkflow"
                 >moderne KFO-Technik</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="scan3d"
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="scan3d"
                 >Invisalign-Partnerpraxis</Chip
               >
             </div>

@@ -65,13 +65,17 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Fokus:</span>
 
             <div class="row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="teethMedicin"
+              <Chip
+                v-reveal="{ once: true }"
+                color="accent"
+                text-color="primary"
+                :img="teethMedicin"
                 >Allgemeine Zahnmedizin</Chip
               >
 
               <Chip
                 v-reveal="{ once: true }"
-                color="white"
+                color="accent"
                 text-color="primary"
                 :img="teethImplants"
                 >Implantologie</Chip
@@ -79,7 +83,7 @@
 
               <Chip
                 v-reveal="{ once: true }"
-                color="white"
+                color="accent"
                 text-color="primary"
                 :img="teethAesthetic"
                 >Ästhetik</Chip
@@ -93,21 +97,21 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Ausstattung:</span>
 
             <div class="row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="xray"
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="xray"
                 >Röntgen</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" img="">DVT</Chip>
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img="">DVT</Chip>
 
               <Chip
                 v-reveal="{ once: true }"
-                color="white"
+                color="accent"
                 text-color="primary"
                 :img="digitalWorkflow"
                 >digitale Workflows</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="white" text-color="primary" :img="scan3d"
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="scan3d"
                 >3D-Scan</Chip
               >
             </div>
