@@ -65,15 +65,15 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Fokus:</span>
 
             <div class="row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img=""
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="jaw"
                 >Kieferorthopädie</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img=""
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="aligner"
                 >Invisalign</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img=""
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="children"
                 >Kinderbehandlung</Chip
               >
             </div>
@@ -85,15 +85,23 @@
             <span class="text-h5 text-bold text-primary q-mt-lg block">Ausstattung:</span>
 
             <div class="row text-italic text-weight-light q-mt-sm">
-              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img=""
+              <Chip
+                v-reveal="{ once: true }"
+                color="accent"
+                text-color="primary"
+                :img="digitalScans"
                 >Digitale Scans</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img=""
+              <Chip
+                v-reveal="{ once: true }"
+                color="accent"
+                text-color="primary"
+                :img="teethAesthetic"
                 >moderne KFO-Technik</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img=""
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="partner"
                 >Invisalign-Partnerpraxis</Chip
               >
             </div>
@@ -201,6 +209,13 @@ import Chip from '@/components/ChipComponent.vue'
 import ServiceBox from '@/components/ServiceBox.vue'
 import OpeningHours from '@/components/OpeningHours.vue'
 import Footer from '@/components/FooterComponent.vue'
+
+import aligner from '@/assets/icons/aligner.png'
+import children from '@/assets/icons/children.png'
+import digitalScans from '@/assets/icons/digital-scans.png'
+import jaw from '@/assets/icons/jaw.png'
+import partner from '@/assets/icons/partner.png'
+import teethAesthetic from '@/assets/icons/teeth_aesthetic.png'
 
 import L from 'leaflet'
 import { onMounted, ref, type Ref } from 'vue'

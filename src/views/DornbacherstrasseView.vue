@@ -101,7 +101,9 @@
                 >Röntgen</Chip
               >
 
-              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" img="">DVT</Chip>
+              <Chip v-reveal="{ once: true }" color="accent" text-color="primary" :img="dvt"
+                >DVT</Chip
+              >
 
               <Chip
                 v-reveal="{ once: true }"
@@ -226,6 +228,7 @@ import teethAesthetic from '@/assets/icons/teeth_aesthetic.png'
 import digitalWorkflow from '@/assets/icons/digital_workflow.png'
 import scan3d from '@/assets/icons/3d-scan.png'
 import xray from '@/assets/icons/x-ray.png'
+import dvt from '@/assets/icons/DVT.png'
 
 import L from 'leaflet'
 import { onMounted, ref, type Ref } from 'vue'
