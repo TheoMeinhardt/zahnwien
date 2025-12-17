@@ -17,7 +17,7 @@
           <span class="block q-my-lg text-body1 text-justify"
             >In unserer neuen sehr zentral gelegenen Wahlarztordination direkt auf der
             Mariahilferstraße empfangen wir Sie in einem modernen, künstlerischen Ambiente in einem
-            typischen Wiener Gebäude. Lehnen Sie Sich zurück, genießen den Flair und die innovativen
+            typischen Wiener Gebäude. Lehnen Sie sich zurück, genießen den Flair und die innovativen
             zahnärztlichen Leistungen unseres fortschrittlichen jungen Teams.</span
           >
           <q-carousel
