@@ -1,42 +1,42 @@
 <template>
   <NavBar background="dark" text="white" :sticky="true" :overlay="false" />
 
-    <section class="hero">
+  <section class="hero">
     <div class="hero-content">
       <h1 class="headline">Unsere Galerie</h1>
       <p class="subline"></p>
     </div>
   </section>
 
-  <section class="gallery-section">
-
-    <!-- Ordination 1 -->
-    <h2 class="ordination-title">Dornbacherstrasse</h2>
-    <div class="gallery-grid">
-      <div v-for="(img, index) in ordination1Images" :key="'o1-' + index" class="gallery-card">
-        <img :src="img" alt="Ordination 1 Bild" />
-      </div>
+  <h2 class="überschrift">Mariahilferstraße</h2>
+  <section class="grid">
+    <div class="box" v-for="(img, index) in Mariahilfer" :key="index">
+      <img :src="img" width="500px" @click="openBigImgMaria(index)">
     </div>
-
-    <!-- Ordination 2 -->
-    <h2 class="ordination-title">Mariahilferstraße</h2>
-    <div class="gallery-grid">
-      <div v-for="(img, index) in ordination2Images" :key="'o2-' + index" class="gallery-card">
-        <img :src="img" alt="Ordination 2 Bild" />
-      </div>
+  </section>
+  <h2 class="überschrift">Dornbacherstraße</h2>
+  <section class="grid">
+    <div class="box" v-for="(img, index) in Dornbacher" :key="index" >
+      <img :src="img" width="500px" @click="openBigImgDorn(index)">
     </div>
   </section>
 
+  <div class="BigImgOverlay" v-if="showBigImg">
+    <button class="btnLeft" @click="left()">←</button>
+    <img class="bigImg" :src="currentImg">
+    <button class="btnRight" @click="right()">→</button>
+    <button class="btnClose" @click="closeBigImg()">×</button>
+  </div>
   <Footer />
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/FooterComponent.vue'
-
 import { parseImagePath } from '@/helpers'
 
-const ordination1Images = [
+const Mariahilfer = [
   parseImagePath('img/Ordi_1070/VFN_7361.jpg'),
   parseImagePath('img/Ordi_1070/VFN_7363.jpg'),
   parseImagePath('img/Ordi_1070/VFN_7366.jpg'),
@@ -50,7 +50,7 @@ const ordination1Images = [
   parseImagePath('img/Ordi_1070/VFN_7395.jpg')
 ]
 
-const ordination2Images = [
+const Dornbacher = [
   parseImagePath('img/Ordi_1170/Ordi1_7290.jpg'),
   parseImagePath('img/Ordi_1170/Ordi2_7224.jpg'),
   parseImagePath('img/Ordi_1170/Ordi3_7303.jpg'),
@@ -67,10 +67,58 @@ const ordination2Images = [
   parseImagePath('img/Ordi_1170/VFN_7248.jpg'),
   parseImagePath('img/Ordi_1170/VFN_7249.jpg')
 ]
+
+const showBigImg = ref(false);
+const currentImg = ref('');
+
+function openBigImgDorn(index: number) {
+  currentImg.value = Dornbacher[index];
+  showBigImg.value = true
+}
+
+function openBigImgMaria(index: number) {
+  currentImg.value = Mariahilfer[index];
+  showBigImg.value = true
+}
+
+function closeBigImg() {
+  showBigImg.value = false
+}
+
+function right() {
+  if(currentImg.value.includes("1070"))
+  {
+    const index = Mariahilfer.indexOf(currentImg.value);
+    const nextIndex = (index + 1) % Mariahilfer.length;
+    openBigImgMaria(nextIndex);
+  }
+  else
+  {
+    const index = Dornbacher.indexOf(currentImg.value);
+    const nextIndex = (index + 1) % Dornbacher.length;
+    openBigImgDorn(nextIndex);
+  }
+}
+
+function left() {
+  if(currentImg.value.includes("1070"))
+  {
+    const index = Mariahilfer.indexOf(currentImg.value);
+    const nextIndex = (index - 1) % Mariahilfer.length;
+    openBigImgMaria(nextIndex);
+  }
+  else
+  {
+    const index = Dornbacher.indexOf(currentImg.value);
+    const nextIndex = (index - 1) % Dornbacher.length;
+    openBigImgDorn(nextIndex);
+  }
+}
+
 </script>
 
 <style scoped lang="scss">
-  .hero {
+.hero {
   width: 100%;
   padding: 140px 20px 100px;
   background: linear-gradient(135deg, $primary, $secondary);
@@ -90,51 +138,100 @@ const ordination2Images = [
   margin-bottom: 10px;
 }
 
-.subline {
-  font-size: 1.2rem;
-  opacity: 0.85;
-}
-.gallery-section {
-  padding: 3rem 2rem;
-  text-align: center;
-  background: #f8f9fa;
-}
-
-.ordination-title {
-  font-size: 2rem;
+.überschrift{
+  font-size: 3rem;
   margin: 2rem 0 1rem 0;
   color: $primary;
-  font-weight: 600;
+  font-weight: 500;
+  text-align: center;
 }
-
-.gallery-grid {
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 30px;
 }
 
-.gallery-card {
-  overflow: hidden;
+.box {
+  display: flex;
+  justify-content: center;
+}
+
+.box img {
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  object-fit: cover;
   border-radius: 25px;
   border: 3px solid $primary;
-  transition: transform 0.2s ease-out, box-shadow 0.3s ease-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
 
-  img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
+.box img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px $primary;
+}
 
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+.BigImgOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
 
-    img {
-      transform: scale(1.1);
-    }
-  }
+.BigImgOverlay .bigImg {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.BigImgOverlay button{
+  position: absolute;
+  background-color: $primary;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.BigImgOverlay .btnClose {
+  top: 20px;
+  right: 20px;
+}
+
+.BigImgOverlay .btnLeft {
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.BigImgOverlay .btnRight {
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.BigImgOverlay .btnClose:hover,
+.BigImgOverlay .btnLeft:hover,
+.BigImgOverlay .btnRight:hover {
+  background-color: $secondary;
+  border-radius: 30%;
+  width: 55px;
+  height: 55px;
 }
 </style>
