@@ -37,7 +37,7 @@ const props = defineProps<{
   overlay: boolean
 }>()
 
-const bgClass = ref(props.background === 'transparent' ? '' : 'bg-dark')
+const bgClass = ref(props.background === 'transparent' ? '' : 'bg-primary')
 const textClass = ref(props.text === 'white' ? 'text-white' : 'text-dark')
 const stickyClass = ref(props.sticky ? 'fixed-top' : '')
 const overlayClass = ref(props.overlay ? 'absolute-top' : 'relative-position')
@@ -69,5 +69,4 @@ a {
 .mobile-navbar.shown {
   max-height: 100vh;
 }
-
 </style>
