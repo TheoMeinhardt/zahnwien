@@ -12,7 +12,7 @@
       <br />
       <RouterLink to="/aboutUs" class="text-accent inline-block text-body1 text-weight-bold">Über uns</RouterLink><br />
       <RouterLink to="/" class="text-accent inline-block text-body1 text-weight-bold">FAQ</RouterLink><br />
-      <RouterLink to="/" class="text-accent inline-block text-body1 text-weight-bold">Kontakt</RouterLink>
+      <RouterLink to="/contactUs" class="text-accent inline-block text-body1 text-weight-bold">Kontakt</RouterLink>
     </div>
 
     <div class="row justify-between text-body2 q-mt-lg">
