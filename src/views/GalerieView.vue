@@ -14,12 +14,6 @@
       <img :src="img" width="500px" @click="openBigImgMaria(index)">
     </div>
   </section>
-  <h2 class="überschrift">Dornbacherstraße</h2>
-  <section class="grid">
-    <div class="box" v-for="(img, index) in Dornbacher" :key="index" >
-      <img :src="img" width="500px" @click="openBigImgDorn(index)">
-    </div>
-  </section>
 
   <div class="BigImgOverlay" v-if="showBigImg">
     <button class="btnLeft" @click="left()">←</button>
@@ -50,31 +44,8 @@ const Mariahilfer = [
   parseImagePath('img/Ordi_1070/VFN_7395.jpg')
 ]
 
-const Dornbacher = [
-  parseImagePath('img/Ordi_1170/Ordi1_7290.jpg'),
-  parseImagePath('img/Ordi_1170/Ordi2_7224.jpg'),
-  parseImagePath('img/Ordi_1170/Ordi3_7303.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7216.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7219.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7224.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7225.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7229.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7230.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7234.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7243.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7244.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7245.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7248.jpg'),
-  parseImagePath('img/Ordi_1170/VFN_7249.jpg')
-]
-
 const showBigImg = ref(false);
 const currentImg = ref('');
-
-function openBigImgDorn(index: number) {
-  currentImg.value = Dornbacher[index];
-  showBigImg.value = true
-}
 
 function openBigImgMaria(index: number) {
   currentImg.value = Mariahilfer[index];
@@ -86,32 +57,18 @@ function closeBigImg() {
 }
 
 function right() {
-  if(currentImg.value.includes("1070"))
-  {
+  if (currentImg.value.includes("1070")) {
     const index = Mariahilfer.indexOf(currentImg.value);
     const nextIndex = (index + 1) % Mariahilfer.length;
     openBigImgMaria(nextIndex);
   }
-  else
-  {
-    const index = Dornbacher.indexOf(currentImg.value);
-    const nextIndex = (index + 1) % Dornbacher.length;
-    openBigImgDorn(nextIndex);
-  }
 }
 
 function left() {
-  if(currentImg.value.includes("1070"))
-  {
+  if (currentImg.value.includes("1070")) {
     const index = Mariahilfer.indexOf(currentImg.value);
     const nextIndex = (index - 1) % Mariahilfer.length;
     openBigImgMaria(nextIndex);
-  }
-  else
-  {
-    const index = Dornbacher.indexOf(currentImg.value);
-    const nextIndex = (index - 1) % Dornbacher.length;
-    openBigImgDorn(nextIndex);
   }
 }
 
@@ -138,13 +95,14 @@ function left() {
   margin-bottom: 10px;
 }
 
-.überschrift{
+.überschrift {
   font-size: 3rem;
   margin: 2rem 0 1rem 0;
   color: $primary;
   font-weight: 500;
   text-align: center;
 }
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -179,7 +137,7 @@ function left() {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -193,7 +151,7 @@ function left() {
   border-radius: 10px;
 }
 
-.BigImgOverlay button{
+.BigImgOverlay button {
   position: absolute;
   background-color: $primary;
   color: white;
