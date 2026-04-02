@@ -1,18 +1,12 @@
 <template>
-  <div
-    v-show="showCookieBanner"
-    class="cookie-banner bg-accent q-mb-lg row"
-    role="dialog"
-    aria-labelledby="cookie-banner-title"
-    aria-describedby="cookie-banner-description"
-  >
+  <div v-show="showCookieBanner" class="cookie-banner bg-white q-mb-lg row" role="dialog"
+    aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-description">
     <div class="col-12 col-md-9 q-pa-md">
       <span id="cookie-banner-title" class="block text-subtitle1 text-bold">Cookies</span>
-      <span id="cookie-banner-description" class="text-body2"
-        >Wir verwenden keinerlei Cookies um Ihre Nutzung dieser Webseite in welcher Weise auch immer
+      <span id="cookie-banner-description" class="text-body2">Wir verwenden keinerlei Cookies um Ihre Nutzung dieser
+        Webseite in welcher Weise auch immer
         zu speichern. Als Interessent und Besucher dieser Seite werden Sie völlig anonym behandelt.
-        Wir werden erst Daten von Ihnen speichern wenn Sie mit uns in Kontakt getreten sind.</span
-      >
+        Wir werden erst Daten von Ihnen speichern wenn Sie mit uns in Kontakt getreten sind.</span>
     </div>
     <div class="col-12 col-md-3 column justify-center items-center">
       <div class="col-auto">
@@ -53,6 +47,7 @@ function declineCookies(): void {
   min-width: 200px;
 
   z-index: 10000;
+  border: 1px $primary solid;
   border-radius: 20px;
 }
 </style>
