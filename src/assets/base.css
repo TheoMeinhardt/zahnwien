@@ -1,59 +1,11 @@
 @font-face {
-  font-family: 'TeleGrotesk';
-  src: url(./fonts/TeleGroteskNextThin.ttf) format('truetype');
-  font-weight: 100;
+  font-family: 'NewYork';
+  src: url(./fonts/NewYork.otf) format('opentype');
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'TeleGrotesk';
-  src: url(./fonts/TeleGroteskNextRegular.ttf) format('truetype');
-  font-weight: 400;
+  font-family: 'Alphazet';
+  src: url(./fonts/Alphazet-Light.woff2) format('woff2');
   font-style: normal;
-}
-
-@font-face {
-  font-family: 'TeleGrotesk';
-  src: url(./fonts/TeleGroteskNextRegularItalic.ttf) format('truetype');
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'TeleGrotesk';
-  src: url(./fonts/TeleGroteskNextMedium.ttf) format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'TeleGrotesk';
-  src: url(./fonts/TeleGroteskNextMediumItalic.ttf) format('truetype');
-  font-weight: 500;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'TeleGrotesk';
-  src: url(./fonts/TeleGroteskNextBold.ttf) format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'TeleGrotesk';
-  src: url(./fonts/TeleGroteskNextBoldItalic.ttf) format('truetype');
-  font-weight: 700;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'TeleGrotesk';
-  src: url(./fonts/TeleGroteskNextUltra.ttf) format('truetype');
-  font-weight: 800;
-  font-style: normal;
-}
-
-.tele-grotesk {
-  font-family: 'TeleGrotesk';
 }

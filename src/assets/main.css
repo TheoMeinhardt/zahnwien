@@ -12,11 +12,17 @@ body {
   margin: 0;
   background-color: #f0f9ff;
   font-family:
-    'TeleGrotesk',
+    'Alphazet',
     system-ui,
     -apple-system,
     'Roboto',
     sans-serif !important;
+  font-weight: 400;
+}
+
+.text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6 {
+  font-family:
+    'NewYork' !important;
 }
 
 /* Scroll reveal utility */
