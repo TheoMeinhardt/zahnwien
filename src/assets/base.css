@@ -2,10 +2,12 @@
   font-family: 'NewYork';
   src: url(./fonts/NewYork.otf) format('opentype');
   font-style: normal;
+  font-weight: 400;
 }
 
 @font-face {
   font-family: 'Alphazet';
   src: url(./fonts/Alphazet-Light.woff2) format('woff2');
   font-style: normal;
+  font-weight: 300;
 }
